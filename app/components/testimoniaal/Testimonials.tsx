@@ -1,14 +1,14 @@
 "use client";
 
-import first from "../../public/images/customer 1.png";
-import second from "../../public/images/customer 1.png";
-import third from "../../public/images/customer 1.png";
-import fourth from "../../public/images/customer 1.png";
-import pa from "../../public/dubai/im 1.png";
-import pb from "../../public/dubai/im 2.png";
-import pc from "../../public/dubai/im 3.png";
-import pd from "../../public/dubai/im 4.png";
-import pe from "../../public/dubai/im 5.png";
+import first from "../../../public/images/customer 1.png";
+import second from "../../../public/images/customer 1.png";
+import third from "../../../public/images/customer 1.png";
+import fourth from "../../../public/images/customer 1.png";
+import pa from "../../../public/dubai/im 1.png";
+import pb from "../../../public/dubai/im 2.png";
+import pc from "../../../public/dubai/im 3.png";
+import pd from "../../../public/dubai/im 4.png";
+import pe from "../../../public/dubai/im 5.png";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -105,10 +105,13 @@ const Testimonials = () => {
           <p className="text-sm text-primary text-orange-600">
             What our customers are saying
           </p>
-          <h1 data-aos="fade-up" className="text-3xl font-bold">
+          <h1
+            className={`${cn(meriwether.variable)} text-3xl font-bold`}
+            style={{ fontFamily: "var(--Merriweather)" }}
+          >
             Testimonials
           </h1>
-          <p data-aos="fade-up" className="text-xs text-gray-600">
+          <p className="text-xs text-gray-600">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit
             asperiores modi Sit asperiores modi
           </p>

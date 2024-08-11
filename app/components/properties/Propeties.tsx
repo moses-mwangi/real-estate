@@ -1,7 +1,7 @@
 import React from "react";
 import { Merriweather } from "next/font/google";
 
-import pro from "../../public/assets/pro 1.png";
+import pro from "../../../public/assets/pro 1.png";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -90,28 +90,28 @@ export default function Propeties() {
         <div className="gap-y-8 gap-x-10 grid grid-cols-3">
           {properties.map((el) => (
             <div
-              className="bg-card shadow-lg flex flex-col gap-5 rounded-md cursor-pointer overflow-hidden"
+              className="bg-card shadow-lg flex flex-col gap-5 rounded-md cursor-pointer"
               key={el.id}
             >
-              <Image
-                className="w-full h-auto hover:scale-105 transition-all duration-200"
-                src={el.image}
-                alt="house"
-                width={400}
-                height={300}
-              />
+              <div className="overflow-hidden rounded-t-md">
+                <Image
+                  className="w-full h-auto hover:scale-105 transition-all duration-200"
+                  src={el.image}
+                  alt="house"
+                  width={400}
+                  height={300}
+                />
+              </div>
               <div className="flex flex-col gap-3 px-4">
                 <div className="flex flex-col gap-2">
                   <p className=" text-[13px] text-slate-700">
                     {el.type}, sales
                   </p>
-                  <p className=" font-medium text-xl text-black/85">
+                  <p className=" font-semibold text-[16px] text-black/85">
                     {el.about}
                   </p>
-                  <p className=" font-semibold text-orange-500">
-                    AED {el.price}
-                  </p>
-                  <p className="text-[13px] text-slate-500">{el.description}</p>
+                  <p className=" font-medium text-orange-500">AED {el.price}</p>
+                  <p className="text-[12px] text-slate-500">{el.description}</p>
                   <div></div>
                 </div>
                 <Separator />

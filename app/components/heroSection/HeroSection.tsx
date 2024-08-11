@@ -14,7 +14,7 @@ const meriwether = Merriweather({
 
 export default function HeroSection() {
   return (
-    <section className="pl-12 h-[90svh] grid grid-cols-[1fr_1.5fr] relative">
+    <section className="pl-12 z-20 pt-20 h-[110svh] grid grid-cols-[1fr_1.5fr] relative">
       <div>
         <div className=" z-50 flex flex-col gap-12 mt-32 absolute w-[60svw]">
           <p
@@ -46,7 +46,7 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-      <div className="bg-header-img" />
+      <div className="bg-header-img md:block hidden" />
     </section>
   );
 }

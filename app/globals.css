@@ -90,6 +90,22 @@ section {
   background-repeat: repeat;
 }
 
+.bg-id {
+  background-image: linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.3)
+    ),
+    url("https://dubai.wpresidence.net/wp-content/uploads/2023/04/dubai-bg-pattern-dark.png");
+  background-repeat: repeat;
+}
+
+.bg-contact {
+  background-image: url("https://dubai.wpresidence.net/wp-content/uploads/2023/05/16-e1683633698187.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 @layer components {
   .bg-header-img {
     background-image: linear-gradient(

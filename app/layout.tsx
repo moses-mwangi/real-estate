@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import Footer from "./footer/Footer";
+import Navbar from "./navbar/Navbar";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -25,7 +27,11 @@ export default function RootLayout({
         className={`${cn(poppins.variable)}`}
         style={{ fontFamily: "var(--Poppins)" }}
       >
-        {children}
+        <div>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

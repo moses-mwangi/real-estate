@@ -1,7 +1,15 @@
 import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import { Merriweather } from "next/font/google";
 import React from "react";
 import { GiFamilyHouse, GiShakingHands } from "react-icons/gi";
 import { TfiBarChart } from "react-icons/tfi";
+
+const meriwether = Merriweather({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--Merriweather",
+});
 
 const about = [
   {
@@ -28,7 +36,12 @@ export default function AboutUs() {
     <div className="grid grid-rows-2 py-20 px-12">
       <div className="">
         <h1 className="flex justify-center text-sm">ABOUT US</h1>
-        <p className="flex justify-center text-gray-800/85 text-4xl font-semibold mt-2">
+        <p
+          className={`${cn(
+            meriwether.variable
+          )} flex justify-center text-gray-800 text-4xl mt-2`}
+          style={{ fontFamily: "var(--Merriweather)" }}
+        >
           Why You Should Work With Us
         </p>
       </div>
@@ -36,7 +49,7 @@ export default function AboutUs() {
         {about.map((el) => (
           <Card
             key={el.desc}
-            className="flex flex-col border-none gap-5 py-4 px-3 shadow-md"
+            className="flex flex-col gap-5 py-4 px-3 shadow-lg"
           >
             <span className=" text-orange-400">{el.logo}</span>
             <h1 className=" font-semibold text-xl text-gray-800/90">
