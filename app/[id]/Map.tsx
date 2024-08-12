@@ -1,5 +1,4 @@
 "use client";
-
 import {
   MapContainer,
   TileLayer,
@@ -17,14 +16,13 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
 interface MapProps {
-  latitude: number;
-  longitude: number;
   address: string;
+  location: number[] | undefined;
 }
 
-function Map({ latitude, longitude, address }: MapProps) {
+function Map({ address, location }: MapProps) {
   const [isLoading, setIsLoading] = useState(false);
-  const [position, setPosition] = useState<any>([latitude, longitude]);
+  const [position, setPosition] = useState<any>(location);
   const [error, setError] = useState("");
 
   function getPosition() {

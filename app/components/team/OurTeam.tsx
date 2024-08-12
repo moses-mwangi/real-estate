@@ -1,6 +1,8 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { Merriweather } from "next/font/google";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
 import prone from "../../../public/dubai/agent 1.png";
@@ -10,6 +12,7 @@ import { FaFacebook } from "react-icons/fa";
 import { Linkedin, PhoneCall, WifiHigh } from "lucide-react";
 import { MdEmail } from "react-icons/md";
 import { BsInstagram, BsTwitter } from "react-icons/bs";
+import axios from "axios";
 
 const meriwether = Merriweather({
   subsets: ["latin"],
@@ -17,34 +20,27 @@ const meriwether = Merriweather({
   variable: "--Merriweather",
 });
 
-const agents = [
-  {
-    image: prone,
-    id: 1,
-    name: "Michael Rutter",
-    role: "buying agent",
-    description:
-      "Whether it is working with a first time homebuyer, a luxury home listing or a seasoned inve...",
-  },
-  {
-    image: protwo,
-    id: 2,
-    name: "Janet Richmond",
-    role: "selling agent",
-    description:
-      "Janet’s knowledge, honesty, integrity, and fairness have been evident throughout her career...",
-  },
-  {
-    image: prothree,
-    id: 3,
-    name: "Mariah Barlow",
-    role: "sales excutive",
-    description:
-      "As a fourth generation realtor, I was raised in a family where real estate was the primary...",
-  },
-];
+interface Agent {
+  _id: string;
+  name: string;
+  role: string;
+  image: string;
+  information: string;
+}
 
 export default function OurTeam() {
+  const [agents, setAgents] = useState<Agent[]>([]);
+
+  useEffect(() => {
+    async function fetchAgents() {
+      const res = await axios.get("http://127.0.0.1:3008/api/agents");
+
+      setAgents(res.data.data);
+    }
+
+    fetchAgents();
+  }, []);
+
   return (
     <div className="bg-team py-14 px-12">
       <div>
@@ -62,7 +58,7 @@ export default function OurTeam() {
         {agents.map((el) => (
           <div
             className="bg-card p-2 shadow-lg flex flex-col gap-5 rounded-md cursor-pointer"
-            key={el.id}
+            key={el._id}
           >
             <div className="overflow-hidden rounded-md">
               <Image
@@ -78,7 +74,7 @@ export default function OurTeam() {
                 <p className="text-xl font-medium text-slate-800">{el.name}</p>
                 <p className=" text-slate-500 text-sm">{el.role}</p>
                 <p className="text-[13px] text-slate-500 mt-3">
-                  {el.description}
+                  {el.information}
                 </p>
               </div>
               <div className="flex justify-between py-4 mt-2">

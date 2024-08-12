@@ -1,13 +1,9 @@
-import React from "react";
-import imone from "../../public/assets/pro 1.png";
-import imtwo from "../../public/assets/pro 2.png";
-import imthree from "../../public/assets/pro 3.png";
-import imfour from "../../public/assets/pro 4.png";
-import imfive from "../../public/assets/pro 5.png";
+"use client";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Merriweather } from "next/font/google";
 import { cn } from "@/lib/utils";
-import { BathIcon, Bed, Calendar, MapPin } from "lucide-react";
+import { BathIcon, Calendar, MapPin } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { BiArea } from "react-icons/bi";
 import { FaCar } from "react-icons/fa";
@@ -16,9 +12,12 @@ import { IoIosBed } from "react-icons/io";
 import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
 import Form from "./Form";
+import axios from "axios";
+import { useParams } from "next/navigation";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 const Map = dynamic(() => import("./Map"), {
-  ssr: false, // Disable SSR for this component
+  ssr: false,
 });
 
 const meriwether = Merriweather({
@@ -27,20 +26,22 @@ const meriwether = Merriweather({
   variable: "--Merriweather",
 });
 
-const property = {
-  _id: 1,
-  image: [imone, imtwo, imthree, imfour, imfive],
-  descrption:
-    "Beautiful, updated, ground level Co-op apartment in the desirable Bay Terrace neighborhood.This home features hardwood floors throughout, brand new bathrooms, newer EIK, modern front-load washer/dryer, full dining room, large living area, 3 spacious bedrooms and plenty of storage. Master bedroom includes both a standard closet and custom closet wall unit. Large windows face many directions for tons of natural light.",
-
-  about: "Stunning Mansion In The Heart Of Dubai",
-  bathrooms: 4,
-  bedrooms: 6,
-  Garages: 2,
-  area: 29000,
-  createdAt: new Date(),
-  price: 1500000,
-};
+interface Property {
+  _id: string;
+  image: (string | StaticImport)[];
+  description: string;
+  about: string;
+  type: string;
+  bathrooms: number;
+  bedrooms: number;
+  garages: number;
+  createdAt: Date;
+  price: number;
+  city: string;
+  zipcode: number;
+  address: string;
+  position: number[];
+}
 
 export default function SingleProperty() {
   const house = {
@@ -49,13 +50,27 @@ export default function SingleProperty() {
     address: "221B Baker Street, London",
   };
 
+  const [property, setProperties] = useState<Property>();
+  const { id } = useParams();
+
+  useEffect(() => {
+    async function fetchAgents() {
+      const propety = await axios.get(
+        `http://127.0.0.1:3008/api/property/${id}`
+      );
+      setProperties(propety.data.data);
+    }
+
+    fetchAgents();
+  });
+
   return (
     <div className="bg-id pt-20">
       <div>
         <div className="grid h-svh grid-cols-2 gap-[1px]">
           <Image
             className=" w-full h-full"
-            src={property.image[0]}
+            src={property?.image[0]!}
             alt="mm"
             width={600}
             height={200}
@@ -63,28 +78,28 @@ export default function SingleProperty() {
           <div className="grid grid-cols-2 gap-[1px]">
             <Image
               className=" w-full h-full"
-              src={property.image[1]}
+              src={property?.image[1]!}
               alt="mm"
               width={500}
               height={200}
             />
             <Image
               className=" w-full h-full"
-              src={property.image[2]}
+              src={property?.image[2]!}
               alt="mm"
               width={500}
               height={200}
             />
             <Image
               className=" w-full h-full"
-              src={property.image[3]}
+              src={property?.image[3]!}
               alt="mm"
               width={500}
               height={200}
             />
             <Image
               className=" w-full h-full"
-              src={property.image[4]}
+              src={property?.image[4]!}
               alt="mm"
               width={500}
               height={200}
@@ -106,7 +121,7 @@ export default function SingleProperty() {
                 className={`${cn(meriwether.variable)} text-3xl`}
                 style={{ fontFamily: "var(--Merriweather)" }}
               >
-                {property.about}
+                {property?.about}
               </p>
               <div className=" flex gap-2 mt-2 items-center">
                 <MapPin className=" w-4 h-4 text-slate-500" />
@@ -118,7 +133,7 @@ export default function SingleProperty() {
             <div>
               <span>
                 <p className=" text-orange-500 text-2xl font-semibold">
-                  AED {property.price.toLocaleString()}
+                  AED {property?.price.toLocaleString()}
                 </p>
               </span>
             </div>
@@ -128,26 +143,30 @@ export default function SingleProperty() {
               <Card className="w-full flex justify-between h-36 rounded-md border-none px-8 pt-14">
                 <div className="flex flex-col gap-1 items-center text-gray-700">
                   <IoIosBed className=" w-6 h-6" />
-                  <h1 className=" text-[15px]">{property.bedrooms} bedrooms</h1>
+                  <h1 className=" text-[15px]">
+                    {property?.bedrooms} bedrooms
+                  </h1>
                 </div>
                 <div className="flex flex-col gap-1 items-center text-gray-700">
                   <BathIcon className=" w-6 h-6" />
                   <h1 className=" text-[15px]">
-                    {property.bathrooms} Bathrooms
+                    {property?.bathrooms} Bathrooms
                   </h1>
                 </div>
                 <div className="flex flex-col gap-1 items-center text-gray-700">
                   <FaCar className=" w-6 h-6" />
-                  <h1 className=" text-[15px]">{property.Garages} Garages</h1>
+                  <h1 className=" text-[15px]">{property?.garages} Garages</h1>
                 </div>
                 <div className="flex flex-col gap-1 items-center text-gray-700">
                   <BiArea className=" w-6 h-6" />
-                  <h1 className=" text-[15px]">{property.area} ft</h1>
+                  <h1 className=" text-[15px]">2657 ft</h1>
                 </div>
                 <div className="flex flex-col gap-1 items-center text-gray-700">
                   <Calendar className=" w-6 h-6" />
                   <h1 className=" text-[15px]">
-                    Year Built:{property.createdAt.toLocaleDateString()}
+                    Year Built:
+                    {property?.createdAt &&
+                      new Date(property.createdAt).getFullYear()}
                   </h1>
                 </div>
               </Card>
@@ -155,7 +174,7 @@ export default function SingleProperty() {
               <Card className="border-none w-full py-6 px-7 rounded-md">
                 <h1 className=" font-semibold">Description</h1>
                 <p className=" text-gray-600 text-[14px] mt-3">
-                  {property.descrption}
+                  {property?.description}
                 </p>
               </Card>
 
@@ -164,16 +183,22 @@ export default function SingleProperty() {
                 <div className="grid grid-cols-1 text-[15px] gap-2">
                   <div className="flex gap-2 items-center">
                     <p className="font-medium text-gray-800">Address:</p>
-                    <p className=" font-normal text-gray-600">Lincoln Street</p>
+                    <p className=" font-normal text-gray-600">
+                      {property?.address}
+                    </p>
                   </div>
                   <div className="flex gap-2 items-center">
                     <p className="font-medium text-gray-800">City:</p>
-                    <p className="font-normal  text-gray-600">Dubai</p>
+                    <p className="font-normal  text-gray-600">
+                      {property?.city}
+                    </p>
                   </div>
 
                   <div className="flex gap-2 items-center">
                     <p className="font-medium text-gray-800">Zip:</p>
-                    <p className="font-normal  text-gray-600">587654</p>
+                    <p className="font-normal  text-gray-600">
+                      {property?.zipcode}
+                    </p>
                   </div>
                   <div className="flex gap-2 items-center">
                     <p className="font-medium text-gray-800">Country:</p>
@@ -188,11 +213,7 @@ export default function SingleProperty() {
           </div>
         </div>
       </div>
-      <Map
-        latitude={house.latitude}
-        longitude={house.longitude}
-        address={house.address}
-      />
+      <Map address={String(property?.address)} location={property?.position} />
       <div className="flex gap-5 px-8 py-8 mb-10">
         <Button className="bg-orange-600 hover:bg-orange-700">
           Book a visit now

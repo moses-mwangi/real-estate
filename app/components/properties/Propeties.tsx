@@ -1,72 +1,17 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { Merriweather } from "next/font/google";
 
-import pro from "../../../public/assets/pro 1.png";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import { PhoneCall } from "lucide-react";
-import { MdEmail, MdOutlineEmail } from "react-icons/md";
+import { MdOutlineEmail } from "react-icons/md";
 import { FaWhatsapp } from "react-icons/fa";
-
-const properties = [
-  {
-    image: pro,
-    id: 1,
-    type: "Villa",
-    about: "Signature Villas For Sale In Palm Jumei...",
-    price: "100,000",
-    description:
-      "Mineral Reserves: 2008 core drilling and testing (on just 60 of the 1,100 acres) proved 30 ...",
-  },
-  {
-    image: pro,
-    id: 2,
-    type: "apartment",
-    about: "Signature Villas For Sale In Palm Jumei...",
-    price: 1000000,
-    description:
-      "Mineral Reserves: 2008 core drilling and testing (on just 60 of the 1,100 acres) proved 30 ...",
-  },
-  {
-    image: pro,
-    id: 3,
-    type: "Villa",
-    about: "Signature Villas For Sale In Palm Jumei...",
-    price: 1000000,
-    description:
-      "Mineral Reserves: 2008 core drilling and testing (on just 60 of the 1,100 acres) proved 30 ...",
-  },
-  {
-    image: pro,
-    id: 4,
-    type: "apartment",
-    about: "Signature Villas For Sale In Palm Jumei...",
-    price: 1000000,
-    description:
-      "Mineral Reserves: 2008 core drilling and testing (on just 60 of the 1,100 acres) proved 30 ...",
-  },
-  {
-    image: pro,
-    id: 6,
-    type: "Villa",
-    about: "Signature Villas For Sale In Palm Jumei...",
-    price: 1000000,
-    description:
-      "Mineral Reserves: 2008 core drilling and testing (on just 60 of the 1,100 acres) proved 30 ...",
-  },
-  {
-    image: pro,
-    id: 7,
-    type: "apartment",
-    about: "Signature Villas For Sale In Palm Jumei...",
-    price: 1000000,
-    description:
-      "Mineral Reserves: 2008 core drilling and testing (on just 60 of the 1,100 acres) proved 30 ...",
-  },
-];
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const meriwether = Merriweather({
   subsets: ["latin"],
@@ -74,7 +19,36 @@ const meriwether = Merriweather({
   variable: "--Merriweather",
 });
 
+interface Property {
+  _id: string;
+  image: [string];
+  description: string;
+  about: string;
+  type: string;
+  bathrooms: number;
+  bedrooms: number;
+  garages: number;
+  createdAt: Date;
+  price: number;
+  city: string;
+  zipcode: number;
+  address: string;
+  position: [number];
+}
+
 export default function Propeties() {
+  const [properties, setProperties] = useState<Property[]>([]);
+  const router = useRouter();
+
+  useEffect(() => {
+    async function fetchAgents() {
+      const propety = await axios.get("http://127.0.0.1:3008/api/property");
+      setProperties(propety.data.data);
+    }
+
+    fetchAgents();
+  }, []);
+
   return (
     <div className="bg-property">
       <div className="bg-white px-12 py-20 bg-opacity-[96%]">
@@ -91,12 +65,15 @@ export default function Propeties() {
           {properties.map((el) => (
             <div
               className="bg-card shadow-lg flex flex-col gap-5 rounded-md cursor-pointer"
-              key={el.id}
+              key={el._id}
+              onClick={() => {
+                router.push(`/${el._id}`);
+              }}
             >
               <div className="overflow-hidden rounded-t-md">
                 <Image
                   className="w-full h-auto hover:scale-105 transition-all duration-200"
-                  src={el.image}
+                  src={el.image[0]}
                   alt="house"
                   width={400}
                   height={300}
@@ -111,7 +88,9 @@ export default function Propeties() {
                     {el.about}
                   </p>
                   <p className=" font-medium text-orange-500">AED {el.price}</p>
-                  <p className="text-[12px] text-slate-500">{el.description}</p>
+                  <p className="text-[12px] text-slate-500">
+                    {el.description.substring(0, 130)}....
+                  </p>
                   <div></div>
                 </div>
                 <Separator />
