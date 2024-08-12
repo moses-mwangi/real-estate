@@ -7,7 +7,7 @@ import imfive from "../../public/assets/pro 5.png";
 import Image from "next/image";
 import { Merriweather } from "next/font/google";
 import { cn } from "@/lib/utils";
-import { BathIcon, Bed, Calendar, Car, LocateIcon, MapPin } from "lucide-react";
+import { BathIcon, Bed, Calendar, MapPin } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { BiArea } from "react-icons/bi";
 import { FaCar } from "react-icons/fa";
@@ -32,11 +32,14 @@ const property = {
   image: [imone, imtwo, imthree, imfour, imfive],
   descrption:
     "Beautiful, updated, ground level Co-op apartment in the desirable Bay Terrace neighborhood.This home features hardwood floors throughout, brand new bathrooms, newer EIK, modern front-load washer/dryer, full dining room, large living area, 3 spacious bedrooms and plenty of storage. Master bedroom includes both a standard closet and custom closet wall unit. Large windows face many directions for tons of natural light.",
+
+  about: "Stunning Mansion In The Heart Of Dubai",
   bathrooms: 4,
   bedrooms: 6,
   Garages: 2,
   area: 29000,
   createdAt: new Date(),
+  price: 1500000,
 };
 
 export default function SingleProperty() {
@@ -103,7 +106,7 @@ export default function SingleProperty() {
                 className={`${cn(meriwether.variable)} text-3xl`}
                 style={{ fontFamily: "var(--Merriweather)" }}
               >
-                Stunning Mansion In The Heart Of Dubai
+                {property.about}
               </p>
               <div className=" flex gap-2 mt-2 items-center">
                 <MapPin className=" w-4 h-4 text-slate-500" />
@@ -115,7 +118,7 @@ export default function SingleProperty() {
             <div>
               <span>
                 <p className=" text-orange-500 text-2xl font-semibold">
-                  AED 1,500,000
+                  AED {property.price.toLocaleString()}
                 </p>
               </span>
             </div>
@@ -148,13 +151,38 @@ export default function SingleProperty() {
                   </h1>
                 </div>
               </Card>
-              <Card className=" border-none w-full py-6 px-7 rounded-md">
+
+              <Card className="border-none w-full py-6 px-7 rounded-md">
                 <h1 className=" font-semibold">Description</h1>
-                <p className=" text-slate-600 text-sm mt-3">
+                <p className=" text-gray-600 text-[14px] mt-3">
                   {property.descrption}
                 </p>
               </Card>
-              <div className=" bg-card w-full h-36 rounded-md"></div>
+
+              <Card className="border-none w-full py-6 px-7 rounded-md">
+                <h1 className=" font-semibold mb-3">Address</h1>
+                <div className="grid grid-cols-1 text-[15px] gap-2">
+                  <div className="flex gap-2 items-center">
+                    <p className="font-medium text-gray-800">Address:</p>
+                    <p className=" font-normal text-gray-600">Lincoln Street</p>
+                  </div>
+                  <div className="flex gap-2 items-center">
+                    <p className="font-medium text-gray-800">City:</p>
+                    <p className="font-normal  text-gray-600">Dubai</p>
+                  </div>
+
+                  <div className="flex gap-2 items-center">
+                    <p className="font-medium text-gray-800">Zip:</p>
+                    <p className="font-normal  text-gray-600">587654</p>
+                  </div>
+                  <div className="flex gap-2 items-center">
+                    <p className="font-medium text-gray-800">Country:</p>
+                    <p className="font-normal  text-gray-600">
+                      United Arab Emirates
+                    </p>
+                  </div>
+                </div>
+              </Card>
             </div>
             <Form />
           </div>

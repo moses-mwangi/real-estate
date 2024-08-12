@@ -29,8 +29,6 @@ export default function Form() {
       </Card>
       <div className=" mt-4">
         <form className=" flex flex-col gap-3">
-          {/* <Input placeholder="Day" />
-          <Input placeholder="Time" /> */}
           <Input className=" text-[13px]" placeholder="Your Name" />
           <Input className=" text-[13px]" placeholder="Your Email" />
           <Input className=" text-[13px]" placeholder="Your Phone" />
