@@ -15,6 +15,7 @@ import { IoIosBed } from "react-icons/io";
 
 import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
+import Form from "./Form";
 
 const Map = dynamic(() => import("./Map"), {
   ssr: false, // Disable SSR for this component
@@ -119,8 +120,8 @@ export default function SingleProperty() {
               </span>
             </div>
           </div>
-          <div className=" grid grid-cols-[1.6fr_1fr] gap-9 mt-12">
-            <div className="flex flex-col gap-8">
+          <div className=" grid grid-cols-[2.2fr_1fr] gap-7 mt-12">
+            <div className="flex flex-col gap-6">
               <Card className="w-full flex justify-between h-36 rounded-md border-none px-8 pt-14">
                 <div className="flex flex-col gap-1 items-center text-gray-700">
                   <IoIosBed className=" w-6 h-6" />
@@ -155,7 +156,7 @@ export default function SingleProperty() {
               </Card>
               <div className=" bg-card w-full h-36 rounded-md"></div>
             </div>
-            <div className=" bg-red-500">mosess</div>
+            <Form />
           </div>
         </div>
       </div>
@@ -165,8 +166,12 @@ export default function SingleProperty() {
         address={house.address}
       />
       <div className="flex gap-5 px-8 py-8 mb-10">
-        <Button className="bg-orange-600">Book a visit now</Button>
-        <Button className="bg-orange-600">Return Back</Button>
+        <Button className="bg-orange-600 hover:bg-orange-700">
+          Book a visit now
+        </Button>
+        <Button className="bg-orange-600 hover:bg-orange-700">
+          Return Back
+        </Button>
       </div>
     </div>
   );

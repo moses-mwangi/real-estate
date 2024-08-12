@@ -13,6 +13,8 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Card } from "@/components/ui/card";
 import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 interface MapProps {
   latitude: number;
@@ -21,9 +23,27 @@ interface MapProps {
 }
 
 function Map({ latitude, longitude, address }: MapProps) {
-  const position: [number, number] = [latitude, longitude];
+  const [isLoading, setIsLoading] = useState(false);
+  const [position, setPosition] = useState<any>([latitude, longitude]);
+  const [error, setError] = useState("");
 
-  const roouter = useRouter();
+  function getPosition() {
+    if (!navigator.geolocation)
+      return setError("Your browser does not support geolocation");
+
+    setIsLoading(true);
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setPosition([pos.coords.latitude, pos.coords.longitude]);
+        setIsLoading(false);
+      },
+
+      (error) => {
+        setError(error.message);
+        setIsLoading(false);
+      }
+    );
+  }
 
   const DefaultIcon = L.icon({
     iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
@@ -36,13 +56,19 @@ function Map({ latitude, longitude, address }: MapProps) {
 
   return (
     <div className="px-8">
-      <Card className="bg-card border-none py-8 px-8 -z-50">
+      <Card className="bg-card relative border-none py-8 px-8">
+        <Button
+          onClick={getPosition}
+          className="absolute z-30 right-[40%] bottom-10 font-semibold text-slate-800 bg-green-500 hover:bg-green-600 uppercase"
+        >
+          {isLoading ? "loading..." : "Get your current position"}
+        </Button>
         <MapContainer
           center={position}
           zoom={13}
           scrollWheelZoom={false}
           style={{ height: "440px", width: "100%" }}
-          className=" rounded-md"
+          className=" rounded-md z-10"
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
