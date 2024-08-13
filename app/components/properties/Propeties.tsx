@@ -70,17 +70,21 @@ export default function Propeties() {
               className="bg-card shadow-lg flex flex-col gap-5 rounded-md cursor-pointer"
               key={el._id}
               onClick={() => {
-                router.push(`/${el._id}`);
+                router.push(
+                  `/${el._id}?lat=${el.position.at(0)}&lng=${el.position.at(1)}`
+                );
               }}
             >
               <div className="overflow-hidden rounded-t-md">
-                <Image
-                  className="w-full h-auto hover:scale-105 transition-all duration-200"
-                  src={el.image[0]}
-                  alt="house"
-                  width={400}
-                  height={300}
-                />
+                {el.image[0] && (
+                  <Image
+                    className="w-full h-auto hover:scale-105 transition-all duration-200"
+                    src={el.image[0]}
+                    alt="house"
+                    width={400}
+                    height={400}
+                  />
+                )}
               </div>
               <div className="flex flex-col gap-3 px-4">
                 <div className="flex flex-col gap-2">

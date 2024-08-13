@@ -30,7 +30,7 @@ interface Agent {
 
 export default function OurTeam() {
   const [agents, setAgents] = useState<Agent[]>([]);
-  //real-estate-api-azure.vercel.app
+
   https: useEffect(() => {
     async function fetchAgents() {
       // const res = await axios.get("http://127.0.0.1:3008/api/agents");

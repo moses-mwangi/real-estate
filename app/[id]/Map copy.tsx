@@ -192,8 +192,8 @@ function Map({ address, location }: MapProps) {
           <Marker position={position} draggable={false}>
             <Popup>{address}</Popup>
           </Marker>
-          {position && <ChangeCenter position={position} />}
 
+          <ChangeCenter position={position} />
           <DetectClick />
         </MapContainer>
       </Card>

@@ -13,8 +13,9 @@ import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
 import Form from "./Form";
 import axios from "axios";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { LatLngExpression } from "leaflet";
 
 const Map = dynamic(() => import("./Map"), {
   ssr: false,
@@ -40,23 +41,24 @@ interface Property {
   city: string;
   zipcode: number;
   address: string;
-  position: number[];
+  position: [number, number];
 }
 
 export default function SingleProperty() {
-  const house = {
-    latitude: 51.505,
-    longitude: -0.09,
-    address: "221B Baker Street, London",
-  };
+  const searchParams = useSearchParams();
+
+  const lat = searchParams.get("lat");
+  const lng = searchParams.get("lng");
+
+  const posi = [Number(lat), Number(lng)];
 
   const [property, setProperties] = useState<Property>();
   const { id } = useParams();
-
+  ///`http://127.0.0.1:3008/api/property/${id}`
   useEffect(() => {
     async function fetchAgents() {
       const propety = await axios.get(
-        `http://127.0.0.1:3008/api/property/${id}`
+        `https://real-estate-api-azure.vercel.app/api/property/${id}`
       );
       setProperties(propety.data.data);
     }
@@ -68,42 +70,52 @@ export default function SingleProperty() {
     <div className="bg-id pt-20">
       <div>
         <div className="grid h-svh grid-cols-2 gap-[1px]">
-          <Image
-            className=" w-full h-full"
-            src={property?.image[0]!}
-            alt="mm"
-            width={600}
-            height={200}
-          />
+          {property?.image[0] && (
+            <Image
+              className=" w-full h-full"
+              src={property.image[0]}
+              alt="mm"
+              width={600}
+              height={200}
+            />
+          )}
           <div className="grid grid-cols-2 gap-[1px]">
-            <Image
-              className=" w-full h-full"
-              src={property?.image[1]!}
-              alt="mm"
-              width={500}
-              height={200}
-            />
-            <Image
-              className=" w-full h-full"
-              src={property?.image[2]!}
-              alt="mm"
-              width={500}
-              height={200}
-            />
-            <Image
-              className=" w-full h-full"
-              src={property?.image[3]!}
-              alt="mm"
-              width={500}
-              height={200}
-            />
-            <Image
-              className=" w-full h-full"
-              src={property?.image[4]!}
-              alt="mm"
-              width={500}
-              height={200}
-            />
+            {property?.image[1] && (
+              <Image
+                className=" w-full h-full"
+                src={property.image[1]}
+                alt="mm"
+                width={500}
+                height={200}
+              />
+            )}
+            {property?.image[2] && (
+              <Image
+                className=" w-full h-full"
+                src={property.image[2]}
+                alt="mm"
+                width={500}
+                height={200}
+              />
+            )}
+            {property?.image[3] && (
+              <Image
+                className=" w-full h-full"
+                src={property.image[3]}
+                alt="mm"
+                width={500}
+                height={200}
+              />
+            )}
+            {property?.image[4] && (
+              <Image
+                className=" w-full h-full"
+                src={property.image[4]}
+                alt="mm"
+                width={500}
+                height={200}
+              />
+            )}
           </div>
         </div>
         <div className=" px-8 py-10">
@@ -213,9 +225,18 @@ export default function SingleProperty() {
           </div>
         </div>
       </div>
-      <Map address={String(property?.address)} location={property?.position} />
+      <Map
+        address={String(property?.address)}
+        location={posi || [25.112, 55.139]}
+      />
       <div className="flex gap-5 px-8 py-8 mb-10">
-        <Button className="bg-orange-600 hover:bg-orange-700">
+        <Button
+          className="bg-orange-600 hover:bg-orange-700"
+          onClick={() => {
+            console.log(property?.position);
+            console.log(posi);
+          }}
+        >
           Book a visit now
         </Button>
         <Button className="bg-orange-600 hover:bg-orange-700">
