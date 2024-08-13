@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Footer from "./footer/Footer";
 import Navbar from "./navbar/Navbar";
+import { Toaster } from "react-hot-toast";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -28,6 +29,19 @@ export default function RootLayout({
         style={{ fontFamily: "var(--Poppins)" }}
       >
         <div>
+          <Toaster
+            position="top-center"
+            containerClassName=""
+            toastOptions={{
+              duration: 3000,
+              className: "",
+              style: {
+                background: "#f1f5f9",
+                color: "#111827",
+                fontSize: "15px",
+              },
+            }}
+          />
           <Navbar />
           <main>{children}</main>
           <Footer />

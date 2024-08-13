@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 interface Property {
   _id: string;
@@ -45,16 +46,24 @@ function useSearchProperty() {
         el.city <= data.city &&
         el.type === data.category
     );
+    console.log(data);
 
-    if (selected.length == 0) return null;
+    if (selected.length !== 0) {
+      router.push(
+        `/search?price=${selected.map(
+          (el) => el.price
+        )}&bathrooms=${selected.map(
+          (el) => el.bathrooms
+        )}&bedrooms=${selected.map((el) => el.bedrooms)}&type=${selected
+          .map((el) => el.type)
+          .at(0)}`
+      );
+    }
 
-    router.push(
-      `/search?price=${selected.map((el) => el.price)}&bathrooms=${selected.map(
-        (el) => el.bathrooms
-      )}&bedrooms=${selected.map((el) => el.bedrooms)}&type=${selected
-        .map((el) => el.type)
-        .at(0)}`
-    );
+    if (selected.length == 0)
+      return data.price === ""
+        ? toast.error("No Property Found with that credential")
+        : toast.error("Select Property Credential First");
   }
 
   return { properties, onSubmit };

@@ -15,7 +15,8 @@ import Form from "./Form";
 import axios from "axios";
 import { useParams, useSearchParams } from "next/navigation";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
-import { LatLngExpression } from "leaflet";
+import { useRouter } from "next/navigation";
+import BookingTour from "./BookingTour";
 
 const Map = dynamic(() => import("./Map"), {
   ssr: false,
@@ -47,6 +48,7 @@ interface Property {
 
 export default function SingleProperty() {
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   const lat = searchParams.get("lat");
   const lng = searchParams.get("lng");
@@ -233,16 +235,13 @@ export default function SingleProperty() {
         location={posi || [25.112, 55.139]}
       />
       <div className="flex gap-5 px-8 py-8 mb-10">
+        <BookingTour />
         <Button
           className="bg-orange-600 hover:bg-orange-700"
           onClick={() => {
-            console.log(property?.position);
-            console.log(posi);
+            router.back();
           }}
         >
-          Book a visit now
-        </Button>
-        <Button className="bg-orange-600 hover:bg-orange-700">
           Return Back
         </Button>
       </div>
