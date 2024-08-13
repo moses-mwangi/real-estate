@@ -45,7 +45,6 @@ export default function Propeties() {
 
   useEffect(() => {
     async function fetchAgents() {
-      // const propety = await axios.get("http://127.0.0.1:3008/api/property");
       const propety = await axios.get(
         "https://real-estate-api-azure.vercel.app/api/property"
       );
@@ -85,7 +84,7 @@ export default function Propeties() {
         <div className="gap-y-8 gap-x-10 grid grid-cols-3">
           {properties.map((el, index) => (
             <div
-              className="bg-card shadow-lg flex flex-col gap-5 rounded-md cursor-pointer"
+              className="bg-card shadow-lg flex flex-col gap-5 rounded-md cursor-zoom-out"
               key={el._id}
             >
               <div className="overflow-hidden relative rounded-t-md">
@@ -121,7 +120,7 @@ export default function Propeties() {
                 </div>
               </div>
               <div
-                className="flex flex-col gap-3 px-4"
+                className="flex flex-col gap-3 px-4 cursor-pointer"
                 onClick={() => {
                   router.push(
                     `/${el._id}?lat=${el.position.at(0)}&lng=${el.position.at(
@@ -132,7 +131,7 @@ export default function Propeties() {
               >
                 <div className="flex flex-col gap-2">
                   <p className="text-[13px] text-slate-700">{el.type}, sales</p>
-                  <p className="font-semibold text-[16px] text-black/85">
+                  <p className="font-semibold text-[16px] text-black/85 duration-150 transition-all hover:text-orange-500">
                     {el.about}
                   </p>
                   <p className="font-medium text-orange-500">AED {el.price}</p>
