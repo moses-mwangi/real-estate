@@ -15,15 +15,12 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Search } from "lucide-react";
 import { useForm } from "react-hook-form";
+import useSearchProperty from "./useSearchProperty";
 
 export default function SearchHouse() {
-  const { handleSubmit, setValue, reset } = useForm();
+  const { onSubmit } = useSearchProperty();
+  const { handleSubmit, setValue } = useForm();
 
-  function onSubmit(data: any) {
-    console.log("Form Data:", data);
-  }
-
-  // Handle the change event for Select components
   const handleSelectChange = (name: string, value: string) => {
     setValue(name, value);
   };
@@ -56,15 +53,15 @@ export default function SearchHouse() {
                     </SelectItem>
                     <SelectItem
                       className="text-[13px] text-slate-500"
-                      value="Full Floor"
+                      value="Penthouse"
                     >
-                      Full Floor
+                      Penthouse
                     </SelectItem>
                     <SelectItem
                       className="text-[13px] text-slate-500"
-                      value="Compound"
+                      value="Mansion"
                     >
-                      Compound
+                      Mansion
                     </SelectItem>
                     <SelectItem
                       className="text-[13px] text-slate-500"
@@ -120,6 +117,30 @@ export default function SearchHouse() {
                     >
                       5
                     </SelectItem>
+                    <SelectItem
+                      className="text-[13px] text-slate-500"
+                      value="6"
+                    >
+                      6
+                    </SelectItem>
+                    <SelectItem
+                      className="text-[13px] text-slate-500"
+                      value="7"
+                    >
+                      7
+                    </SelectItem>
+                    <SelectItem
+                      className="text-[13px] text-slate-500"
+                      value="8"
+                    >
+                      8
+                    </SelectItem>
+                    <SelectItem
+                      className="text-[13px] text-slate-500"
+                      value="9"
+                    >
+                      9
+                    </SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>
@@ -163,6 +184,36 @@ export default function SearchHouse() {
                       value="4"
                     >
                       4
+                    </SelectItem>
+                    <SelectItem
+                      className="text-[13px] text-slate-500"
+                      value="5"
+                    >
+                      5
+                    </SelectItem>
+                    <SelectItem
+                      className="text-[13px] text-slate-500"
+                      value="6"
+                    >
+                      6
+                    </SelectItem>
+                    <SelectItem
+                      className="text-[13px] text-slate-500"
+                      value="7"
+                    >
+                      7
+                    </SelectItem>
+                    <SelectItem
+                      className="text-[13px] text-slate-500"
+                      value="8"
+                    >
+                      8
+                    </SelectItem>
+                    <SelectItem
+                      className="text-[13px] text-slate-500"
+                      value="9"
+                    >
+                      9
                     </SelectItem>
                   </SelectGroup>
                 </SelectContent>
@@ -210,27 +261,39 @@ export default function SearchHouse() {
                     </SelectLabel>
                     <SelectItem
                       className="text-[13px] text-slate-500"
-                      value="500"
+                      value="1600000"
                     >
-                      $0 - $500
+                      $0 - $1600000
                     </SelectItem>
                     <SelectItem
                       className="text-[13px] text-slate-500"
-                      value="1000"
+                      value="2000000"
                     >
-                      $0 - $1000
+                      $0 - $2000000
                     </SelectItem>
                     <SelectItem
                       className="text-[13px] text-slate-500"
-                      value="1500"
+                      value="3500000"
                     >
-                      $0 - $1500
+                      $0 - $3500000
                     </SelectItem>
                     <SelectItem
                       className="text-[13px] text-slate-500"
-                      value="2500"
+                      value="5000000"
                     >
-                      $0 - $2500
+                      $0 - $5000000
+                    </SelectItem>
+                    <SelectItem
+                      className="text-[13px] text-slate-500"
+                      value="6000000"
+                    >
+                      $0 - $6000000
+                    </SelectItem>
+                    <SelectItem
+                      className="text-[13px] text-slate-500"
+                      value="8000000"
+                    >
+                      $0 - $8000000
                     </SelectItem>
                   </SelectGroup>
                 </SelectContent>

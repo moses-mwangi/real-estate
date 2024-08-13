@@ -42,6 +42,7 @@ interface Property {
   zipcode: number;
   address: string;
   position: [number, number];
+  size: number;
 }
 
 export default function SingleProperty() {
@@ -171,14 +172,16 @@ export default function SingleProperty() {
                 </div>
                 <div className="flex flex-col gap-1 items-center text-gray-700">
                   <BiArea className=" w-6 h-6" />
-                  <h1 className=" text-[15px]">2657 ft</h1>
+                  <h1 className=" text-[15px]">
+                    {property?.size.toLocaleString()} ft
+                  </h1>
                 </div>
                 <div className="flex flex-col gap-1 items-center text-gray-700">
                   <Calendar className=" w-6 h-6" />
-                  <h1 className=" text-[15px]">
+                  <h1 className="text-[15px]">
                     Year Built:
                     {property?.createdAt &&
-                      new Date(property.createdAt).getFullYear()}
+                      new Date(property.createdAt).toLocaleDateString()}
                   </h1>
                 </div>
               </Card>
