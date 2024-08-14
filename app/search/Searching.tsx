@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import useSearchProperty from "../components/heroSection/useSearchProperty";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Heart, PhoneCall, Plus } from "lucide-react";
-import { Separator } from "@radix-ui/react-select";
 import { Card } from "@/components/ui/card";
 import { MdOutlineEmail } from "react-icons/md";
 import { FaWhatsapp } from "react-icons/fa";
@@ -64,6 +63,7 @@ export default function Searching() {
 
   return (
     <div className="flex flex-col gap-8">
+      {selected.length === 0 && <div className=" h-svh"></div>}
       {selected?.map((el, index) => (
         <div
           className="bg-card shadow-lg grid grid-cols-[1fr_2.3fr] items-center gap-5 rounded-md"
