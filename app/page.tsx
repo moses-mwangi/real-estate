@@ -1,5 +1,5 @@
 import Contact from "./components/contact/Contact";
-import Footer from "./footer/Footer";
+import Footer from "./components/footer/Footer";
 import HeroSection from "./components/heroSection/HeroSection";
 import Navbar from "./navbar/Navbar";
 import Propeties from "./components/properties/Propeties";

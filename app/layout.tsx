@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import Footer from "./footer/Footer";
+import Footer from "./components/footer/Footer";
 import Navbar from "./navbar/Navbar";
 import { Toaster } from "react-hot-toast";
 

@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import logo from "../../public/images/logo.png";
 import Link from "next/link";
+import UserPage from "../components/user/User";
 
 const lists = [
   { label: "Home" },
@@ -33,7 +34,7 @@ export default function Navbar() {
           </div>
         ))}
       </div>
-      <div className="bg-red-300 h-8 w-8 rounded-full"></div>
+      <UserPage />
     </div>
   );
 }
