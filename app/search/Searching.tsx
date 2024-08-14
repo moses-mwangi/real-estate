@@ -120,10 +120,9 @@ export default function Searching() {
               <p className="text-[12px] text-slate-500">
                 {el.description.substring(0, 200)}....
               </p>
-              <div></div>
             </div>
-            <Separator />
-            <div className="flex gap-10 items-center">
+
+            <div className="flex gap-10 items-center mt-2">
               <Card className="hover:bg-orange-500 hover:text-slate-100 bg-red-100 rounded-md text-sm text-orange-600 px-6 py-1 flex justify-center items-center">
                 <PhoneCall className=" w-[15px] h-[15px] mr-1" /> Call
               </Card>
