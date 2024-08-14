@@ -1,19 +1,44 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useSearchProperty from "../components/heroSection/useSearchProperty";
 import { useRouter, useSearchParams } from "next/navigation";
-import { PhoneCall } from "lucide-react";
+import { Heart, PhoneCall, Plus } from "lucide-react";
 import { Separator } from "@radix-ui/react-select";
 import { Card } from "@/components/ui/card";
 import { MdOutlineEmail } from "react-icons/md";
 import { FaWhatsapp } from "react-icons/fa";
 import Image from "next/image";
+import { GrNext, GrPrevious } from "react-icons/gr";
+import { IoShareSocialSharp } from "react-icons/io5";
 
 export default function Searching() {
+  const [nextImageIndexes, setNextImageIndexes] = useState<number[]>([]);
   const { properties } = useSearchProperty();
   const searchParams = useSearchParams();
   const router = useRouter();
+
+  useEffect(() => {
+    async function fetchAgents() {
+      setNextImageIndexes(Array(properties.length).fill(0));
+    }
+
+    fetchAgents();
+  }, [properties]);
+
+  const handleNextImage = (index: number, imageCount: number) => {
+    setNextImageIndexes((prev) =>
+      prev.map((value, i) => (i === index ? (value + 1) % imageCount : value))
+    );
+  };
+
+  const handlePreviousImage = (index: number, imageCount: number) => {
+    setNextImageIndexes((prev) =>
+      prev.map((value, i) =>
+        i === index ? (value - 1 + imageCount) % imageCount : value
+      )
+    );
+  };
 
   const price = searchParams
     .get("price")
@@ -39,31 +64,56 @@ export default function Searching() {
 
   return (
     <div className="flex flex-col gap-8">
-      {selected?.map((el) => (
+      {selected?.map((el, index) => (
         <div
-          className="bg-card shadow-lg grid grid-cols-[1fr_2.3fr] items-center gap-5 rounded-md cursor-pointer"
+          className="bg-card shadow-lg grid grid-cols-[1fr_2.3fr] items-center gap-5 rounded-md"
           key={el._id}
-          onClick={() => {
-            router.push(
-              `/${el._id}?lat=${el.position.at(0)}&lng=${el.position.at(1)}`
-            );
-          }}
         >
-          <div className="overflow-hidden rounded-t-md">
+          <div className="overflow-hidden z-30 relative rounded-t-md cursor-zoom-out">
             {el.image[0] && (
               <Image
                 className=" w-full h-auto hover:scale-105 transition-all duration-200"
-                src={el.image[0]}
+                src={
+                  el._id
+                    ? el.image[nextImageIndexes[index]] || el.image[0]
+                    : el.image[0]
+                }
                 alt="house"
                 width={200}
                 height={200}
               />
             )}
+            <GrNext
+              onClick={() => handleNextImage(index, el.image.length)}
+              className="w-10 h-10 font-bold cursor-pointer hover:bg-card/20 rounded-full p-1 absolute right-1 top-1/2 transform -translate-y-1/2 z-50 text-slate-100"
+            />
+            <GrPrevious
+              onClick={() => handlePreviousImage(index, el.image.length)}
+              className="w-10 h-10 font-bold cursor-pointer hover:bg-card/20 rounded-full p-1 absolute left-1 top-1/2 transform -translate-y-1/2 z-50 text-slate-100"
+            />
+            <div className="rounded-sm px-[6px] py-[2px] absolute left-4 top-4  z-50 bg-cyan-600 text-[10px] text-slate-100">
+              Featured
+            </div>
+            <div className="rounded-sm px-[6px] py-[2px] absolute right-4 top-4  z-50 bg-orange-400 text-[10px] text-slate-100">
+              Sales
+            </div>
+            <div className="flex gap-2 items-center absolute bottom-3 left-3">
+              <IoShareSocialSharp className=" w-5 h-5 hover:bg-slate-800 bg-slate-900/45 p-[2px] rounded-sm text-slate-50" />
+              <Heart className=" w-5 h-5 hover:bg-slate-800 bg-slate-900/45 p-[2px] rounded-sm text-slate-50" />
+              <Plus className=" w-5 h-5 hover:bg-slate-800 bg-slate-900/45 p-[2px] rounded-sm text-slate-50" />
+            </div>
           </div>
-          <div className="flex flex-col gap-3 px-4">
+          <div
+            className="flex flex-col gap-3 px-4 cursor-pointer"
+            onClick={() => {
+              router.push(
+                `/${el._id}?lat=${el.position.at(0)}&lng=${el.position.at(1)}`
+              );
+            }}
+          >
             <div className="flex flex-col gap-2">
-              <p className=" text-[13px] text-slate-700">{el.type}, sales</p>
-              <p className=" font-semibold text-[16px] text-black/85">
+              <p className="text-[13px] text-slate-700">{el.type}, sales</p>
+              <p className="font-semibold text-[16px] hover:text-orange-500 text-black/85">
                 {el.about}
               </p>
               <p className=" font-medium text-orange-500">AED {el.price}</p>
