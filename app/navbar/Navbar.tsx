@@ -3,6 +3,7 @@ import React from "react";
 import logo from "../../public/images/logo.png";
 import Link from "next/link";
 import UserPage from "../components/user/User";
+import UserProfile from "../components/user/UserProfile";
 
 const lists = [
   { label: "Home" },
@@ -35,6 +36,7 @@ export default function Navbar() {
         ))}
       </div>
       <UserPage />
+      <UserProfile />
     </div>
   );
 }

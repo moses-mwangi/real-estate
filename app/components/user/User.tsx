@@ -4,13 +4,15 @@ import React, { useState } from "react";
 import SignUpForm from "./SignUpForm";
 import { Card } from "@/components/ui/card";
 import { X } from "lucide-react";
+import useUser from "./useUser";
 
 export default function UserPage() {
   const [show, setShow] = useState(false);
+  const { curUser } = useUser();
 
   return (
     <div>
-      {show === false && (
+      {show === false && !curUser && (
         <Card
           className=" bg-slate-100 cursor-pointer font-semibold text-sm py-2 px-3 rounded-md"
           onClick={() => {
@@ -23,8 +25,9 @@ export default function UserPage() {
       {show === true && (
         <div className="flex absolute top-0 right-0 bg-black/40 backdrop-blur-[2px]  justify-center items-center h-svh w-svw z-50">
           <div className="bg-sign rounded-l-md relative h-full w-full max-h-[85.3svh] max-w-[300px]">
-            <div className=" text-[24px] absolute bottom-2 px-4 pb-7  text-gray-900 font-semibold">
-              Welcome to Dubai Real Estate
+            <div className="text-[24px] absolute top-1/2 px-6 pb-7  text-white font-semibold">
+              Welcome to
+              <br /> Dubai Real Estate
             </div>
           </div>
           <div className="bg-card h-full max-h-[85.3svh] rounded-r-md">
