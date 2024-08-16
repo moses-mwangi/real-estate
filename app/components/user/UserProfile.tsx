@@ -30,7 +30,6 @@ export default function UserProfile() {
     try {
       logOut();
       toast.success("You have successfully logout");
-      // window.location.reload();
     } catch (err) {
       console.error(err);
       toast.success("Fail to logout");
@@ -39,7 +38,7 @@ export default function UserProfile() {
 
   return (
     <div>
-      {curUser !== null ? (
+      {curUser ? (
         <DropdownMenu>
           <DropdownMenuTrigger>
             <div className="bg-pink-500 p-2 w-9 h-9 text-slate-100 font-semibold flex items-center justify-center rounded-full">
