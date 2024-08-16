@@ -13,40 +13,40 @@ export interface IUser {
 }
 
 function useUser() {
-  const [curUser, setCurUser] = useState<IUser>();
+  const [curUser, setCurUser] = useState<IUser | null>(null);
   const router = useRouter();
 
   useEffect(() => {
-    async function getCurrentUser() {
-      const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
-      if (!token) {
-        toast.error("No token found. Please log in.");
-        return;
-      }
-
-      try {
-        const res = await axios.get("http://127.0.0.1:3008/api/auth/me", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          withCredentials: true,
-        });
-
-        console.log(res.data);
-        router.refresh();
-        setCurUser(res.data.user);
-        toast.success("User data fetched successfully");
-      } catch (err) {
-        console.error(err);
-        toast.error("Something went wrong: Please try again");
-      }
+    if (token) {
+      getCurrentUser(token);
+    } else {
+      setCurUser(null);
     }
+  }, []);
 
-    getCurrentUser();
-  }, [router]);
+  async function getCurrentUser(token: string) {
+    try {
+      const res = await axios.get("http://127.0.0.1:3008/api/auth/me", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
 
-  return { curUser };
+      setCurUser(res.data.user);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  const logOut = () => {
+    localStorage.removeItem("token");
+    setCurUser(null);
+  };
+
+  return { curUser, logOut };
 }
 
 export default useUser;

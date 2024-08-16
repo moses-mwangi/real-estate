@@ -4,6 +4,7 @@ import first from "../../../public/images/customer 1.png";
 import second from "../../../public/images/customer 1.png";
 import third from "../../../public/images/customer 1.png";
 import fourth from "../../../public/images/customer 1.png";
+
 import pa from "../../../public/dubai/im 1.png";
 import pb from "../../../public/dubai/im 2.png";
 import pc from "../../../public/dubai/im 3.png";
@@ -22,6 +23,7 @@ const meriwether = Merriweather({
   subsets: ["latin"],
   weight: ["400"],
   variable: "--Merriweather",
+  display: "swap",
 });
 
 const comp = [

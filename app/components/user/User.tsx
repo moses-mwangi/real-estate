@@ -1,18 +1,24 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SignUpForm from "./SignUpForm";
 import { Card } from "@/components/ui/card";
 import { X } from "lucide-react";
-import useUser from "./useUser";
 
 export default function UserPage() {
   const [show, setShow] = useState(false);
-  const { curUser } = useUser();
+  const [token, setToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    const tok = localStorage.getItem("token");
+    if (tok) {
+      setToken(tok);
+    }
+  }, [token]);
 
   return (
     <div>
-      {show === false && !curUser && (
+      {show === false && token === null && (
         <Card
           className=" bg-slate-100 cursor-pointer font-semibold text-sm py-2 px-3 rounded-md"
           onClick={() => {

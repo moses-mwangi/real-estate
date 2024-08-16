@@ -2,7 +2,6 @@ import Image from "next/image";
 import React from "react";
 import logo from "../../public/images/logo.png";
 import Link from "next/link";
-import UserPage from "../components/user/User";
 import UserProfile from "../components/user/UserProfile";
 
 const lists = [
@@ -35,7 +34,6 @@ export default function Navbar() {
           </div>
         ))}
       </div>
-      <UserPage />
       <UserProfile />
     </div>
   );

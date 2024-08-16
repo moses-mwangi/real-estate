@@ -26,6 +26,7 @@ interface Set {
 export default function SignUpForm({ setShow }: Set) {
   const [newUser, setNewUser] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [token, setToken] = useState<string | null>(null);
 
   const {
     register,
@@ -38,6 +39,14 @@ export default function SignUpForm({ setShow }: Set) {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    console.log(storedToken);
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
 
   const onSubmit: SubmitHandler<SignUpFormInputs> = async (data) => {
     try {
@@ -53,9 +62,6 @@ export default function SignUpForm({ setShow }: Set) {
       reset();
       router.push("/");
       router.refresh();
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
     } catch (err) {
       toast.error("Failed to register. Please try again.");
       console.log("Error", err);
