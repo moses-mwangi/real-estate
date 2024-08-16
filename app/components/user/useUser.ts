@@ -1,7 +1,5 @@
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 
 export interface IUser {
   _id: string;
@@ -14,7 +12,6 @@ export interface IUser {
 
 function useUser() {
   const [curUser, setCurUser] = useState<IUser | null>(null);
-  const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem("token");

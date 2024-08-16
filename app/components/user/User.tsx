@@ -18,7 +18,7 @@ export default function UserPage() {
 
   return (
     <div>
-      {show === false && token === null && (
+      {show === false && (
         <Card
           className=" bg-slate-100 cursor-pointer font-semibold text-sm py-2 px-3 rounded-md"
           onClick={() => {
