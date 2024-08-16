@@ -21,7 +21,7 @@ export default function UserPage() {
     <div>
       {show === false && (
         <Card
-          className=" bg-slate-100 cursor-pointer font-semibold text-sm py-2 px-3 rounded-md"
+          className=" bg-slate-50/65 cursor-pointer font-semibold hover:bg-card text-gray-700 hover:text-orange-600 transition-all duration-150 text-sm py-2 px-3 rounded-2xl"
           onClick={() => {
             setShow((el) => !el);
           }}
