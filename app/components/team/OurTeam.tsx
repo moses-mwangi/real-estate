@@ -45,7 +45,7 @@ export default function OurTeam() {
   }, []);
 
   return (
-    <div className="bg-team py-14 px-12">
+    <div className="bg-team py-14 px-12" id="agents">
       <div>
         <h1 className=" flex justify-center">OUR AGENTS</h1>
         <h1

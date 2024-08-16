@@ -74,7 +74,7 @@ export default function Propeties() {
   };
 
   return (
-    <div className="bg-property">
+    <div className="bg-property" id="properties">
       <div className="bg-white px-12 py-20 bg-opacity-[96%]">
         <div className="flex flex-col gap-2 mb-5">
           <p className="opacity-80 font-light">DUBAI REAL ESTATE</p>

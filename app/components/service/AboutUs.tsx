@@ -33,7 +33,7 @@ const about = [
 
 export default function AboutUs() {
   return (
-    <div className="grid grid-rows-2 py-20 px-12">
+    <div className="grid grid-rows-2 py-20 px-12" id="services">
       <div className="">
         <h1 className="flex justify-center text-sm">ABOUT US</h1>
         <p

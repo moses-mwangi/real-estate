@@ -66,7 +66,10 @@ export default function Contact() {
   };
 
   return (
-    <div className="bg-team py-14 pl-32 grid grid-cols-2 items-center">
+    <div
+      className="bg-team py-14 pl-32 grid grid-cols-2 items-center"
+      id="contact"
+    >
       <div className="flex flex-col gap-3 w-[80%]">
         <h1>CONTACT US</h1>
         <p
