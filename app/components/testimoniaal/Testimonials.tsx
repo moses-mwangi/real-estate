@@ -2,7 +2,7 @@
 
 import first from "../../../public/images/customer 1.png";
 import second from "../../../public/images/customer 2.png";
-import third from "../../../public/images/customer 1.png";
+import third from "../../../public/images/customer 4.png";
 import fourth from "../../../public/images/customer 3.png";
 
 import pa from "../../../public/dubai/im 1.png";
