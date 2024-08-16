@@ -89,7 +89,7 @@ export default function Contact() {
                 })}
               />
               {errors.firstName && (
-                <p className="text-red-500 text-sm">
+                <p className="text-red-500 text-[13px]">
                   {errors.firstName.message}
                 </p>
               )}
@@ -104,7 +104,7 @@ export default function Contact() {
                 {...register("lastName", { required: "Last Name is required" })}
               />
               {errors.lastName && (
-                <p className="text-red-500 text-sm">
+                <p className="text-red-500 text-[13px]">
                   {errors.lastName.message}
                 </p>
               )}
@@ -118,7 +118,9 @@ export default function Contact() {
                 {...register("country", { required: "Country is required" })}
               />
               {errors.country && (
-                <p className="text-red-500 text-sm">{errors.country.message}</p>
+                <p className="text-red-500 text-[13px]">
+                  {errors.country.message}
+                </p>
               )}
             </div>
             <div>
@@ -130,7 +132,9 @@ export default function Contact() {
                 {...register("city", { required: "City is required" })}
               />
               {errors.city && (
-                <p className="text-red-500 text-sm">{errors.city.message}</p>
+                <p className="text-red-500 text-[13px]">
+                  {errors.city.message}
+                </p>
               )}
             </div>
             <div>
@@ -143,7 +147,9 @@ export default function Contact() {
                 {...register("email", { required: "Email is required" })}
               />
               {errors.email && (
-                <p className="text-red-500 text-sm">{errors.email.message}</p>
+                <p className="text-red-500 text-[13px]">
+                  {errors.email.message}
+                </p>
               )}
             </div>
             <div>
@@ -155,7 +161,9 @@ export default function Contact() {
                 {...register("mobile", { required: "Mobile is required" })}
               />
               {errors.mobile && (
-                <p className="text-red-500 text-sm">{errors.mobile.message}</p>
+                <p className="text-red-500 text-[13px]">
+                  {errors.mobile.message}
+                </p>
               )}
             </div>
           </div>
@@ -168,7 +176,9 @@ export default function Contact() {
               {...register("message", { required: "Message is required" })}
             />
             {errors.message && (
-              <p className="text-red-500 text-sm">{errors.message.message}</p>
+              <p className="text-red-500 text-[13px]">
+                {errors.message.message}
+              </p>
             )}
           </div>
           <Button

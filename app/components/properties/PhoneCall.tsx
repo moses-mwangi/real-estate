@@ -28,7 +28,7 @@ export default function PhoneNumber() {
                 <X />
               </button>
             </div>
-            <CardContent className="px-2">
+            <CardContent className="px-2 text-[13px]">
               You can contact Janet Richmond via phone: (305) 555-4555 mobile:
               (305) 555-4555. Please use the #%id to identify the property:
               Apartment in GEMZ in Al Furjan
