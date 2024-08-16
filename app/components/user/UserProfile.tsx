@@ -14,6 +14,14 @@ import useUser from "./useUser";
 import { LogOut, User } from "lucide-react";
 import UserPage from "./User";
 import { Separator } from "@/components/ui/separator";
+import { Merriweather } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const meriwether = Merriweather({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--Merriweather",
+});
 
 export interface IUser {
   _id: string;
@@ -46,7 +54,10 @@ export default function UserProfile() {
               {curUser?.name[0]}
             </div>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="bg-card w-64 mr-6">
+          <DropdownMenuContent
+            className={`${cn(meriwether.variable)} bg-card w-64 mr-6`}
+            style={{ fontFamily: "var(--Merriweather)" }}
+          >
             <DropdownMenuLabel className="">My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="flex items-center gap-2">
