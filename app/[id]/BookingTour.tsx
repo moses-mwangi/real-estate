@@ -36,7 +36,7 @@ import {
 } from "@/components/ui/select";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 type FormValues = {
   date: Date;
@@ -52,12 +52,17 @@ export default function BookingTour() {
   const [date, setDate] = React.useState<Date>();
   const { register, handleSubmit, setValue, reset } = useForm<FormValues>();
   const { id } = useParams();
+  const router = useRouter();
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
-      const res = await axios.post("http://127.0.0.1:3008/api/tours", data);
+      const res = await axios.post(
+        "https://real-estate-api-azure.vercel.app/api/tours",
+        data
+      );
 
       toast.success("You have succefully booked");
+      router.push("/");
     } catch (err) {
       console.error(err);
       toast.error("Failed to make Booking:Try again");
