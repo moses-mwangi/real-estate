@@ -105,11 +105,11 @@ export default function Propeties() {
                 )}
                 <GrNext
                   onClick={() => handleNextImage(index, el.image.length)}
-                  className="w-10 h-10 font-bold hover:bg-card/20 rounded-full p-1 absolute right-1 top-1/2 transform -translate-y-1/2 z-40 text-slate-100"
+                  className="w-10 h-10 cursor-pointer font-bold hover:bg-card/20 rounded-full p-1 absolute right-1 top-1/2 transform -translate-y-1/2 z-40 text-slate-100"
                 />
                 <GrPrevious
                   onClick={() => handlePreviousImage(index, el.image.length)}
-                  className="w-10 h-10 font-bold hover:bg-card/20 rounded-full p-1 absolute left-1 top-1/2 transform -translate-y-1/2 z-40 text-slate-100"
+                  className="w-10 h-10 cursor-pointer font-bold hover:bg-card/20 rounded-full p-1 absolute left-1 top-1/2 transform -translate-y-1/2 z-40 text-slate-100"
                 />
                 <div className="rounded-sm px-[6px] py-[2px] absolute left-4 top-4  z-40 bg-cyan-600 text-[10px] text-slate-100">
                   Featured
