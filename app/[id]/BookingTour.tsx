@@ -37,6 +37,7 @@ import {
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useParams, useRouter } from "next/navigation";
+import useUser from "../components/user/useUser";
 
 type FormValues = {
   date: Date;
@@ -51,6 +52,7 @@ type FormValues = {
 export default function BookingTour() {
   const [date, setDate] = React.useState<Date>();
   const { register, handleSubmit, setValue, reset } = useForm<FormValues>();
+  const { curUser } = useUser();
   const { id } = useParams();
   const router = useRouter();
 
@@ -143,34 +145,24 @@ export default function BookingTour() {
                 <Input
                   className="text-[13px]"
                   placeholder="Your Name"
-                  {...register(
-                    "name"
-                    // , { required: true }
-                  )}
+                  defaultValue={curUser?.name}
+                  {...register("name")}
                 />
                 <Input
                   type="hidden"
                   defaultValue={id}
-                  {...register(
-                    "property"
-                    // , { required: true }
-                  )}
+                  {...register("property")}
                 />
                 <Input
                   className="text-[13px]"
                   placeholder="Your Email"
-                  {...register(
-                    "email"
-                    // , { required: true }
-                  )}
+                  defaultValue={curUser?.email}
+                  {...register("email")}
                 />
                 <Input
                   className="text-[13px]"
                   placeholder="Your Phone"
-                  {...register(
-                    "phone"
-                    // , { required: true }
-                  )}
+                  {...register("phone")}
                 />
 
                 <Textarea
