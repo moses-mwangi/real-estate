@@ -4,6 +4,7 @@ import Image from "next/image";
 import React from "react";
 import logo from "../../public/images/logo.png";
 import UserProfile from "../components/user/UserProfile";
+import { useRouter } from "next/navigation";
 
 const lists = [
   { label: "Home", id: "home" },
@@ -14,6 +15,8 @@ const lists = [
 ];
 
 export default function Navbar() {
+  const router = useRouter();
+
   const handleScroll = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -29,7 +32,10 @@ export default function Navbar() {
         alt="logo"
         width={300}
         height={100}
-        onClick={() => handleScroll("home")}
+        onClick={() => {
+          handleScroll("home");
+          router.push("/");
+        }}
       />
       <div className="flex gap-12">
         {lists.map((el) => (
