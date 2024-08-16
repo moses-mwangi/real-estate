@@ -13,6 +13,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import useUser from "../components/user/useUser";
 import emailjs from "emailjs-com";
 import toast from "react-hot-toast";
+import PhoneNumber from "./PhoneCall";
 
 interface FormValues {
   name: string;
@@ -98,10 +99,8 @@ export default function Form() {
         </form>
       </div>
       <div className="mt-5 flex flex-col gap-4">
-        <div className="flex justify-between gap-3">
-          <Button className="w-full flex items-center bg-orange-600 hover:bg-orange-500">
-            <PhoneCall className="w-4 h-4 mr-2" /> Call
-          </Button>
+        <div className="grid grid-cols-2 justify-between gap-3">
+          <PhoneNumber />
           <Button className="w-full flex items-center bg-orange-600 hover:bg-orange-500">
             <BsWhatsapp className="w-4 h-4 mr-2" /> WhatsApp
           </Button>
