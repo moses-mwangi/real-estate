@@ -1,13 +1,13 @@
 "use client";
-
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
 
 interface Property {
   _id: string;
-  image: [string];
+  image: string[];
   description: string;
   about: string;
   type: string;
@@ -19,7 +19,16 @@ interface Property {
   city: string;
   zipcode: number;
   address: string;
-  position: [number];
+  position: number[];
+}
+
+interface Data {
+  type: string;
+  bathrooms: number;
+  bedrooms: number;
+  price: number;
+  city: string;
+  category: string;
 }
 
 function useSearchProperty() {
@@ -37,7 +46,18 @@ function useSearchProperty() {
     fetchAgents();
   }, []);
 
-  function onSubmit(data: any) {
+  const onSubmit = (data: any) => {
+    if (
+      !data.price ||
+      !data.bathrooms ||
+      !data.bedrooms ||
+      !data.category ||
+      !data.city
+    ) {
+      toast.error("Please fill in all fields.");
+      return;
+    }
+
     const selected = properties?.filter(
       (el) =>
         el.price <= data.price &&
@@ -46,9 +66,8 @@ function useSearchProperty() {
         el.city <= data.city &&
         el.type === data.category
     );
-    console.log(data);
 
-    if (selected.length !== 0) {
+    if (selected.length > 0) {
       router.push(
         `/search?price=${selected.map(
           (el) => el.price
@@ -58,13 +77,10 @@ function useSearchProperty() {
           .map((el) => el.type)
           .at(0)}`
       );
+    } else {
+      toast.error("No Property Found with the given criteria.");
     }
-
-    if (selected.length == 0)
-      return data.price === ""
-        ? toast.error("No Property Found with that credential")
-        : toast.error("Select Property Credential First");
-  }
+  };
 
   return { properties, onSubmit };
 }
