@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-import { Heart, PhoneCall, Plus } from "lucide-react";
+import { Heart, Phone, PhoneCall, Plus } from "lucide-react";
 import { MdOutlineEmail } from "react-icons/md";
 import { FaWhatsapp } from "react-icons/fa";
 import axios from "axios";
@@ -15,6 +15,8 @@ import { GrNext, GrPrevious } from "react-icons/gr";
 import { IoShareSocialSharp } from "react-icons/io5";
 import useUser from "../user/useUser";
 import toast from "react-hot-toast";
+import Email from "./Email";
+import PhoneNumber from "./PhoneCall";
 
 const meriwether = Merriweather({
   subsets: ["latin"],
@@ -43,7 +45,7 @@ export default function Propeties() {
   const [properties, setProperties] = useState<Property[]>([]);
   const [nextImageIndexes, setNextImageIndexes] = useState<number[]>([]);
   const router = useRouter();
-  const { curUser, setShow, show } = useUser();
+  const { curUser, setShow } = useUser();
 
   useEffect(() => {
     async function fetchAgents() {
@@ -103,16 +105,16 @@ export default function Propeties() {
                 )}
                 <GrNext
                   onClick={() => handleNextImage(index, el.image.length)}
-                  className="w-10 h-10 font-bold hover:bg-card/20 rounded-full p-1 absolute right-1 top-1/2 transform -translate-y-1/2 z-50 text-slate-100"
+                  className="w-10 h-10 font-bold hover:bg-card/20 rounded-full p-1 absolute right-1 top-1/2 transform -translate-y-1/2 z-40 text-slate-100"
                 />
                 <GrPrevious
                   onClick={() => handlePreviousImage(index, el.image.length)}
-                  className="w-10 h-10 font-bold hover:bg-card/20 rounded-full p-1 absolute left-1 top-1/2 transform -translate-y-1/2 z-50 text-slate-100"
+                  className="w-10 h-10 font-bold hover:bg-card/20 rounded-full p-1 absolute left-1 top-1/2 transform -translate-y-1/2 z-40 text-slate-100"
                 />
-                <div className="rounded-sm px-[6px] py-[2px] absolute left-4 top-4  z-50 bg-cyan-600 text-[10px] text-slate-100">
+                <div className="rounded-sm px-[6px] py-[2px] absolute left-4 top-4  z-40 bg-cyan-600 text-[10px] text-slate-100">
                   Featured
                 </div>
-                <div className="rounded-sm px-[6px] py-[2px] absolute right-4 top-4  z-50 bg-orange-400 text-[10px] text-slate-100">
+                <div className="rounded-sm px-[6px] py-[2px] absolute right-4 top-4  z-40 bg-orange-400 text-[10px] text-slate-100">
                   Sales
                 </div>
                 <div className="flex gap-2 items-center absolute bottom-3 left-3">
@@ -121,22 +123,22 @@ export default function Propeties() {
                   <Plus className=" w-5 h-5 hover:bg-slate-800 bg-slate-900/45 p-[2px] rounded-sm text-slate-50" />
                 </div>
               </div>
-              <div
-                className="flex flex-col gap-3 px-4 cursor-pointer"
-                onClick={() => {
-                  if (curUser) {
-                    router.push(
-                      `/${el._id}?lat=${el.position.at(0)}&lng=${el.position.at(
-                        1
-                      )}`
-                    );
-                  } else {
-                    setShow((el) => !el);
-                    toast.error("Log in First");
-                  }
-                }}
-              >
-                <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-3 px-4 cursor-pointer">
+                <div
+                  className="flex flex-col gap-2"
+                  onClick={() => {
+                    if (curUser) {
+                      router.push(
+                        `/${el._id}?lat=${el.position.at(
+                          0
+                        )}&lng=${el.position.at(1)}`
+                      );
+                    } else {
+                      setShow((el) => !el);
+                      toast.error("Log in First");
+                    }
+                  }}
+                >
                   <p className="text-[13px] text-slate-700">{el.type}, sales</p>
                   <p className="font-semibold text-[16px] text-black/85 duration-150 transition-all hover:text-orange-500">
                     {el.about}
@@ -148,12 +150,8 @@ export default function Propeties() {
                 </div>
                 <Separator />
                 <div className="flex justify-between mb-3">
-                  <Card className="hover:bg-orange-500 hover:text-slate-100 bg-red-100 rounded-md text-sm text-orange-600 px-6 py-1 flex justify-center items-center">
-                    <PhoneCall className="w-[15px] h-[15px] mr-1" /> Call
-                  </Card>
-                  <Card className="hover:bg-orange-500 hover:text-slate-100 bg-red-100 rounded-md text-sm text-orange-600 px-6 py-1 flex justify-center items-center">
-                    <MdOutlineEmail className="w-[15px] h-[15px] mr-1" /> Email
-                  </Card>
+                  <PhoneNumber />
+                  <Email />
                   <Card className="hover:bg-orange-500 hover:text-slate-100 bg-red-100 rounded-md text-sm text-orange-600 px-6 py-1 flex justify-center items-center">
                     <FaWhatsapp className="w-[15px] h-[15px] mr-1" />
                   </Card>
