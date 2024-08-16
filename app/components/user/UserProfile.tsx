@@ -11,8 +11,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import useUser from "./useUser";
-import { LogOut } from "lucide-react";
+import { LogOut, User } from "lucide-react";
 import UserPage from "./User";
+import { Separator } from "@/components/ui/separator";
 
 export interface IUser {
   _id: string;
@@ -45,21 +46,26 @@ export default function UserProfile() {
               {curUser?.name[0]}
             </div>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="bg-card w-full mr-6">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuContent className="bg-card w-64 mr-6">
+            <DropdownMenuLabel className="">My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="">
+            <DropdownMenuItem className="flex items-center gap-2">
+              <div className=" bg-slate-100 rounded-full p-[8px]">
+                <User />
+              </div>
               <div>
+                <p>{curUser.name}</p>
                 <p className=" font-medium text-gray-600">{curUser?.email}</p>
               </div>
             </DropdownMenuItem>
+            <DropdownMenuSeparator />
             <DropdownMenuItem
-              className="flex cursor-pointer text-blue-500 font-medium justify-between items-center"
+              className="flex gap-5 items-center cursor-pointer text-blue-500 font-medium"
               onClick={() => {
                 handleLogout();
               }}
             >
-              <LogOut className="w-5 h-5" />
+              <LogOut className="w-[18px] h-[18px]" />
               <p className=" font-medium">Logout</p>
             </DropdownMenuItem>
           </DropdownMenuContent>
