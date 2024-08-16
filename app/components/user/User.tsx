@@ -4,10 +4,11 @@ import React, { useEffect, useState } from "react";
 import SignUpForm from "./SignUpForm";
 import { Card } from "@/components/ui/card";
 import { X } from "lucide-react";
+import useUser from "./useUser";
 
 export default function UserPage() {
-  const [show, setShow] = useState(false);
   const [token, setToken] = useState<string | null>(null);
+  const { show, setShow } = useUser();
 
   useEffect(() => {
     const tok = localStorage.getItem("token");

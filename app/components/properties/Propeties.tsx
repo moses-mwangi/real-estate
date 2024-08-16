@@ -6,14 +6,15 @@ import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-import { Heart, PhoneCall, Plus, Share } from "lucide-react";
+import { Heart, PhoneCall, Plus } from "lucide-react";
 import { MdOutlineEmail } from "react-icons/md";
 import { FaWhatsapp } from "react-icons/fa";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { GrNext, GrPrevious } from "react-icons/gr";
-import { CiShare2 } from "react-icons/ci";
 import { IoShareSocialSharp } from "react-icons/io5";
+import useUser from "../user/useUser";
+import toast from "react-hot-toast";
 
 const meriwether = Merriweather({
   subsets: ["latin"],
@@ -42,6 +43,7 @@ export default function Propeties() {
   const [properties, setProperties] = useState<Property[]>([]);
   const [nextImageIndexes, setNextImageIndexes] = useState<number[]>([]);
   const router = useRouter();
+  const { curUser, setShow, show } = useUser();
 
   useEffect(() => {
     async function fetchAgents() {
@@ -122,11 +124,16 @@ export default function Propeties() {
               <div
                 className="flex flex-col gap-3 px-4 cursor-pointer"
                 onClick={() => {
-                  router.push(
-                    `/${el._id}?lat=${el.position.at(0)}&lng=${el.position.at(
-                      1
-                    )}`
-                  );
+                  if (curUser) {
+                    router.push(
+                      `/${el._id}?lat=${el.position.at(0)}&lng=${el.position.at(
+                        1
+                      )}`
+                    );
+                  } else {
+                    setShow((el) => !el);
+                    toast.error("Log in First");
+                  }
                 }}
               >
                 <div className="flex flex-col gap-2">

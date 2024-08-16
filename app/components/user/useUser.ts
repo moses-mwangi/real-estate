@@ -12,6 +12,7 @@ export interface IUser {
 
 function useUser() {
   const [curUser, setCurUser] = useState<IUser | null>(null);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -46,7 +47,7 @@ function useUser() {
     setCurUser(null);
   };
 
-  return { curUser, logOut };
+  return { curUser, logOut, show, setShow };
 }
 
 export default useUser;
