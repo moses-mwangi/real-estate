@@ -52,3 +52,23 @@ export default function UserPage() {
     </div>
   );
 }
+
+// app.use(
+//   session({
+//     // secret: config.get<string>("sessionSecret"),
+//     secret: "XFh//pPG4zrBeLBIWgv73NwaypFz4NJJFeOclYf3OEE=",
+//     resave: false,
+//     saveUninitialized: true,
+//   })
+// );
+
+// app.use(
+//   cookieSession({
+//     name: "session",
+//     keys: ["cyberwolves"],
+//     maxAge: 24 * 60 * 60 * 100,
+//   })
+// );
+
+// app.use(passport.initialize());
+// app.use(passport.session());

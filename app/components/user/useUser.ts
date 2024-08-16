@@ -28,12 +28,15 @@ function useUser() {
 
   async function getCurrentUser(token: string) {
     try {
-      const res = await axios.get("http://127.0.0.1:3008/api/auth/me", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
-      });
+      const res = await axios.get(
+        "https://real-estate-api-azure.vercel.app/api/auth/me",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
+      );
 
       setCurUser(res.data.user);
     } catch (err) {

@@ -12,7 +12,6 @@ import {
 
 import useUser from "./useUser";
 import { LogOut } from "lucide-react";
-import { divIcon } from "leaflet";
 import UserPage from "./User";
 
 export interface IUser {

@@ -51,8 +51,8 @@ export default function SignUpForm({ setShow }: Set) {
   const onSubmit: SubmitHandler<SignUpFormInputs> = async (data) => {
     try {
       const url = newUser
-        ? "http://127.0.0.1:3008/api/auth/login"
-        : "http://127.0.0.1:3008/api/auth/register";
+        ? "https://real-estate-api-azure.vercel.app/api/auth/login"
+        : "https://real-estate-api-azure.vercel.app/api/auth/register";
 
       const res = await axios.post(url, data);
       toast.success(newUser ? "Login successful" : "Registration successful");
