@@ -4,7 +4,7 @@ import Image from "next/image";
 import React from "react";
 import logo from "../../public/images/logo.png";
 import UserProfile from "../components/user/UserProfile";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const lists = [
   { label: "Home", id: "home" },
@@ -16,6 +16,7 @@ const lists = [
 
 export default function Navbar() {
   const router = useRouter();
+  const path = usePathname();
 
   const handleScroll = (id: string) => {
     const element = document.getElementById(id);
@@ -33,8 +34,11 @@ export default function Navbar() {
         width={300}
         height={100}
         onClick={() => {
-          handleScroll("home");
-          router.push("/");
+          if (path === "/") {
+            handleScroll("home");
+          } else {
+            router.push("/");
+          }
         }}
       />
       <div className="flex gap-12">
