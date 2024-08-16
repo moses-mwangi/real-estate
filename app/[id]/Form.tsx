@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import React from "react";
 import agent from "../../public/dubai/agent 2.png";
@@ -7,8 +9,11 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { PhoneCall } from "lucide-react";
 import { BsWhatsapp } from "react-icons/bs";
+import useUser from "../components/user/useUser";
 
 export default function Form() {
+  const { curUser } = useUser();
+
   return (
     <div className="bg-card p-8">
       <div className="flex gap-3 items-center mb-2">
@@ -29,8 +34,16 @@ export default function Form() {
       </Card>
       <div className=" mt-4">
         <form className=" flex flex-col gap-3">
-          <Input className=" text-[13px]" placeholder="Your Name" />
-          <Input className=" text-[13px]" placeholder="Your Email" />
+          <Input
+            className=" text-[13px]"
+            defaultValue={curUser?.name}
+            placeholder="Your Name"
+          />
+          <Input
+            className=" text-[13px]"
+            defaultValue={curUser?.email}
+            placeholder="Your Email"
+          />
           <Input className=" text-[13px]" placeholder="Your Phone" />
 
           <Textarea
