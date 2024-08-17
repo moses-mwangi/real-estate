@@ -28,7 +28,7 @@ export default function HeroSection() {
             )} text-[53px] leading-[1] text-gray-800`}
             style={{ fontFamily: "var(--Merriweather)" }}
           >
-            Dubai Real Estate <br /> Luxury Market Place
+            Kenya Real Estate <br /> Luxury Market Place
           </p>
           <SearchHouse />
           <div className="flex gap-10">
