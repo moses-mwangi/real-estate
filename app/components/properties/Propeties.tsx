@@ -17,6 +17,7 @@ import useUser from "../user/useUser";
 import toast from "react-hot-toast";
 import Email from "./Email";
 import PhoneNumber from "./PhoneCall";
+import useProperty from "./useProperty";
 
 const meriwether = Merriweather({
   subsets: ["latin"],
@@ -24,54 +25,11 @@ const meriwether = Merriweather({
   variable: "--Merriweather",
 });
 
-interface Property {
-  _id: string;
-  image: [string];
-  description: string;
-  about: string;
-  type: string;
-  bathrooms: number;
-  bedrooms: number;
-  garages: number;
-  createdAt: Date;
-  price: number;
-  city: string;
-  zipcode: number;
-  address: string;
-  position: [number];
-}
-
 export default function Propeties() {
-  const [properties, setProperties] = useState<Property[]>([]);
-  const [nextImageIndexes, setNextImageIndexes] = useState<number[]>([]);
   const router = useRouter();
   const { curUser, setShow } = useUser();
-
-  useEffect(() => {
-    async function fetchAgents() {
-      const propety = await axios.get(
-        "https://real-estate-api-azure.vercel.app/api/property"
-      );
-      setProperties(propety.data.data);
-      setNextImageIndexes(Array(propety.data.data.length).fill(0));
-    }
-
-    fetchAgents();
-  }, []);
-
-  const handleNextImage = (index: number, imageCount: number) => {
-    setNextImageIndexes((prev) =>
-      prev.map((value, i) => (i === index ? (value + 1) % imageCount : value))
-    );
-  };
-
-  const handlePreviousImage = (index: number, imageCount: number) => {
-    setNextImageIndexes((prev) =>
-      prev.map((value, i) =>
-        i === index ? (value - 1 + imageCount) % imageCount : value
-      )
-    );
-  };
+  const { properties, nextImageIndexes, handleNextImage, handlePreviousImage } =
+    useProperty();
 
   return (
     <div className="bg-property" id="properties">
@@ -143,7 +101,9 @@ export default function Propeties() {
                   <p className="font-semibold text-[16px] text-black/85 duration-150 transition-all hover:text-orange-500">
                     {el.about}
                   </p>
-                  <p className="font-medium text-orange-500">AED {el.price}</p>
+                  <p className="font-medium text-orange-500">
+                    Ksh {el.price.toLocaleString()}
+                  </p>
                   <p className="text-[12px] text-slate-500">
                     {el.description.substring(0, 130)}....
                   </p>

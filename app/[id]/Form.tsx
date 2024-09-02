@@ -14,6 +14,8 @@ import useUser from "../components/user/useUser";
 import emailjs from "emailjs-com";
 import toast from "react-hot-toast";
 import PhoneNumber from "./PhoneCall";
+import useProperty from "../components/properties/useProperty";
+import { useParams } from "next/navigation";
 
 interface FormValues {
   name: string;
@@ -23,7 +25,14 @@ interface FormValues {
 }
 
 export default function Form() {
+  const { id } = useParams();
+
   const { curUser } = useUser();
+  const { properties } = useProperty();
+  const property = properties.find((el) => el._id === id);
+
+  const user = property?.userId.map((el) => el.photo);
+
   const {
     register,
     handleSubmit,
@@ -56,13 +65,21 @@ export default function Form() {
 
   return (
     <div className="bg-card p-8">
-      <div className="flex gap-3 items-center mb-2">
-        <Image src={agent} alt="agent" className=" w-20 h-20 rounded-lg" />
-        <div>
-          <p className="font-semibold text-[17px]">Maria Barlow</p>
-          <p className="text-[15px] text-orange-600">Sales Executive</p>
+      {property?.userId.map((el) => (
+        <div key={el.photo} className="flex gap-3 items-center mb-2">
+          <Image
+            src={el.photo ? el.photo : agent}
+            alt="agent"
+            className=" w-28 h-auto rounded-lg"
+            width={150}
+            height={80}
+          />
+          <div>
+            <p className="font-semibold text-[17px]">{el.name}</p>
+            <p className="text-[15px] text-orange-600">Sales Executive</p>
+          </div>
         </div>
-      </div>
+      ))}
       <Card className="w-full text-sm rounded-md text-slate-50 flex justify-start py-1 px-3 bg-cyan-600 hover:bg-cyan-700">
         Schedule a showing?
       </Card>

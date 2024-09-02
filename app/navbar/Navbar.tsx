@@ -3,6 +3,8 @@
 import Image from "next/image";
 import React from "react";
 import logo from "../../public/images/logo.png";
+import log from "../../public/images/image copy 11.png";
+import copy from "../../public/images/image copy.png";
 import UserProfile from "../components/user/UserProfile";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -26,13 +28,15 @@ export default function Navbar() {
   };
 
   return (
-    <div className="py-5 px-12 shadow-md fixed z-50 top-0 left-0 w-full bg-card flex justify-between items-center">
+    <div className="py-[5px] pl-8 pr-12 shadow-md fixed z-50 top-0 left-0 w-full bg-card flex justify-between items-center">
       <Image
-        className="h-10 w-auto cursor-pointer"
-        src={logo}
+        className="h-[66px] w-auto cursor-pointer"
+        src={log}
         alt="logo"
-        width={300}
-        height={100}
+        // width={300}
+        // height={100}
+        // width={600}
+        // height={400}
         onClick={() => {
           if (path === "/") {
             handleScroll("home");

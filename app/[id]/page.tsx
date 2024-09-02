@@ -12,11 +12,10 @@ import { IoIosBed } from "react-icons/io";
 import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
 import Form from "./Form";
-import axios from "axios";
 import { useParams, useSearchParams } from "next/navigation";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { useRouter } from "next/navigation";
 import BookingTour from "./BookingTour";
+import useProperty from "../components/properties/useProperty";
 
 const Map = dynamic(() => import("./Map"), {
   ssr: false,
@@ -28,24 +27,6 @@ const meriwether = Merriweather({
   variable: "--Merriweather",
 });
 
-interface Property {
-  _id: string;
-  image: (string | StaticImport)[];
-  description: string;
-  about: string;
-  type: string;
-  bathrooms: number;
-  bedrooms: number;
-  garages: number;
-  createdAt: Date;
-  price: number;
-  city: string;
-  zipcode: number;
-  address: string;
-  position: [number, number];
-  size: number;
-}
-
 export default function SingleProperty() {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -54,20 +35,9 @@ export default function SingleProperty() {
   const lng = searchParams.get("lng");
 
   const posi = [Number(lat), Number(lng)];
-
-  const [property, setProperties] = useState<Property>();
   const { id } = useParams();
-  ///`http://127.0.0.1:3008/api/property/${id}`
-  useEffect(() => {
-    async function fetchAgents() {
-      const propety = await axios.get(
-        `https://real-estate-api-azure.vercel.app/api/property/${id}`
-      );
-      setProperties(propety.data.data);
-    }
-
-    fetchAgents();
-  });
+  const { properties } = useProperty();
+  const property = properties.find((el) => el._id === id);
 
   return (
     <div className="bg-id pt-20">
@@ -82,7 +52,7 @@ export default function SingleProperty() {
               height={200}
             />
           )}
-          <div className="grid grid-cols-2 gap-[1px]">
+          <div className="grid grid-cols-2 grid-rows-2 gap-[1px]">
             {property?.image[1] && (
               <Image
                 className=" w-full h-full"
@@ -148,7 +118,7 @@ export default function SingleProperty() {
             <div>
               <span>
                 <p className=" text-orange-500 text-2xl font-semibold">
-                  AED {property?.price.toLocaleString()}
+                  Ksh {property?.price.toLocaleString()}
                 </p>
               </span>
             </div>
@@ -175,7 +145,7 @@ export default function SingleProperty() {
                 <div className="flex flex-col gap-1 items-center text-gray-700">
                   <BiArea className=" w-6 h-6" />
                   <h1 className=" text-[15px]">
-                    {property?.size.toLocaleString()} ft
+                    {property?.size ? property?.size.toLocaleString() : 5000} ft
                   </h1>
                 </div>
                 <div className="flex flex-col gap-1 items-center text-gray-700">

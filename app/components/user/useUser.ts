@@ -6,7 +6,7 @@ export interface IUser {
   name: string;
   email: string;
   password: string;
-  googleId: string;
+  userId: object;
   date: Date;
 }
 
