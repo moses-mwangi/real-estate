@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export interface IUser {
@@ -6,35 +7,52 @@ export interface IUser {
   name: string;
   email: string;
   password: string;
-  userId: object;
   date: Date;
+  photo: string;
+  role: string;
 }
 
 function useUser() {
   const [curUser, setCurUser] = useState<IUser | null>(null);
+  const [allUsers, setAllUsers] = useState<IUser[] | null>(null);
+  const router = useRouter();
   const [show, setShow] = useState(false);
 
+  const [token, setToken] = useState<String | null>(null);
+
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = document.cookie.split("=")[1];
 
     if (token) {
       getCurrentUser(token);
+
+      setToken(token);
     } else {
       setCurUser(null);
     }
   }, []);
 
+  useEffect(() => {
+    async function getAllUsers() {
+      try {
+        const res = await axios.get("http://127.0.0.1:3008/api/users");
+
+        setAllUsers(res.data.users);
+      } catch (err) {
+        console.log("ERROR", err);
+      }
+    }
+    getAllUsers();
+  }, []);
+
   async function getCurrentUser(token: string) {
     try {
-      const res = await axios.get(
-        "https://real-estate-api-azure.vercel.app/api/auth/me",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          withCredentials: true,
-        }
-      );
+      const res = await axios.get("http://127.0.0.1:3008/api/auth/me", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
 
       setCurUser(res.data.user);
     } catch (err) {
@@ -43,11 +61,11 @@ function useUser() {
   }
 
   const logOut = () => {
-    localStorage.removeItem("token");
+    document.cookie = `token=; path=/`;
     setCurUser(null);
   };
 
-  return { curUser, logOut, show, setShow };
+  return { allUsers, curUser, token, logOut, show, setShow };
 }
 
 export default useUser;

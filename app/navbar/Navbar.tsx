@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import React from "react";
-import logo from "../../public/images/logo.png";
 import log from "../../public/images/image copy 11.png";
-import copy from "../../public/images/image copy.png";
-import UserProfile from "../components/user/UserProfile";
 import { usePathname, useRouter } from "next/navigation";
+import UserDetails from "../components/user/UserDetails";
+import useUser from "../components/user/useUser";
+import SignUpForm from "../components/user/SignUpForm";
 
 const lists = [
   { label: "Home", id: "home" },
@@ -19,6 +19,7 @@ const lists = [
 export default function Navbar() {
   const router = useRouter();
   const path = usePathname();
+  const { token } = useUser();
 
   const handleScroll = (id: string) => {
     const element = document.getElementById(id);
@@ -28,7 +29,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="py-[5px] pl-8 pr-12 shadow-md fixed z-50 top-0 left-0 w-full bg-card flex justify-between items-center">
+    <div className="py-[5px] pl-8 shadow-md fixed z-50 top-0 left-0 w-full bg-card flex justify-between items-center">
       <Image
         className="h-[66px] w-auto cursor-pointer"
         src={log}
@@ -57,7 +58,8 @@ export default function Navbar() {
           </div>
         ))}
       </div>
-      <UserProfile />
+
+      {token ? <UserDetails /> : <SignUpForm />}
     </div>
   );
 }
