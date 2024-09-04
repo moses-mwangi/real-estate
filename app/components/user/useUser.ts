@@ -15,7 +15,6 @@ export interface IUser {
 function useUser() {
   const [curUser, setCurUser] = useState<IUser | null>(null);
   const [allUsers, setAllUsers] = useState<IUser[] | null>(null);
-  const router = useRouter();
   const [show, setShow] = useState(false);
 
   const [token, setToken] = useState<String | null>(null);
@@ -75,7 +74,15 @@ function useUser() {
 
   const agent = allUsers?.filter((el) => el.role === "agent");
 
-  return { allUsers, agent, curUser, token, logOut, show, setShow };
+  return {
+    allUsers,
+    agent,
+    curUser,
+    token,
+    logOut,
+    show,
+    setShow,
+  };
 }
 
 export default useUser;

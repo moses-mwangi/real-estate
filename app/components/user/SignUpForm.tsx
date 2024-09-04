@@ -14,6 +14,7 @@ import { Eye, EyeOff, X } from "lucide-react";
 import toast from "react-hot-toast";
 import useUser from "./useUser";
 import { Card } from "@/components/ui/card";
+import ForgotPasswordForm from "./ForgotPassword";
 
 interface SignUpFormInputs {
   email: string;
@@ -25,7 +26,10 @@ export default function SignUpForm() {
   const [newUser, setNewUser] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { show, setShow } = useUser();
+  const [showForgotPasModal, setShowForgotPasModal] = useState(false);
+
+  const [show, setShow] = useState(false);
+  // const { show, setShow } = useUser();
 
   const {
     register,
@@ -88,6 +92,13 @@ export default function SignUpForm() {
         >
           Sign Up
         </Card>
+      )}
+
+      {showForgotPasModal === true && (
+        <ForgotPasswordForm
+          setShow={setShow}
+          setShowForgotPasModal={setShowForgotPasModal}
+        />
       )}
 
       {show === true && (
@@ -228,7 +239,15 @@ export default function SignUpForm() {
                       </p>
                     </div>
                   )}
-                  <div className=" text-[13px] cursor-pointer hover:text-orange-500 text-blue-500 font-medium">
+                  <div
+                    className={`${
+                      !newUser ? " hidden" : ""
+                    } text-[13px] cursor-pointer hover:text-orange-500 text-blue-500 font-medium`}
+                    onClick={() => {
+                      setShow((el) => !el);
+                      setShowForgotPasModal((el) => !el);
+                    }}
+                  >
                     Forgot Password
                   </div>
                 </div>
