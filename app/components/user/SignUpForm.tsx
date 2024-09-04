@@ -81,7 +81,7 @@ export default function SignUpForm() {
     <div>
       {show === false && (
         <Card
-          className=" bg-slate-50/65 cursor-pointer mr-12 font-semibold hover:bg-card text-gray-700 hover:text-orange-600 transition-all duration-150 text-sm py-2 px-3 rounded-2xl"
+          className="w-fit shadow-[4px_4px_0_orange]  translate-x-[3px] translate-y-[3px]  bg-card hover:shadow-lg cursor-pointer mr-12 font-semibold text-gray-700 hover:text-orange-500 transition-all duration-150 text-sm py-2 px-3 rounded-md"
           onClick={() => {
             setShow((el) => !el);
           }}
@@ -89,6 +89,7 @@ export default function SignUpForm() {
           Sign Up
         </Card>
       )}
+
       {show === true && (
         <div className="flex absolute top-0 right-0 bg-black/40 backdrop-blur-[2px]  justify-center items-center h-svh w-svw z-50">
           <div className="bg-sign rounded-l-md relative h-full w-full max-h-[85.3svh] max-w-[300px]">

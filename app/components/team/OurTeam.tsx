@@ -50,7 +50,9 @@ export default function OurTeam() {
             </div>
             <div className="flex flex-col gap-3 px-2">
               <div className="flex flex-col">
-                <p className="text-xl font-medium text-slate-800">{el.name}</p>
+                <p className="text-[18px] font-medium text-gray-800">
+                  {el.name}
+                </p>
                 <p className=" text-slate-500 text-sm">{el.role}</p>
                 <p className="text-[13px] text-slate-500 mt-3">
                   {/* {el.aboutYou} */}
