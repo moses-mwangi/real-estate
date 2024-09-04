@@ -18,6 +18,7 @@ import toast from "react-hot-toast";
 import Email from "./Email";
 import PhoneNumber from "./PhoneCall";
 import useProperty from "./useProperty";
+import { Button } from "@/components/ui/button";
 
 const meriwether = Merriweather({
   subsets: ["latin"],
@@ -31,8 +32,24 @@ export default function Propeties() {
   const { properties, nextImageIndexes, handleNextImage, handlePreviousImage } =
     useProperty();
 
+  const pro = properties.map((el) => el.userId);
+  const pros = properties.map((el) =>
+    el.userId.map((el) => {
+      return el;
+    })
+  );
+
   return (
     <div className="bg-property" id="properties">
+      <Button
+        onClick={() => {
+          console.log(pro);
+          console.log(pros);
+          console.log(properties);
+        }}
+      >
+        CLICK
+      </Button>
       <div className="bg-white px-12 py-20 bg-opacity-[96%]">
         <div className="flex flex-col gap-2 mb-5">
           <p className="opacity-80 font-light">DUBAI REAL ESTATE</p>
@@ -81,7 +98,10 @@ export default function Propeties() {
                   <Plus className=" w-5 h-5 hover:bg-slate-800 bg-slate-900/45 p-[2px] rounded-sm text-slate-50" />
                 </div>
               </div>
-              <div className="flex flex-col gap-3 px-4 cursor-pointer">
+              <div
+                // className="flex flex-col gap-3 px-4 cursor-pointer">
+                className="grid grid-cols-1 gap-3 px-4 cursor-pointer"
+              >
                 <div
                   className="flex flex-col gap-2"
                   onClick={() => {
@@ -104,17 +124,21 @@ export default function Propeties() {
                   <p className="font-medium text-orange-500">
                     Ksh {el.price.toLocaleString()}
                   </p>
-                  <p className="text-[12px] text-slate-500">
+                  <p className="text-[12px] h-14 text-slate-500">
                     {el.description.substring(0, 130)}....
                   </p>
                 </div>
                 <Separator />
-                <div className="flex justify-between mb-3">
-                  <PhoneNumber />
-                  <Email />
-                  <Card className="hover:bg-orange-500 hover:text-slate-100 bg-red-100 rounded-md text-sm text-orange-600 px-6 py-1 flex justify-center items-center">
-                    <FaWhatsapp className="w-[15px] h-[15px] mr-1" />
-                  </Card>
+                <div>
+                  {el.userId.map((arr) => (
+                    <div className="flex justify-between mb-3" key={arr.photo}>
+                      <PhoneNumber el={arr} />
+                      <Email el={arr} />
+                      <Card className="hover:bg-orange-500 hover:text-slate-100 bg-red-100 rounded-md text-sm text-orange-600 px-6 py-1 flex justify-center items-center">
+                        <FaWhatsapp className="w-[15px] h-[15px] mr-1" />
+                      </Card>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

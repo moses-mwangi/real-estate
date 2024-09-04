@@ -20,7 +20,7 @@ interface Property {
   zipcode: number;
   address: string;
   position: [number];
-  userId: [{ photo: string; name: string }];
+  userId: [{ photo: string; name: string; phone: number; email: string }];
   size: number;
 }
 

@@ -2,9 +2,38 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { PhoneCall, X } from "lucide-react";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import React, { useState } from "react";
 
-export default function PhoneNumber() {
+interface Phone {
+  el: {
+    photo: string;
+    name: string;
+    phone: number;
+    email: string;
+  };
+}
+
+interface Property {
+  _id: string;
+  image: (string | StaticImport)[];
+  description: string;
+  about: string;
+  type: string;
+  bathrooms: number;
+  bedrooms: number;
+  garages: number;
+  createdAt: Date;
+  price: number;
+  city: string;
+  zipcode: number;
+  address: string;
+  position: [number];
+  userId: [{ photo: string; name: string; phone: number; email: string }];
+  size: number;
+}
+
+export default function PhoneNumber({ el }: Phone) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -28,10 +57,9 @@ export default function PhoneNumber() {
                 <X />
               </button>
             </div>
-            <CardContent className="px-2 text-[13px]">
-              You can contact Janet Richmond via phone: (305) 555-4555 mobile:
-              (305) 555-4555. Please use the #%id to identify the property:
-              Apartment in GEMZ in Al Furjan
+            <CardContent className="px-2 font-medium text-gray-700 text-[14px]">
+              You can contact {el.name} via phone: {el.phone}. Please use the
+              #%id to identify the property: Apartment in GEMZ in Al Furjan
             </CardContent>
           </div>
         </div>

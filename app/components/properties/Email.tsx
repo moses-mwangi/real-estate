@@ -15,54 +15,86 @@ import emailjs from "emailjs-com";
 import toast from "react-hot-toast";
 import useUser from "../user/useUser";
 import { X } from "lucide-react";
+import axios from "axios";
 
 interface FormValues {
   name: string;
   email: string;
   phone: string;
   message: string;
+  agentEmail: string;
 }
 
-export default function Email() {
+interface EmailData {
+  el: {
+    photo: string;
+    name: string;
+    phone: number;
+    email: string;
+  };
+}
+
+{
+  // "email":"jane.doe@gmail.com",
+  // "agentEmail":"moses.mwangi.me@gmail.com",
+  // "message":"can we meet at 08:40pm today",
+  // "name":"Jane Doe",
+  // "phone":"0725672675"
+}
+
+export default function Email({ el }: EmailData) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { curUser } = useUser();
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm<FormValues>();
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    const serviceId = "service_qmydrmg";
-    const templateId = "template_hkpilep";
-    const publicKey = "my4sRMVXuyAu-Oamg";
-
-    try {
-      const templateParams = {
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        message: data.message,
-      };
-
-      await emailjs.send(serviceId, templateId, templateParams, publicKey);
-
-      toast.success("Email sent successfully!");
-      reset(); // Reset the form after successful submission
-      setIsModalOpen(false); // Close the modal after success
-    } catch (error) {
-      toast.error("Failed to send email. Please try again.");
-    }
-  };
-
-  const handleSendEmail = handleSubmit((data) => {
-    if (!data.name || !data.email || !data.phone || !data.message) {
+    if (
+      !data.name ||
+      !data.email ||
+      !data.phone ||
+      !data.message ||
+      !data.agentEmail
+    ) {
       toast.error("All fields are required!");
       return;
     }
-    onSubmit(data); // Send email if all fields are filled
-  });
+
+    console.log(data);
+
+    try {
+      setIsLoading(true);
+
+      await axios.post("http://127.0.0.1:3008/api/users/sendEmail", data);
+
+      toast.success("Email sent successfully!");
+      reset();
+      setIsModalOpen(false);
+
+      setIsLoading(false);
+    } catch (error) {
+      toast.error("Failed to send email. Please try again.");
+      setIsLoading(false);
+      console.error("ERROR:", error);
+    }
+  };
+
+  const loader = (
+    <div
+      className="inline-block h-5 w-5 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+      role="status"
+    >
+      <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+        Loading...
+      </span>
+    </div>
+  );
 
   return (
     <div>
@@ -79,12 +111,14 @@ export default function Email() {
             <div className="flex justify-between items-center mb-4">
               <div className="flex gap-3 items-center">
                 <Image
-                  src={agent}
-                  alt="agent"
                   className="w-[87px] h-20 rounded-lg"
+                  src={el.photo}
+                  alt="agent"
+                  width={200}
+                  height={220}
                 />
                 <div>
-                  <p className="font-semibold text-[17px]">Maria Barlow</p>
+                  <p className="font-semibold text-[17px]">{el.name}</p>
                   <p className="text-[15px] text-orange-600">Sales Executive</p>
                 </div>
               </div>
@@ -102,7 +136,7 @@ export default function Email() {
 
             <form
               className="mt-4 flex flex-col gap-3"
-              onSubmit={handleSendEmail}
+              onSubmit={handleSubmit(onSubmit)}
             >
               <div className="grid grid-cols-3 gap-3">
                 <Input
@@ -121,6 +155,16 @@ export default function Email() {
                 />
                 <Input
                   className="text-[13px]"
+                  defaultValue={el.email}
+                  placeholder={
+                    errors.agentEmail
+                      ? "agentEmail is required"
+                      : "Your agentEmail"
+                  }
+                  {...register("agentEmail", { required: true })}
+                />
+                <Input
+                  className="text-[13px]"
                   placeholder={
                     errors.phone ? "Phone is required" : "Your Phone"
                   }
@@ -136,7 +180,7 @@ export default function Email() {
                 type="submit"
                 className="w-full bg-orange-600 hover:bg-orange-500"
               >
-                Send Email
+                {isLoading === false ? "Send Email" : loader}
               </Button>
             </form>
           </div>
