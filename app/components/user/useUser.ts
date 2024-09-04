@@ -65,7 +65,9 @@ function useUser() {
     setCurUser(null);
   };
 
-  return { allUsers, curUser, token, logOut, show, setShow };
+  const agent = allUsers?.filter((el) => el.role === "agent");
+
+  return { allUsers, agent, curUser, token, logOut, show, setShow };
 }
 
 export default useUser;

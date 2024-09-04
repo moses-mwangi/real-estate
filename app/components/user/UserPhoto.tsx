@@ -12,9 +12,9 @@ export default function UserPhoto() {
   return (
     <div className="px-12 py-2 w-full flex justify-end">
       {curUser?.photo ? (
-        <div className="">
+        <div className="w-[56px] h-[56px]">
           <Image
-            className=" rounded-full w-12 h-12"
+            className="rounded-full w-full  h-full object-cover"
             src={curUser?.photo}
             alt="user photo"
             width={100}

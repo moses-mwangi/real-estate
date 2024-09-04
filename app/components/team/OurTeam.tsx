@@ -2,17 +2,14 @@
 
 import { cn } from "@/lib/utils";
 import { Merriweather } from "next/font/google";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 
-import prone from "../../../public/dubai/agent 1.png";
-import protwo from "../../../public/dubai/agent 2.png";
-import prothree from "../../../public/dubai/agent 3.png";
 import { FaFacebook } from "react-icons/fa";
-import { Linkedin, PhoneCall, WifiHigh } from "lucide-react";
+import { Linkedin, PhoneCall } from "lucide-react";
 import { MdEmail } from "react-icons/md";
 import { BsInstagram, BsTwitter } from "react-icons/bs";
-import axios from "axios";
+import useUser from "../user/useUser";
 
 const meriwether = Merriweather({
   subsets: ["latin"],
@@ -20,28 +17,8 @@ const meriwether = Merriweather({
   variable: "--Merriweather",
 });
 
-interface Agent {
-  _id: string;
-  name: string;
-  role: string;
-  image: string;
-  information: string;
-}
-
 export default function OurTeam() {
-  const [agents, setAgents] = useState<Agent[]>([]);
-
-  https: useEffect(() => {
-    async function fetchAgents() {
-      const res = await axios.get(
-        "https://real-estate-api-azure.vercel.app/api/agents"
-      );
-
-      setAgents(res.data.data);
-    }
-
-    fetchAgents();
-  }, []);
+  const { agent } = useUser();
 
   return (
     <div className="bg-team py-14 px-12" id="agents">
@@ -57,15 +34,15 @@ export default function OurTeam() {
         </h1>
       </div>
       <div className="grid grid-cols-3 gap-8 mt-12">
-        {agents.map((el) => (
+        {agent?.map((el) => (
           <div
-            className="bg-card p-2 shadow-lg flex flex-col gap-5 rounded-md cursor-pointer"
+            className="bg-card p-2 shadow-lg grid grid-rows-2 gap-5 rounded-md cursor-pointer"
             key={el._id}
           >
-            <div className="overflow-hidden rounded-md">
+            <div className="overflow-hidden h-full rounded-md">
               <Image
-                className="w-full h-auto rounded-md hover:scale-105 transition-all duration-200"
-                src={el.image}
+                className="w-full h-full rounded-md hover:scale-105 transition-all duration-200"
+                src={el.photo}
                 alt="house"
                 width={400}
                 height={300}
@@ -76,7 +53,11 @@ export default function OurTeam() {
                 <p className="text-xl font-medium text-slate-800">{el.name}</p>
                 <p className=" text-slate-500 text-sm">{el.role}</p>
                 <p className="text-[13px] text-slate-500 mt-3">
-                  {el.information}
+                  {/* {el.aboutYou} */}
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Mollitia in cum pariatur facilis obcaecati excepturi atque
+                  iure dolorum illo? Enim iste voluptatibus, ea sint ducimus
+                  doloribus debitis ratione assumenda quos!
                 </p>
               </div>
               <div className="flex justify-between py-4 mt-2">

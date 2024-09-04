@@ -46,13 +46,15 @@ export default function UserDetails() {
                   />
                 )}
                 {curUser?.photo ? (
-                  <Image
-                    className="rounded-full w-12 h-12"
-                    src={curUser?.photo}
-                    alt="User Avatar"
-                    width={100}
-                    height={100}
-                  />
+                  <div className="w-[54px] h-[54px]">
+                    <Image
+                      className="rounded-full h-full w-full object-cover"
+                      src={curUser?.photo}
+                      alt="User Avatar"
+                      width={100}
+                      height={100}
+                    />
+                  </div>
                 ) : (
                   <Button className=" bg-pink-600 hover:bg-pink-700 w-12 h-12 rounded-full text-slate-50 font-semibold">
                     {curUser?.name[0].toLocaleUpperCase()}
