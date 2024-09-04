@@ -94,10 +94,10 @@ function UserImageUpload({ setIsUpload, isUpload }: Props) {
               <div className="text-xl font-medium">{curUser?.name}</div>
             </div>
             <div className="w-[70px] h-[70px]">
-              {image ? (
+              {curUser?.photo ? (
                 <Image
                   className="h-full w-auto object-cover rounded-full"
-                  src={image}
+                  src={curUser.photo}
                   alt="Cropped Image"
                   width={50}
                   height={50}
