@@ -61,6 +61,9 @@ function useUser() {
   }
 
   const logOut = () => {
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
     document.cookie = `token=; path=/`;
     setCurUser(null);
   };
