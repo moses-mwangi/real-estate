@@ -48,7 +48,7 @@ function UserImageUpload({ setIsUpload, isUpload }: Props) {
       const token = document.cookie.split("=")[1];
       setLoading(true);
       const res = await axios.post(
-        "http://127.0.0.1:3008/api/users/updateImage",
+        "https://real-estate-api-azure.vercel.app/api/users/updateImage",
         formData,
         {
           headers: {
