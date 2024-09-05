@@ -66,8 +66,6 @@ export default function Email({ el }: EmailData) {
       return;
     }
 
-    console.log(data);
-
     try {
       setIsLoading(true);
 
@@ -140,12 +138,14 @@ export default function Email({ el }: EmailData) {
             >
               <div className="grid grid-cols-3 gap-3">
                 <Input
+                  type="text"
                   className="text-[13px]"
                   defaultValue={curUser?.name || ""}
                   placeholder={errors.name ? "Name is required" : "Your Name"}
                   {...register("name", { required: true })}
                 />
                 <Input
+                  type="text"
                   className="text-[13px]"
                   defaultValue={curUser?.email || ""}
                   placeholder={
@@ -155,6 +155,7 @@ export default function Email({ el }: EmailData) {
                 />
                 <Input
                   className="text-[13px]"
+                  type="hidden"
                   defaultValue={el.email}
                   placeholder={
                     errors.agentEmail
