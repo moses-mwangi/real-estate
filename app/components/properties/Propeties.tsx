@@ -28,7 +28,7 @@ const meriwether = Merriweather({
 
 export default function Propeties() {
   const router = useRouter();
-  const { curUser, setShow } = useUser();
+  const { curUser } = useUser();
   const { properties, nextImageIndexes, handleNextImage, handlePreviousImage } =
     useProperty();
 
@@ -89,10 +89,7 @@ export default function Propeties() {
                   <Plus className=" w-5 h-5 hover:bg-slate-800 bg-slate-900/45 p-[2px] rounded-sm text-slate-50" />
                 </div>
               </div>
-              <div
-                // className="flex flex-col gap-3 px-4 cursor-pointer">
-                className="grid grid-cols-1 gap-3 px-4 cursor-pointer"
-              >
+              <div className="grid grid-cols-1 gap-3 px-4 cursor-pointer">
                 <div
                   className="flex flex-col gap-2"
                   onClick={() => {
@@ -103,7 +100,6 @@ export default function Propeties() {
                         )}&lng=${el.position.at(1)}`
                       );
                     } else {
-                      setShow((el) => !el);
                       toast.error("Log in First");
                     }
                   }}

@@ -7,11 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
 import React, { useState } from "react";
 import { MdOutlineEmail } from "react-icons/md";
-
-import agent from "../../../public/dubai/agent 2.png";
-
 import { useForm, SubmitHandler } from "react-hook-form";
-import emailjs from "emailjs-com";
 import toast from "react-hot-toast";
 import useUser from "../user/useUser";
 import { X } from "lucide-react";

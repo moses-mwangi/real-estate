@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import axios from "axios";
@@ -12,7 +12,6 @@ import { FcGoogle } from "react-icons/fc";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Eye, EyeOff, X } from "lucide-react";
 import toast from "react-hot-toast";
-import useUser from "./useUser";
 import { Card } from "@/components/ui/card";
 import ForgotPasswordForm from "./ForgotPassword";
 
@@ -27,9 +26,7 @@ export default function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showForgotPasModal, setShowForgotPasModal] = useState(false);
-
   const [show, setShow] = useState(false);
-  // const { show, setShow } = useUser();
 
   const {
     register,

@@ -15,8 +15,6 @@ export interface IUser {
 function useUser() {
   const [curUser, setCurUser] = useState<IUser | null>(null);
   const [allUsers, setAllUsers] = useState<IUser[] | null>(null);
-  const [show, setShow] = useState(false);
-
   const [token, setToken] = useState<String | null>(null);
 
   useEffect(() => {
@@ -80,8 +78,6 @@ function useUser() {
     curUser,
     token,
     logOut,
-    show,
-    setShow,
   };
 }
 
