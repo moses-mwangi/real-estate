@@ -13,6 +13,15 @@ import axios from "axios";
 import useUser from "./useUser";
 import ResetPasswordForm from "./ResetPasswordForm";
 
+import { Inter, Inter_Tight } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--Inter",
+});
+
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
 });
@@ -85,14 +94,42 @@ export default function ForgotPasswordForm({
   return (
     <div className="flex absolute top-0 right-0 bg-black/40 backdrop-blur-[2px]  justify-center items-center h-svh w-svw z-50">
       {showResetPasModal === false ? (
-        <Card className="w-96 shadow-xl border-[1px] px-9 py-9">
+        <Card className="w-[398px] shadow-xl border-[1px] px-7 py-9">
+          <div
+            className={`${cn(inter.variable)} flex flex-col gap-3 mb-8`}
+            style={{ fontFamily: "var(--Inter)" }}
+          >
+            <p className=" flex justify-center  text-[26px]">
+              Forgot Your Password?
+            </p>
+            <div className=" flex flex-col items-center justify-center text-[16px]">
+              <p>Enter your email address and we will send you</p>
+              <p>instructions to reset your password.</p>
+            </div>
+          </div>
           <form
             className="grid grid-cols-1"
             onSubmit={handleSubmit(handleForgotPassword)}
           >
-            <div className="grid grid-cols-1 gap-2 mb-5">
+            {/* <div className="grid grid-cols-1 gap-2 mb-5">
               <Label className="font-medium text-gray-700">Email Address</Label>
               <Input type="text" {...register("email")} />
+              {errors.email && (
+                <span className="text-red-600 font-medium text-[13px]">
+                  {errors.email.message}
+                </span>
+              )}
+            </div> */}
+
+            <div className="relative mb-5">
+              <Input
+                type="text"
+                {...register("email")}
+                className="block w-full bg-white px-3 py-2 text-gray-700 bg-transparent rounded-md border border-gray-300 appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent peer"
+              />
+              <Label className="absolute left-3 -top-2.5  bg-white text-sm px-[4px] text-gray-700 font-normal transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-blue-500">
+                Email address *
+              </Label>
               {errors.email && (
                 <span className="text-red-600 font-medium text-[13px]">
                   {errors.email.message}
