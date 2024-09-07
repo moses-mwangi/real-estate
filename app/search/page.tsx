@@ -18,7 +18,7 @@ export default function SearchedPage() {
         )} flex justify-center pb-12 text-4xl font-semibold text-gray-800`}
         style={{ fontFamily: "var(--Merriweather)" }}
       >
-        All Searched Property
+        Your specified filtered Properties
       </p>
       <Suspense fallback={<p>Loading....</p>}>
         <Searching />

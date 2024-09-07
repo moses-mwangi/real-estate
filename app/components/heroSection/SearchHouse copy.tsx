@@ -20,18 +20,15 @@ import { Input } from "@/components/ui/input";
 
 export default function SearchHouse() {
   const { onSubmit } = useSearchProperty();
-  const { register, handleSubmit, setValue } = useForm();
+  const { handleSubmit, setValue } = useForm();
 
   const handleSelectChange = (name: string, value: string) => {
     setValue(name, value);
   };
 
   return (
-    <div className="rounded-md relative">
-      <Button className="bg-orange-500 hover:bg-orange-600 w-36 py-1  absolute left-[1px] -top-10 rounded-t-md rounded-b-none">
-        SALES
-      </Button>
-      <Card className="w-full rounded-tl-none h-auto py-7">
+    <div>
+      <Card className="w-full h-auto py-7">
         <form
           className="h-full px-7 flex flex-col gap-4 justify-center"
           onSubmit={handleSubmit(onSubmit)}
@@ -228,12 +225,29 @@ export default function SearchHouse() {
 
           <div className="grid md:grid-cols-3 grid-cols-1 gap-8">
             <div>
-              <Input
-                placeholder="Enter City,Country or Area"
-                {...register("city")}
-                className="w-full border-none text-[13px] text-slate-500"
-              />
-              <Separator />
+              {/* <Select
+                onValueChange={(value) => handleSelectChange("city", value)}
+              >
+                <SelectTrigger className="w-full border-none text-[13px] text-slate-500">
+                  <SelectValue placeholder="Property City" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel className="text-[13px] text-slate-500">
+                      Property City
+                    </SelectLabel>
+                    <SelectItem
+                      className="text-[13px] text-slate-500"
+                      value="Dubai"
+                    >
+                      Dubai
+                    </SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              <Separator /> */}
+
+              <Input placeholder="Enter City or area" />
             </div>
 
             <div>

@@ -5,7 +5,7 @@ import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface Property {
+export interface Property {
   _id: string;
   image: (string | StaticImport)[];
   description: string;
@@ -32,6 +32,7 @@ function useProperty() {
     async function fetchAgents() {
       const propety = await axios.get(
         "https://real-estate-api-azure.vercel.app/api/property"
+        // "http://127.0.0.1:3008/api/property"
       );
       setProperties(propety.data.data);
       setNextImageIndexes(Array(propety.data.data.length).fill(0));

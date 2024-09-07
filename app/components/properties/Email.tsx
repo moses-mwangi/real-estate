@@ -30,14 +30,6 @@ interface EmailData {
   };
 }
 
-{
-  // "email":"jane.doe@gmail.com",
-  // "agentEmail":"moses.mwangi.me@gmail.com",
-  // "message":"can we meet at 08:40pm today",
-  // "name":"Jane Doe",
-  // "phone":"0725672675"
-}
-
 export default function Email({ el }: EmailData) {
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);

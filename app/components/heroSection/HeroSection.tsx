@@ -21,7 +21,7 @@ export default function HeroSection() {
       id="home"
     >
       <div>
-        <div className=" z-50 flex flex-col gap-12 mt-32 absolute w-[60svw]">
+        <div className="z-50 flex flex-col gap-[70px] mt-[120px] absolute w-[60svw]">
           <p
             className={`${cn(
               meriwether.variable
