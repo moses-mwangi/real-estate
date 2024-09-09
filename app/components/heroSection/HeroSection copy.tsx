@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Merriweather } from "next/font/google";
 import SearchHouse from "./SearchHouse";
 import { cn } from "@/lib/utils";
@@ -15,23 +15,6 @@ const meriwether = Merriweather({
 });
 
 export default function HeroSection() {
-  const [currentImage, setCurrentImage] = useState(0);
-
-  const images = [
-    "url('https://dubai.wpresidence.net/wp-content/uploads/2023/05/header-e1683715581611.webp')",
-    "url('https://res.cloudinary.com/dijocmuzg/image/upload/v1724920187/real-estate-images/image_1724920184143.png')",
-    "url('https://res.cloudinary.com/dijocmuzg/image/upload/v1724920763/real-estate-images/image_1724920760714.png')",
-    "url('https://res.cloudinary.com/dijocmuzg/image/upload/v1725378230/real-estate-images/image_1725378230682.png')",
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImage((prevImage) => (prevImage + 1) % images.length);
-    }, 2000);
-
-    return () => clearInterval(interval);
-  }, [images.length]);
-
   return (
     <section
       className="px-[10px] sm:pl-7 md:pl-12 z-20 w-full h-[105svh] sm:h-[105svh] pt-20 md:grid md:grid-cols-[1fr_1.5fr] relative"
@@ -68,20 +51,15 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-      <div
-        className="md:block hidden"
-        style={{
-          backgroundImage: `${images[currentImage]}`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          transition: "background-image 1s ease-in-out",
-          backgroundRepeat: "no-repeat",
-          maskImage:
-            "linear-gradient(to right, transparent 0%, black 20%, black 100%, transparent 100%)",
-
-          objectFit: "fill",
-        }}
-      />
+      <div className="bg-header-img md:block hidden" />
     </section>
   );
 }
+
+////  https://dubai.wpresidence.net/wp-content/uploads/2023/05/80532.webp);
+
+/// https://dubai.wpresidence.net/wp-content/uploads/revslider/craftsman/slider-bg.png
+
+//https://dubai.wpresidence.net/wp-content/uploads/2023/04/dubai-bg-pattern-dark.png
+
+////  https://dubai.wpresidence.net/wp-content/uploads/2023/05/header-e1683715581611.webp);
