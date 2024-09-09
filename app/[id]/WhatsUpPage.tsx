@@ -25,7 +25,7 @@ export default function WhatsUpPage({ el }: Phone) {
     <div>
       <Link href={whatsappLink} target="_blank" rel="noopener noreferrer">
         <Card className="bg-orange-500 text-slate-100 hover:bg-red-100 rounded-md text-sm hover:text-orange-600 px-6 py-2 flex justify-center items-center transition-all duration-150">
-          <FaWhatsapp className="w-[16px] h-[16px] mr-1" /> Whats Up
+          <FaWhatsapp className="w-[16px] h-[16px] mr-1" />
         </Card>
       </Link>
     </div>
