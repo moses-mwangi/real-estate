@@ -1,24 +1,18 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Merriweather } from "next/font/google";
 import Image from "next/image";
-import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-import { Heart, Phone, PhoneCall, Plus } from "lucide-react";
-import { MdOutlineEmail } from "react-icons/md";
-import { FaWhatsapp } from "react-icons/fa";
-import axios from "axios";
+import { Heart, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import { IoShareSocialSharp } from "react-icons/io5";
-import useUser from "../user/useUser";
-import toast from "react-hot-toast";
 import Email from "./Email";
 import PhoneNumber from "./PhoneCall";
 import useProperty from "./useProperty";
-import { Button } from "@/components/ui/button";
+import WhatsUpPage from "./WhatsUpPage";
 
 const meriwether = Merriweather({
   subsets: ["latin"],
@@ -28,16 +22,8 @@ const meriwether = Merriweather({
 
 export default function Propeties() {
   const router = useRouter();
-  const { curUser } = useUser();
   const { properties, nextImageIndexes, handleNextImage, handlePreviousImage } =
     useProperty();
-
-  const pro = properties.map((el) => el.userId);
-  const pros = properties.map((el) =>
-    el.userId.map((el) => {
-      return el;
-    })
-  );
 
   return (
     <div className="bg-property" id="properties">
@@ -93,15 +79,11 @@ export default function Propeties() {
                 <div
                   className="flex flex-col gap-2"
                   onClick={() => {
-                    if (curUser) {
-                      router.push(
-                        `/${el._id}?lat=${el.position.at(
-                          0
-                        )}&lng=${el.position.at(1)}`
-                      );
-                    } else {
-                      toast.error("Log in First");
-                    }
+                    router.push(
+                      `/${el._id}?lat=${el.position.at(0)}&lng=${el.position.at(
+                        1
+                      )}`
+                    );
                   }}
                 >
                   <p className="text-[13px] text-slate-700">{el.type}, sales</p>
@@ -118,12 +100,13 @@ export default function Propeties() {
                 <Separator />
                 <div>
                   {el.userId.map((arr) => (
-                    <div className="flex justify-between mb-3" key={arr.photo}>
+                    <div
+                      className="flex justify-between items-center mb-3"
+                      key={arr.photo}
+                    >
                       <PhoneNumber el={arr} />
                       <Email el={arr} />
-                      <Card className="hover:bg-orange-500 hover:text-slate-100 bg-red-100 rounded-md text-sm text-orange-600 px-6 py-1 flex justify-center items-center">
-                        <FaWhatsapp className="w-[15px] h-[15px] mr-1" />
-                      </Card>
+                      <WhatsUpPage el={arr} />
                     </div>
                   ))}
                 </div>

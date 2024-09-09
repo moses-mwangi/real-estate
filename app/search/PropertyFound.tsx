@@ -66,7 +66,7 @@ export default function PropertyFound({
       <Suspense fallback={<p>Loading...</p>}>
         <SortProperty totalProperties={totalProperties} />
       </Suspense>
-      {selectedProperties?.map((property, index) => (
+      {paginatedProperties?.map((property, index) => (
         <div
           className="bg-card shadow-lg grid grid-cols-[1fr_2.3fr] items-center gap-5 rounded-md"
           key={property._id}
@@ -168,6 +168,7 @@ export default function PropertyFound({
           </Label>
         </div>
       </div>
+      <Separator />
     </div>
   );
 }

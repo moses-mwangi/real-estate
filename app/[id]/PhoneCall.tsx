@@ -1,21 +1,30 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { PhoneCall, X } from "lucide-react";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import React, { useState } from "react";
 
-export default function PhoneNumber() {
+interface Phone {
+  el: {
+    photo: string;
+    name: string;
+    phone: number;
+    email: string;
+  };
+}
+
+export default function PhoneNumber({ el }: Phone) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div>
-      <Button
-        className="w-full flex items-center bg-orange-600 hover:bg-orange-500"
+      <Card
+        className="bg-orange-500 text-slate-100 hover:bg-red-100 rounded-md text-sm hover:text-orange-600 px-6 py-2 flex justify-center items-center   transition-all duration-150"
         onClick={() => setIsModalOpen(true)}
       >
-        <PhoneCall className="w-4 h-4 mr-2" /> Call
-      </Button>
+        <PhoneCall className="w-[15px] h-[15px] mr-1" /> Call
+      </Card>
 
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center backdrop-blur-[1px] z-50 bg-black bg-opacity-50">
@@ -29,10 +38,9 @@ export default function PhoneNumber() {
                 <X />
               </button>
             </div>
-            <CardContent className="px-2 text-[13px]">
-              You can contact Janet Richmond via phone: (305) 555-4555 mobile:
-              (305) 555-4555. Please use the #%id to identify the property:
-              Apartment in GEMZ in Al Furjan
+            <CardContent className="px-2 font-medium text-gray-700 text-[14px]">
+              You can contact {el.name} via phone: {el.phone}. Please use the
+              #%id to identify the property: Apartment in GEMZ in Al Furjan
             </CardContent>
           </div>
         </div>

@@ -1,27 +1,28 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import agent from "../../public/dubai/agent 2.png";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { PhoneCall } from "lucide-react";
-import { BsWhatsapp } from "react-icons/bs";
 import { useForm, SubmitHandler } from "react-hook-form";
 import useUser from "../components/user/useUser";
-import emailjs from "emailjs-com";
 import toast from "react-hot-toast";
-import PhoneNumber from "./PhoneCall";
 import useProperty from "../components/properties/useProperty";
 import { useParams } from "next/navigation";
+import axios from "axios";
+
+import PhoneNumber from "./PhoneCall";
+import WhatsUpPage from "./WhatsUpPage";
 
 interface FormValues {
   name: string;
   email: string;
   phone: string;
   message: string;
+  agentEmail: string;
 }
 
 export default function Form() {
@@ -31,7 +32,7 @@ export default function Form() {
   const { properties } = useProperty();
   const property = properties.find((el) => el._id === id);
 
-  const user = property?.userId.map((el) => el.photo);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -41,27 +42,48 @@ export default function Form() {
   } = useForm<FormValues>();
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    const serviceId = "service_qmydrmg";
-    const templateId = "template_hkpilep";
-    const publicKey = "my4sRMVXuyAu-Oamg";
+    if (
+      !data.name ||
+      !data.email ||
+      !data.phone ||
+      !data.message ||
+      !data.agentEmail
+    ) {
+      toast.error("All fields are required!");
+      return;
+    }
+
+    if (!curUser) {
+      toast.error("You have to logIn first to send email");
+      return;
+    }
 
     try {
-      const templateParams = {
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        message: data.message,
-      };
+      setIsLoading(true);
 
-      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      await axios.post("http://127.0.0.1:3008/api/users/sendEmail", data);
 
       toast.success("Email sent successfully!");
-
       reset();
+
+      setIsLoading(false);
     } catch (error) {
       toast.error("Failed to send email. Please try again.");
+      setIsLoading(false);
+      console.error("ERROR:", error);
     }
   };
+
+  const loader = (
+    <div
+      className="inline-block h-5 w-5 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+      role="status"
+    >
+      <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+        Loading...
+      </span>
+    </div>
+  );
 
   return (
     <div className="bg-card p-8">
@@ -83,46 +105,74 @@ export default function Form() {
       <Card className="w-full text-sm rounded-md text-slate-50 flex justify-start py-1 px-3 bg-cyan-600 hover:bg-cyan-700">
         Schedule a showing?
       </Card>
-      <div className="mt-4">
-        <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            className="text-[13px]"
-            defaultValue={curUser?.name || ""}
-            placeholder={errors.name ? "Name is required" : "Your Name"}
-            {...register("name", { required: true })}
-          />
-          <Input
-            className="text-[13px]"
-            defaultValue={curUser?.email || ""}
-            placeholder={errors.email ? "Email is required" : "Your Email"}
-            {...register("email", { required: true })}
-          />
-          <Input
-            className="text-[13px]"
-            placeholder={errors.phone ? "Phone is required" : "Your Phone"}
-            {...register("phone", { required: true })}
-          />
-          <Textarea
-            className="text-[13px]"
-            placeholder="I'm interested in [Luxury 6 Bed Mansion in Palm Jumeira]"
-            {...register("message", { required: true })}
-          />
-          <Button
-            type="submit"
-            className="w-full bg-orange-600 hover:bg-orange-500"
-          >
-            Send Email
-          </Button>
-        </form>
-      </div>
-      <div className="mt-5 flex flex-col gap-4">
-        <div className="grid grid-cols-2 justify-between gap-3">
-          <PhoneNumber />
-          <Button className="w-full flex items-center bg-orange-600 hover:bg-orange-500">
-            <BsWhatsapp className="w-4 h-4 mr-2" /> WhatsApp
-          </Button>
+      {property?.userId.map((el) => (
+        <div key={el.email}>
+          <div className="mt-4">
+            <form
+              className="flex flex-col gap-3"
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <div className="grid grid-cols-1 gap-3">
+                <Input
+                  type="text"
+                  className="text-[13px]"
+                  value={curUser?.name || ""}
+                  placeholder={errors.name ? "Name is required" : "Your Name"}
+                  {...register("name", { required: true })}
+                />
+                <Input
+                  type="text"
+                  className="text-[13px]"
+                  value={curUser?.email || ""}
+                  placeholder={
+                    errors.email ? "Email is required" : "Your Email"
+                  }
+                  {...register("email", { required: true })}
+                />
+                <Input
+                  className="text-[13px]"
+                  type="hidden"
+                  defaultValue={el.email}
+                  placeholder={
+                    errors.agentEmail
+                      ? "agentEmail is required"
+                      : "Your agentEmail"
+                  }
+                  {...register("agentEmail", { required: true })}
+                />
+                <Input
+                  className="text-[13px]"
+                  placeholder={
+                    errors.phone ? "Phone is required" : "Your Phone"
+                  }
+                  {...register("phone", { required: true })}
+                />
+              </div>
+              <Textarea
+                className="text-[13px] h-28"
+                placeholder="I'm interested in [Luxury 6 Bed Mansion in Palm Jumeira]"
+                {...register("message", { required: true })}
+              />
+              <Button
+                type="submit"
+                className="w-full bg-orange-500 hover:text-orange-600 hover:bg-red-100 transition-all duration-150"
+              >
+                {isLoading === false ? "Send Email" : loader}
+              </Button>
+            </form>
+          </div>
+          <div className="mt-5 flex flex-col gap-4">
+            <div className="grid grid-cols-2 justify-between gap-3">
+              <div className=" cursor-pointer">
+                <PhoneNumber el={el} />
+              </div>
+              <div>
+                <WhatsUpPage el={el} />
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      ))}
     </div>
   );
 }

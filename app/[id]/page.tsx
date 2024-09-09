@@ -16,6 +16,7 @@ import { useParams, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import BookingTour from "./BookingTour";
 import useProperty from "../components/properties/useProperty";
+import { GiSpookyHouse } from "react-icons/gi";
 
 const Map = dynamic(() => import("./Map"), {
   ssr: false,
@@ -106,12 +107,14 @@ export default function SingleProperty() {
                 className={`${cn(meriwether.variable)} text-3xl`}
                 style={{ fontFamily: "var(--Merriweather)" }}
               >
-                {property?.about}
+                {/* {property?.about} */}
+                {property?.description.substring(0, 28)}...
               </p>
               <div className=" flex gap-2 mt-2 items-center">
                 <MapPin className=" w-4 h-4 text-slate-500" />
                 <p className=" text-slate-600 text-[15px]">
-                  Dubai, Al Reem Island
+                  Kenya {property?.address}
+                  {/* {property.country} {property?.address} */}
                 </p>
               </div>
             </div>
@@ -149,11 +152,12 @@ export default function SingleProperty() {
                   </h1>
                 </div>
                 <div className="flex flex-col gap-1 items-center text-gray-700">
-                  <Calendar className=" w-6 h-6" />
+                  <GiSpookyHouse className=" w-7 h-7" />
                   <h1 className="text-[15px]">
-                    Year Built:
+                    {/* Year Built:
                     {property?.createdAt &&
-                      new Date(property.createdAt).toLocaleDateString()}
+                      new Date(property.createdAt).toLocaleDateString()} */}
+                    Type: {property?.type}
                   </h1>
                 </div>
               </Card>
@@ -184,14 +188,12 @@ export default function SingleProperty() {
                   <div className="flex gap-2 items-center">
                     <p className="font-medium text-gray-800">Zip:</p>
                     <p className="font-normal  text-gray-600">
-                      {property?.zipcode}
+                      {property?.zip}
                     </p>
                   </div>
                   <div className="flex gap-2 items-center">
                     <p className="font-medium text-gray-800">Country:</p>
-                    <p className="font-normal  text-gray-600">
-                      United Arab Emirates
-                    </p>
+                    <p className="font-normal  text-gray-600">Kenya</p>
                   </div>
                 </div>
               </Card>

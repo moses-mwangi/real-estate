@@ -14,25 +14,6 @@ interface Phone {
   };
 }
 
-interface Property {
-  _id: string;
-  image: (string | StaticImport)[];
-  description: string;
-  about: string;
-  type: string;
-  bathrooms: number;
-  bedrooms: number;
-  garages: number;
-  createdAt: Date;
-  price: number;
-  city: string;
-  zipcode: number;
-  address: string;
-  position: [number];
-  userId: [{ photo: string; name: string; phone: number; email: string }];
-  size: number;
-}
-
 export default function PhoneNumber({ el }: Phone) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 

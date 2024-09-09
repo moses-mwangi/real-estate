@@ -54,6 +54,11 @@ export default function Email({ el }: EmailData) {
       return;
     }
 
+    if (!curUser) {
+      toast.error("You have to logIn first to send email");
+      return;
+    }
+
     try {
       setIsLoading(true);
 
@@ -128,14 +133,14 @@ export default function Email({ el }: EmailData) {
                 <Input
                   type="text"
                   className="text-[13px]"
-                  defaultValue={curUser?.name || ""}
+                  value={curUser?.name || ""}
                   placeholder={errors.name ? "Name is required" : "Your Name"}
                   {...register("name", { required: true })}
                 />
                 <Input
                   type="text"
                   className="text-[13px]"
-                  defaultValue={curUser?.email || ""}
+                  value={curUser?.email || ""}
                   placeholder={
                     errors.email ? "Email is required" : "Your Email"
                   }
