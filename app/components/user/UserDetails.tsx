@@ -4,11 +4,9 @@ import React, { useState } from "react";
 import useUser from "@/app/components/user/useUser";
 import Image from "next/image";
 import { LogOut, User, Pencil } from "lucide-react";
-import us from "../../../public/assets/pro 4.png";
 import UserPhoto from "./UserPhoto";
 import { MdMarkEmailUnread, MdAdminPanelSettings } from "react-icons/md";
 import UserProfileSetting from "./UserProfileSetting";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import UserImageUpload from "./UserImageUpload";
 
@@ -17,7 +15,6 @@ export default function UserDetails() {
   const [isUpload, setIsUpload] = useState(false);
 
   const { curUser, logOut } = useUser();
-  const router = useRouter();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);

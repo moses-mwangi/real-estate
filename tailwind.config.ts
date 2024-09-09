@@ -10,6 +10,15 @@ const config = {
   ],
   prefix: "",
   theme: {
+    screens: {
+      sssm: "340px",
+      smm: "400px",
+      sm: "600px",
+      md: "880px",
+      lg: "1024px",
+      mlg: "1165px",
+      xl: "1290px",
+    },
     container: {
       center: true,
       padding: "2rem",
@@ -54,9 +63,7 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
-      // backgroundImage: {
-      //   hero: "url(--url)",
-      // },
+
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

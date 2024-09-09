@@ -2,7 +2,6 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { PhoneCall, X } from "lucide-react";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import React, { useState } from "react";
 
 interface Phone {

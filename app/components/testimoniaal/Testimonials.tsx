@@ -125,7 +125,7 @@ const Testimonials = () => {
               <div key={data.id} className="my-6">
                 <div
                   key={data.id}
-                  className="flex flex-col bg-white gap-4 shadow-lg py-6 px-8 mx-4 rounded-xl bg-primary/5 relative"
+                  className="flex flex-col bg-white gap-4 shadow-lg py-6 px-8  sm:mx-4 rounded-xl bg-primary/5 relative"
                 >
                   <div className="mb-4">
                     <Image
@@ -164,9 +164,9 @@ const Testimonials = () => {
             Popular Dubai Projects
           </h1>
         </div>
-        <div className="flex justify-between bg-slate-900 px-12">
+        <div className="flex justify-between bg-slate-900 px-[8px] md:px-12">
           {comp.map((el) => (
-            <Image key={el.id} src={el.im} alt="logo" width={130} height={50} />
+            <Image key={el.id} src={el.im} alt="logo" width={120} height={50} />
           ))}
         </div>
       </div>

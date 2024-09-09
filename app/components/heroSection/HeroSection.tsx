@@ -17,21 +17,21 @@ const meriwether = Merriweather({
 export default function HeroSection() {
   return (
     <section
-      className="pl-12 z-20 pt-20 h-[110svh] grid grid-cols-[1fr_1.5fr] relative"
+      className="pl-5 sm:pl-7 md:pl-12 z-20 w-full h-[150svh] sm:h-[165svh] md:h-[110svh] pt-20 md:grid md:grid-cols-[1fr_1.5fr] relative"
       id="home"
     >
       <div>
-        <div className="z-50 flex flex-col gap-[70px] mt-[120px] absolute w-[60svw]">
+        <div className="z-50 flex flex-col gap-[70px] mt-24 sm:mt-[120px] absolute w-full md:w-[60svw]">
           <p
             className={`${cn(
               meriwether.variable
-            )} text-[53px] leading-[1] text-gray-800`}
+            )} text-4xl sm:text-[53px] leading-[1] text-gray-800`}
             style={{ fontFamily: "var(--Merriweather)" }}
           >
             Kenya Real Estate <br /> Luxury Market Place
           </p>
           <SearchHouse />
-          <div className="flex gap-10">
+          <div className=" hidden sm:flex gap-10">
             <span className="flex gap-2 text-slate-800 font-medium text-[15px] items-center">
               <PiBuildingApartmentBold className="w-[22px] h-[22px] text-orange-600" />{" "}
               Apartment

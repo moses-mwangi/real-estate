@@ -6,10 +6,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { Merriweather } from "next/font/google";
 import { useForm, SubmitHandler } from "react-hook-form";
-import React from "react";
+import React, { useState } from "react";
 import useUser from "../user/useUser";
 import toast from "react-hot-toast";
 import emailjs from "emailjs-com";
+import axios from "axios";
 
 const meriwether = Merriweather({
   subsets: ["latin"],
@@ -28,6 +29,7 @@ interface ContactFormValues {
 }
 
 export default function Contact() {
+  const [isLoading, setIsLoading] = useState(false);
   const { curUser } = useUser();
   const {
     register,
@@ -37,43 +39,53 @@ export default function Contact() {
   } = useForm<ContactFormValues>();
 
   const onSubmit: SubmitHandler<ContactFormValues> = async (data) => {
-    const serviceId = "service_qmydrmg";
-    const templateId = "template_hkpilep";
-    const publicKey = "my4sRMVXuyAu-Oamg";
+    if (!curUser) {
+      toast.error("You have to logIn first to send email");
+      return;
+    }
+
+    const formData = {
+      name: `${data.firstName} ${data.lastName}`,
+      email: data.email,
+      phone: data.mobile,
+      message: data.message,
+      agentEmail: "moses.me7662@gmail.com",
+    };
 
     try {
-      if (curUser) {
-        const templateParams = {
-          firstName: data.firstName,
-          lastName: data.lastName,
-          country: data.country,
-          city: data.city,
-          email: data.email,
-          mobile: data.mobile,
-          message: data.message,
-        };
+      setIsLoading(true);
+      await axios.post("http://127.0.0.1:3008/api/users/sendEmail", formData);
 
-        await emailjs.send(serviceId, templateId, templateParams, publicKey);
-
-        toast.success("Email sent successfully!");
-      } else {
-        toast.error("You need to log in to send an email.");
-      }
+      reset();
+      toast.success("Email sent successfully!");
+      setIsLoading(false);
       reset();
     } catch (error) {
       toast.error("Failed to send email. Please try again.");
+      setIsLoading(false);
     }
   };
 
+  const loader = (
+    <div
+      className="inline-block h-5 w-5 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+      role="status"
+    >
+      <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+        Loading...
+      </span>
+    </div>
+  );
+
   return (
     <div
-      className="bg-team py-14 pl-32 grid grid-cols-2 items-center"
+      className="bg-team py-14 md:pl-32 flex justify-center md:grid md:grid-cols-2 items-center"
       id="contact"
     >
       <div className="flex flex-col gap-3 w-[80%]">
         <h1>CONTACT US</h1>
         <p
-          className={`${cn(meriwether.variable)} text-4xl mb-4`}
+          className={`${cn(meriwether.variable)} text-3xl sm:text-4xl mb-4`}
           style={{ fontFamily: "var(--Merriweather)" }}
         >
           We’d love to hear from you
@@ -85,7 +97,7 @@ export default function Contact() {
                 className={`text-gray-600 font-medium ${
                   errors.firstName ? "border-red-500" : ""
                 }`}
-                defaultValue={curUser?.name.split(",").at(0)}
+                value={curUser?.name.split(" ").at(0)}
                 placeholder="First Name"
                 {...register("firstName", {
                   required: "First Name is required",
@@ -102,7 +114,7 @@ export default function Contact() {
                 className={`text-gray-600 font-medium ${
                   errors.lastName ? "border-red-500" : ""
                 }`}
-                defaultValue={curUser?.name.split(",").at(1)}
+                value={curUser?.name.split(" ").at(1)}
                 placeholder="Last Name"
                 {...register("lastName", { required: "Last Name is required" })}
               />
@@ -188,11 +200,11 @@ export default function Contact() {
             type="submit"
             className="bg-orange-500 hover:bg-orange-600 transition-all duration-200"
           >
-            Send Email
+            {isLoading === false ? "Send Email" : loader}
           </Button>
         </form>
       </div>
-      <div className="bg-contact h-svh rounded-l-md" />
+      <div className=" hidden md:block bg-contact h-svh rounded-l-md" />
     </div>
   );
 }

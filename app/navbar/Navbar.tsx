@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import UserDetails from "../components/user/UserDetails";
 import useUser from "../components/user/useUser";
 import SignUpForm from "../components/user/SignUpForm";
+import NavbarSheet from "./NavbarSheet";
 
 const lists = [
   { label: "Home", id: "home" },
@@ -29,7 +30,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="py-[5px] pl-8 shadow-md fixed z-50 top-0 left-0 w-full bg-card flex justify-between items-center">
+    <div className="py-[5px] pl-8 shadow-md fixed w-svw z-50 top-0 left-0 bg-card flex justify-between items-center">
       <Image
         className="h-[66px] w-auto cursor-pointer"
         src={log}
@@ -46,7 +47,7 @@ export default function Navbar() {
           }
         }}
       />
-      <div className="flex gap-12">
+      <div className=" hidden md:flex gap-12">
         {lists.map((el) => (
           <div key={el.label}>
             <span
@@ -58,8 +59,10 @@ export default function Navbar() {
           </div>
         ))}
       </div>
-
-      {token ? <UserDetails /> : <SignUpForm />}
+      <div className="flex gap-1 items-center">
+        <NavbarSheet />
+        <div>{token ? <UserDetails /> : <SignUpForm />}</div>
+      </div>
     </div>
   );
 }

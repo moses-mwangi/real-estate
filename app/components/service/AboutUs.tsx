@@ -33,19 +33,19 @@ const about = [
 
 export default function AboutUs() {
   return (
-    <div className="grid grid-rows-2 py-20 px-12" id="services">
+    <div className="flex flex-col gap-11 py-20 px-7 sm:px-12" id="services">
       <div className="">
         <h1 className="flex justify-center text-sm">ABOUT US</h1>
         <p
           className={`${cn(
             meriwether.variable
-          )} flex justify-center text-gray-800 text-4xl mt-2`}
+          )} flex justify-center text-gray-800 text-3xl sm:text-4xl mt-2`}
           style={{ fontFamily: "var(--Merriweather)" }}
         >
           Why You Should Work With Us
         </p>
       </div>
-      <div className="flex items-center justify-between gap-14">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-between gap-6">
         {about.map((el) => (
           <Card
             key={el.desc}

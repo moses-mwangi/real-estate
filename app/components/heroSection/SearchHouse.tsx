@@ -31,12 +31,12 @@ export default function SearchHouse() {
       <Button className="bg-orange-500 hover:bg-orange-600 w-36 py-1  absolute left-[1px] -top-10 rounded-t-md rounded-b-none">
         SALES
       </Button>
-      <Card className="w-full rounded-tl-none h-auto py-7">
+      <Card className="md:w-full w-[90svw] rounded-tl-none h-auto py-7">
         <form
           className="h-full px-7 flex flex-col gap-4 justify-center"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="grid md:grid-cols-3 grid-cols-1 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             <div>
               <Select
                 onValueChange={(value) => handleSelectChange("category", value)}

@@ -26,8 +26,8 @@ export default function Propeties() {
     useProperty();
 
   return (
-    <div className="bg-property" id="properties">
-      <div className="bg-white px-12 py-20 bg-opacity-[96%]">
+    <div className="bg-propertysmm" id="properties">
+      <div className="bg-white px-7 sm:px-12 py-20 bg-opacity-[96%]">
         <div className="flex flex-col gap-2 mb-5">
           <p className="opacity-80 font-light">DUBAI REAL ESTATE</p>
           <h1
@@ -37,7 +37,7 @@ export default function Propeties() {
             Latest Properties
           </h1>
         </div>
-        <div className="gap-y-8 gap-x-10 grid grid-cols-3">
+        <div className="gap-y-8 gap-x-10 grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3">
           {properties.map((el, index) => (
             <div
               className="bg-card shadow-lg flex flex-col gap-5 rounded-md cursor-zoom-out"
