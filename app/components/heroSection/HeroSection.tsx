@@ -78,8 +78,6 @@ export default function HeroSection() {
           backgroundRepeat: "no-repeat",
           maskImage:
             "linear-gradient(to right, transparent 0%, black 20%, black 100%, transparent 100%)",
-
-          objectFit: "fill",
         }}
       />
     </section>
