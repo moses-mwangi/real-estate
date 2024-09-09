@@ -81,14 +81,16 @@ export default function SignUpForm() {
   return (
     <div>
       {show === false && (
-        <Card
-          className="w-fit shadow-[4px_4px_0_orange]  translate-x-[3px] translate-y-[3px]  bg-card hover:shadow-lg cursor-pointer mr-12 font-semibold text-gray-700 hover:text-orange-500 transition-all duration-150 text-sm py-2 px-3 rounded-md"
-          onClick={() => {
-            setShow((el) => !el);
-          }}
-        >
-          Sign Up
-        </Card>
+        <div className="pr-2 md:mr-12">
+          <Card
+            className="w-fit shadow-[4px_4px_0_orange]  translate-x-[3px] translate-y-[3px]  bg-card hover:shadow-lg cursor-pointer font-semibold text-gray-700 hover:text-orange-500 transition-all duration-150 text-sm py-2 px-3 rounded-md"
+            onClick={() => {
+              setShow((el) => !el);
+            }}
+          >
+            Sign Up
+          </Card>
+        </div>
       )}
 
       {showForgotPasModal === true && (
