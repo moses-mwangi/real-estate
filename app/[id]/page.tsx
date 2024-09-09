@@ -43,16 +43,18 @@ export default function SingleProperty() {
   return (
     <div className="bg-id pt-20">
       <div>
-        <div className="grid h-svh grid-cols-2 gap-[1px]">
-          {property?.image[0] && (
-            <Image
-              className=" w-full h-full"
-              src={property.image[0]}
-              alt="mm"
-              width={600}
-              height={200}
-            />
-          )}
+        <div className="grid h-svh grid-cols-1 sm:grid-cols-2 gap-[1px]">
+          <div className=" hidden sm:block ">
+            {property?.image[0] && (
+              <Image
+                className=" w-full h-full"
+                src={property.image[0]}
+                alt="mm"
+                width={600}
+                height={200}
+              />
+            )}
+          </div>
           <div className="grid grid-cols-2 grid-rows-2 gap-[1px]">
             {property?.image[1] && (
               <Image
@@ -92,8 +94,8 @@ export default function SingleProperty() {
             )}
           </div>
         </div>
-        <div className=" px-8 py-10">
-          <div className=" flex justify-between items-center">
+        <div className="px-5 sm:px-8 py-10">
+          <div className="flex sm:gap-0 gap-3 sm:justify-between sm:flex-row flex-col sm:items-center">
             <div>
               <span className=" flex gap-5 mb-3">
                 <p className="bg-orange-600 py-[2px] px-2 rounded-sm text-slate-50 text-sm">
@@ -104,17 +106,17 @@ export default function SingleProperty() {
                 </p>
               </span>
               <p
-                className={`${cn(meriwether.variable)} text-3xl`}
+                className={`${cn(
+                  meriwether.variable
+                )} leading-normal text-[29px] sm:text-3xl`}
                 style={{ fontFamily: "var(--Merriweather)" }}
               >
-                {/* {property?.about} */}
                 {property?.description.substring(0, 28)}...
               </p>
               <div className=" flex gap-2 mt-2 items-center">
                 <MapPin className=" w-4 h-4 text-slate-500" />
                 <p className=" text-slate-600 text-[15px]">
                   Kenya {property?.address}
-                  {/* {property.country} {property?.address} */}
                 </p>
               </div>
             </div>
@@ -126,39 +128,34 @@ export default function SingleProperty() {
               </span>
             </div>
           </div>
-          <div className=" grid grid-cols-[2.2fr_1fr] gap-7 mt-12">
-            <div className="flex flex-col gap-6">
-              <Card className="w-full flex justify-between h-36 rounded-md border-none px-8 pt-14">
-                <div className="flex flex-col gap-1 items-center text-gray-700">
+          <div className=" grid grid-cols-1 md:grid-cols-[2.2fr_1fr] gap-7 mt-12">
+            <div className="flex flex-col  gap-6">
+              <Card className="w-full h-auto flex flex-col gap-4 sm:gap-0 sm:flex-row sm:justify-between  rounded-md border-none px-7 sm:px-8 py-8 sm:pt-14">
+                <div className="flex flex-row sm:flex-col gap-4 sm:gap-1 items-center text-gray-700">
                   <IoIosBed className=" w-6 h-6" />
                   <h1 className=" text-[15px]">
                     {property?.bedrooms} bedrooms
                   </h1>
                 </div>
-                <div className="flex flex-col gap-1 items-center text-gray-700">
+                <div className="flex flex-row sm:flex-col gap-4 sm:gap-1 items-center text-gray-700">
                   <BathIcon className=" w-6 h-6" />
                   <h1 className=" text-[15px]">
                     {property?.bathrooms} Bathrooms
                   </h1>
                 </div>
-                <div className="flex flex-col gap-1 items-center text-gray-700">
+                <div className="flex flex-row sm:flex-col gap-4 sm:gap-1 items-center text-gray-700">
                   <FaCar className=" w-6 h-6" />
                   <h1 className=" text-[15px]">{property?.garages} Garages</h1>
                 </div>
-                <div className="flex flex-col gap-1 items-center text-gray-700">
+                <div className="flex flex-row sm:flex-col gap-4 sm:gap-1 items-center text-gray-700">
                   <BiArea className=" w-6 h-6" />
                   <h1 className=" text-[15px]">
                     {property?.size ? property?.size.toLocaleString() : 5000} ft
                   </h1>
                 </div>
-                <div className="flex flex-col gap-1 items-center text-gray-700">
+                <div className="flex flex-row sm:flex-col gap-4 sm:gap-1 items-center text-gray-700">
                   <GiSpookyHouse className=" w-7 h-7" />
-                  <h1 className="text-[15px]">
-                    {/* Year Built:
-                    {property?.createdAt &&
-                      new Date(property.createdAt).toLocaleDateString()} */}
-                    Type: {property?.type}
-                  </h1>
+                  <h1 className="text-[15px]">Type: {property?.type}</h1>
                 </div>
               </Card>
 

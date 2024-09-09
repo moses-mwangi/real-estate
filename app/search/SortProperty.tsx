@@ -32,7 +32,7 @@ export default function SortProperty({ totalProperties }: Sort) {
   };
 
   return (
-    <div className=" flex justify-between items-center">
+    <div className=" flex flex-col gap-2 sm:gap-0 sm:flex-row sm:justify-between sm:items-center">
       <div>
         <p className="text-gray-700 text-[17px] font-medium flex gap-1">
           Filtered Results:

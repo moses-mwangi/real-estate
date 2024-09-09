@@ -51,7 +51,7 @@ export default function OurTeam() {
   };
 
   return (
-    <div className="bg-team py-14 px-7 sm:px-12" id="agents">
+    <div className="bg-team py-14 px-6 sm:px-12" id="agents">
       <div>
         <h1 className="flex justify-center text-[16px]">OUR AGENTS</h1>
         <h1
@@ -68,7 +68,7 @@ export default function OurTeam() {
           {agent?.map((el) => (
             <div key={el._id} className="p-3">
               <div
-                className="bg-card p-4 h-full shadow-lg grid grid-rows-2 gap-5 rounded-md cursor-pointer transition-all hover:shadow-xl"
+                className="bg-card p-4 w-full h-full shadow-lg grid grid-rows-2 gap-5 rounded-md cursor-pointer transition-all hover:shadow-xl"
                 style={{ height: "512px" }}
               >
                 <div className="overflow-hidden rounded-md">

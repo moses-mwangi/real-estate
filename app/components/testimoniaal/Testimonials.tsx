@@ -154,19 +154,26 @@ const Testimonials = () => {
         </div>
       </div>
       <div className="mt-24">
-        <div className="bg-project flex  justify-center">
+        <div className="bg-project w-full flex  justify-center">
           <h1
             className={`${cn(
               meriwether.variable
             )} pt-40 text-6xl text-slate-50 font-medium`}
             style={{ fontFamily: "var(--Merriweather)" }}
           >
-            Popular Dubai Projects
+            Popular Nairobi Projects
           </h1>
         </div>
-        <div className="flex justify-between bg-slate-900 px-[8px] md:px-12">
+        <div className=" grid grid-cols-5 bg-slate-900 md:px-12">
           {comp.map((el) => (
-            <Image key={el.id} src={el.im} alt="logo" width={120} height={50} />
+            <Image
+              className="w-[68px] h-[45px]"
+              key={el.id}
+              src={el.im}
+              alt="logo"
+              width={100}
+              height={50}
+            />
           ))}
         </div>
       </div>

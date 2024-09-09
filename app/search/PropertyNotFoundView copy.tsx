@@ -11,7 +11,6 @@ import PhoneNumber from "../components/properties/PhoneCall";
 import Email from "../components/properties/Email";
 import { Label } from "@/components/ui/label";
 import useProperty from "../components/properties/useProperty";
-import WhatsUpPage from "../components/properties/WhatsUpPage";
 
 interface Select {
   handlePreviousImage: (index: number, imageCount: number) => void;
@@ -59,11 +58,10 @@ export default function PropertyNotFoundView({
         <Separator />
         <div className="mt-6 mb-2">
           <p className=" mb-5">YOU CAN VIEW THIS LATEST PROPERTIES</p>
-
           <div className="flex flex-col gap-8">
             {paginatedProperties?.map((property, index) => (
               <div
-                className="bg-card shadow-lg grid grid-cols-1 md:grid-cols-[1fr_2.3fr] items-center gap-5 rounded-md"
+                className="bg-card shadow-lg grid grid-cols-[1fr_2.3fr] items-center gap-5 rounded-md"
                 key={property._id}
               >
                 <div className="overflow-hidden h-full z-30 relative rounded-t-md cursor-zoom-out">
@@ -129,16 +127,18 @@ export default function PropertyNotFoundView({
                       {property.description.substring(0, 200)}....
                     </p>
                   </div>
-
-                  <div className=" pb-8">
+                  <div>
                     {property.userId.map((el) => (
                       <div
-                        className="flex sm:gap-10 items-center justify-between mt-2"
+                        className="flex gap-10 items-center mt-2"
                         key={el.email}
                       >
                         <PhoneNumber el={el} />
                         <Email el={el} />
-                        <WhatsUpPage el={el} />
+                        <Card className="hover:bg-orange-500 hover:text-slate-100 bg-red-100 rounded-md text-sm text-orange-600 px-6 py-1 flex justify-center items-center">
+                          <FaWhatsapp className=" w-[15px] h-[15px] mr-1" />
+                          WhatsApp
+                        </Card>
                       </div>
                     ))}
                   </div>
@@ -146,10 +146,8 @@ export default function PropertyNotFoundView({
               </div>
             ))}
           </div>
-
-          <div className="flex items-center justify-between my-6">
-            <p className="hidden sm:block text-[16px]">{`SHOWING ${currentPage} PAGE of ${totalPages} PAGES`}</p>
-            <p className="sm:hidden text-[16px]">{`Results on page ${currentPage}`}</p>
+          <div className="flex justify-between my-6">
+            <p className=" text-[16px]">{`SHOWING ${currentPage} PAGE of ${totalPages} PAGES`}</p>
             <div className="flex gap-4">
               <Label
                 className={`py-[5px] text-[16px] px-3 cursor-pointer  hover:bg-orange-500 hover:text-card transition-all duration-200 rounded-sm ${

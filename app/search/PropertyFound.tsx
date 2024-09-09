@@ -14,6 +14,7 @@ import Email from "../components/properties/Email";
 import useProperty, { Property } from "../components/properties/useProperty";
 import { Label } from "@/components/ui/label";
 import SortProperty from "./SortProperty";
+import WhatsUpPage from "../components/properties/WhatsUpPage";
 
 interface Select {
   filteredProperties: Property[];
@@ -41,6 +42,7 @@ export default function PropertyFound({
   const latestProperties = filteredProperties.sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
+
   const totalPages = Math.ceil(properties.length / propertiesPerPage);
 
   // Get properties for the current page
@@ -68,13 +70,13 @@ export default function PropertyFound({
       </Suspense>
       {paginatedProperties?.map((property, index) => (
         <div
-          className="bg-card shadow-lg grid grid-cols-[1fr_2.3fr] items-center gap-5 rounded-md"
+          className="bg-card shadow-lg grid grid-cols-1 md:grid-cols-[1fr_2.3fr] items-center gap-5 rounded-md"
           key={property._id}
         >
-          <div className="overflow-hidden z-30 relative rounded-t-md cursor-zoom-out">
+          <div className="overflow-hidden h-full z-30 relative rounded-t-md cursor-zoom-out">
             {property.image[0] && (
               <Image
-                className=" w-full h-auto hover:scale-105 transition-all duration-200"
+                className=" w-full h-full hover:scale-105 transition-all duration-200"
                 src={
                   property._id
                     ? property.image[nextImageIndexes[index]] ||
@@ -131,23 +133,24 @@ export default function PropertyFound({
               </p>
             </div>
 
-            <div>
+            <div className=" pb-8">
               {property.userId.map((el) => (
-                <div className="flex gap-10 items-center mt-2" key={el.email}>
+                <div
+                  className="flex sm:gap-10 items-center justify-between mt-2"
+                  key={el.email}
+                >
                   <PhoneNumber el={el} />
                   <Email el={el} />
-                  <Card className="hover:bg-orange-500 hover:text-slate-100 bg-red-100 rounded-md text-sm text-orange-600 px-6 py-1 flex justify-center items-center">
-                    <FaWhatsapp className=" w-[15px] h-[15px] mr-1" />
-                    WhatsApp
-                  </Card>
+                  <WhatsUpPage el={el} />
                 </div>
               ))}
             </div>
           </div>
         </div>
       ))}
-      <div className="flex justify-between my-6">
-        <p className=" text-[16px]">{`SHOWING ${currentPage} PAGE of ${totalPages} PAGES`}</p>
+      <div className="flex justify-between items-center my-6">
+        <p className=" hidden sm:block text-[16px]">{`SHOWING ${currentPage} PAGE of ${totalPages} PAGES`}</p>
+        <p className="  sm:hidden text-[16px]">{`Results on page ${currentPage}`}</p>
         <div className="flex gap-4">
           <Label
             className={`py-[5px] text-[16px] px-3 cursor-pointer  hover:bg-orange-500 hover:text-card transition-all duration-200 rounded-sm ${

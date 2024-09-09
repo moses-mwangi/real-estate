@@ -11,11 +11,11 @@ const meriwether = Merriweather({
 
 export default function SearchedPage() {
   return (
-    <div className="bg-id flex-col pt-32 pb-[114px] px-14">
+    <div className="bg-id flex-col pt-32 pb-[20px] md:pb-[30px] px-7 sm:px-14">
       <p
         className={`${cn(
           meriwether.variable
-        )} flex justify-center pb-12 text-4xl font-semibold text-gray-800`}
+        )} flex justify-center pb-12 text-3xl sm:text-4xl font-semibold text-gray-800`}
         style={{ fontFamily: "var(--Merriweather)" }}
       >
         Your specified filtered Properties

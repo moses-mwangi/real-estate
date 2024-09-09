@@ -33,7 +33,7 @@ const about = [
 
 export default function AboutUs() {
   return (
-    <div className="flex flex-col gap-11 py-20 px-7 sm:px-12" id="services">
+    <div className="flex flex-col gap-10 py-20 px-6 sm:px-12" id="services">
       <div className="">
         <h1 className="flex justify-center text-sm">ABOUT US</h1>
         <p
