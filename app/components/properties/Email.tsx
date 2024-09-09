@@ -62,7 +62,10 @@ export default function Email({ el }: EmailData) {
     try {
       setIsLoading(true);
 
-      await axios.post("http://127.0.0.1:3008/api/users/sendEmail", data);
+      await axios.post(
+        "https://real-estate-api-azure.vercel.app/api/users/sendEmail",
+        data
+      );
 
       toast.success("Email sent successfully!");
       reset();

@@ -31,8 +31,7 @@ function useProperty() {
   useEffect(() => {
     async function fetchAgents() {
       const propety = await axios.get(
-        // "https://real-estate-api-azure.vercel.app/api/property"
-        "http://127.0.0.1:3008/api/property"
+        "https://real-estate-api-azure.vercel.app/api/property"
       );
       setProperties(propety.data.data);
       setNextImageIndexes(Array(propety.data.data.length).fill(0));
