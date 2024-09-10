@@ -11,6 +11,7 @@ import useUser from "../user/useUser";
 import toast from "react-hot-toast";
 import emailjs from "emailjs-com";
 import axios from "axios";
+import { Separator } from "@/components/ui/separator";
 
 const meriwether = Merriweather({
   subsets: ["latin"],
@@ -82,7 +83,7 @@ export default function Contact() {
 
   return (
     <div
-      className="bg-team pt-14 md:pl-32 flex justify-center md:grid md:grid-cols-2 items-center"
+      className="bg-team pb-6 pt-14 md:pl-32 flex justify-center md:grid md:grid-cols-2 items-center"
       id="contact"
     >
       <div className="flex flex-col gap-3 w-[80%]">

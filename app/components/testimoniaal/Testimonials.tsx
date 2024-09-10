@@ -158,7 +158,7 @@ const Testimonials = () => {
           <h1
             className={`${cn(
               meriwether.variable
-            )} pt-40 text-6xl text-slate-50 font-medium`}
+            )} pt-40 text-3xl sm:text-6xl text-slate-50 font-medium`}
             style={{ fontFamily: "var(--Merriweather)" }}
           >
             Popular Nairobi Projects

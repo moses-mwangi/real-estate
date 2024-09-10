@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Heart, Plus } from "lucide-react";
-import { Card } from "@/components/ui/card";
-import { FaWhatsapp } from "react-icons/fa";
 import Image from "next/image";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import { IoShareSocialSharp } from "react-icons/io5";
@@ -12,6 +10,7 @@ import Email from "../components/properties/Email";
 import { Label } from "@/components/ui/label";
 import useProperty from "../components/properties/useProperty";
 import WhatsUpPage from "../components/properties/WhatsUpPage";
+import Link from "next/link";
 
 interface Select {
   handlePreviousImage: (index: number, imageCount: number) => void;
@@ -106,15 +105,11 @@ export default function PropertyNotFoundView({
                   </div>
                 </div>
                 <div className="flex flex-col gap-3 px-4 cursor-pointer">
-                  <div
+                  <Link
+                    href={`/${property._id}?lat=${property.position.at(
+                      0
+                    )}&lng=${property.position.at(1)}`}
                     className="flex flex-col gap-2"
-                    onClick={() => {
-                      router.push(
-                        `/${property._id}?lat=${property.position.at(
-                          0
-                        )}&lng=${property.position.at(1)}`
-                      );
-                    }}
                   >
                     <p className="text-[13px] text-slate-700">
                       {property.type}, sales
@@ -128,7 +123,7 @@ export default function PropertyNotFoundView({
                     <p className="text-[12px] text-slate-500">
                       {property.description.substring(0, 200)}....
                     </p>
-                  </div>
+                  </Link>
 
                   <div className=" pb-8">
                     {property.userId.map((el) => (

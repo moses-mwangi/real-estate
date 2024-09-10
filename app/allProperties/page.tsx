@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Merriweather } from "next/font/google";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
@@ -9,11 +9,10 @@ import { Heart, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import { IoShareSocialSharp } from "react-icons/io5";
-import Email from "./Email";
-import PhoneNumber from "./PhoneCall";
-import useProperty from "./useProperty";
-import WhatsUpPage from "./WhatsUpPage";
-import { Label } from "@/components/ui/label";
+import useProperty from "../components/properties/useProperty";
+import PhoneNumber from "../components/properties/PhoneCall";
+import Email from "../components/properties/Email";
+import WhatsUpPage from "../components/properties/WhatsUpPage";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -24,6 +23,7 @@ const meriwether = Merriweather({
 });
 
 export default function Propeties() {
+  const [showMore, setShowMore] = useState(6);
   const router = useRouter();
   const { properties, nextImageIndexes, handleNextImage, handlePreviousImage } =
     useProperty();
@@ -32,9 +32,11 @@ export default function Propeties() {
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
 
+  const moreProperties = sortedProperty.slice(0, showMore);
+
   return (
-    <div className="bg-property" id="properties">
-      <div className="bg-white px-7 sm:px-12 pt-20 bg-opacity-[96%]">
+    <div className="bg-property">
+      <div className="bg-white px-7 sm:px-12 pt-28 bg-opacity-[96%]">
         <div className="flex flex-col gap-2 mb-5">
           <p className="opacity-80 font-light">GLOBAL REAL ESTATE</p>
           <h1
@@ -44,8 +46,11 @@ export default function Propeties() {
             Latest Properties
           </h1>
         </div>
+        {sortedProperty.length === 0 && (
+          <div className=" bg-white opacity-[96%] h-svh" />
+        )}
         <div className="gap-y-8 gap-x-10 grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3">
-          {sortedProperty?.map((el, index) => (
+          {moreProperties?.map((el, index) => (
             <div
               className="bg-card shadow-lg flex flex-col gap-5 rounded-md cursor-zoom-out"
               key={el._id}
@@ -119,12 +124,19 @@ export default function Propeties() {
         </div>
         <div className=" flex justify-center py-16">
           <Button
-            className="font-normal text-[17px] transition-all duration-150  bg-orange-500 hover:bg-orange-400 rounded-md px-3 py-1"
+            className={` ${
+              sortedProperty.length <= showMore
+                ? " cursor-not-allowed opacity-50"
+                : ""
+            } font-normal text-[16px] disabled:cursor-not-allowed transition-all duration-150  bg-orange-500 hover:text-orange-600 hover:bg-red-100 rounded-md px-3 py-1`}
+            // disabled={sortedProperty.length <= showMore}
             onClick={() => {
-              router.push("/allProperties");
+              if (sortedProperty.length > showMore) {
+                setShowMore((prev) => prev + 6);
+              }
             }}
           >
-            SHOW ALL PROPERTIES
+            VIEW MORE PROPERTIES
           </Button>
         </div>
       </div>
