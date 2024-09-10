@@ -3,6 +3,9 @@
 import Image from "next/image";
 import React from "react";
 import log from "../../public/images/image copy 11.png";
+import logo from "../../public/logos/image copy 3.png";
+import logos from "../../public/logos/image copy 4.png";
+import logoss from "../../public/logos/image copy 5.png";
 import { usePathname, useRouter } from "next/navigation";
 import UserDetails from "../components/user/UserDetails";
 import useUser from "../components/user/useUser";
@@ -32,13 +35,12 @@ export default function Navbar() {
   return (
     <div className="py-[5px] pl-8 shadow-md fixed w-svw z-50 top-0 left-0 bg-card flex justify-between items-center">
       <Image
-        className="h-[66px] w-auto cursor-pointer"
-        src={log}
+        className="h-auto w-auto cursor-pointer"
+        // className="cursor-pointer"
+        src={logoss}
         alt="logo"
-        // width={300}
-        // height={100}
-        // width={600}
-        // height={400}
+        width={60}
+        height={50}
         onClick={() => {
           if (path === "/") {
             handleScroll("home");
