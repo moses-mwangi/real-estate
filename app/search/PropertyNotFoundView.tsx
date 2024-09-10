@@ -23,7 +23,6 @@ export default function PropertyNotFoundView({
   handleNextImage,
   nextImageIndexes,
 }: Select) {
-  const router = useRouter();
   const { properties } = useProperty();
 
   const [currentPage, setCurrentPage] = useState(1);

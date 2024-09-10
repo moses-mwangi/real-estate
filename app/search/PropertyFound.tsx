@@ -3,8 +3,6 @@
 import React, { Suspense, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Heart, Plus } from "lucide-react";
-import { Card } from "@/components/ui/card";
-import { FaWhatsapp } from "react-icons/fa";
 import Image from "next/image";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import { IoShareSocialSharp } from "react-icons/io5";
@@ -30,7 +28,6 @@ export default function PropertyFound({
   handleNextImage,
   nextImageIndexes,
 }: Select) {
-  const router = useRouter();
   const { properties } = useProperty();
 
   const [currentPage, setCurrentPage] = useState(1);

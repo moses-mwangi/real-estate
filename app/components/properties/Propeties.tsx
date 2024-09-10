@@ -13,7 +13,6 @@ import Email from "./Email";
 import PhoneNumber from "./PhoneCall";
 import useProperty from "./useProperty";
 import WhatsUpPage from "./WhatsUpPage";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
