@@ -11,10 +11,11 @@ export default function PhoneNumber() {
   return (
     <div>
       <Button
-        className="bg-orange-500 hover:bg-orange-600"
+        className="bg-orange-500 hover:bg-orange-600 text-[13px] sm:text-[16px]"
         onClick={() => setIsModalOpen(true)}
       >
-        <PhoneCall className="mr-[5px] w-5 h-5" /> CALL US NOW
+        <PhoneCall className="mr-[5px] w-[17px] h-[17px] sm:w-5 sm:h-5" /> CALL
+        US NOW
       </Button>
 
       {isModalOpen && (
