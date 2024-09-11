@@ -13,21 +13,22 @@ const meriwether = Merriweather({
 
 const about = [
   {
-    logo: <GiShakingHands className=" w-10 h-10" />,
-    desc: "Legal services",
+    logo: <GiShakingHands className="w-10 h-10" />,
+    desc: "Legal Services",
     service:
-      "We offer expert legal help for all related property items in Dubai.",
+      "Our global legal experts ensure smooth property transactions, offering advice every step of the way.",
   },
   {
-    logo: <GiFamilyHouse className=" w-10 h-10" />,
-    desc: "Sell your home",
+    logo: <GiFamilyHouse className="w-10 h-10" />,
+    desc: "Sell Your Home",
     service:
-      "We sell your home at the best market price and very quickly as well.",
+      "We ensure your home is sold at the best possible price, quickly and hassle-free.",
   },
   {
-    logo: <TfiBarChart className=" w-10 h-10" />,
-    desc: "Buy your home",
-    service: "We offer you free consultancy to get a loan for your new home.",
+    logo: <TfiBarChart className="w-10 h-10" />,
+    desc: "Buy Your Home",
+    service:
+      "Get free consultations for securing a loan and buying your dream home with ease.",
   },
 ];
 
