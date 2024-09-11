@@ -1,9 +1,9 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { Merriweather } from "next/font/google";
 import { cn } from "@/lib/utils";
-import { BathIcon, Calendar, MapPin } from "lucide-react";
+import { BathIcon, MapPin } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { BiArea } from "react-icons/bi";
 import { FaCar } from "react-icons/fa";
@@ -17,6 +17,7 @@ import { useRouter } from "next/navigation";
 import BookingTour from "./BookingTour";
 import useProperty from "../components/properties/useProperty";
 import { GiSpookyHouse } from "react-icons/gi";
+import AllImagePreview from "./AllImagePreview";
 
 const Map = dynamic(() => import("./Map"), {
   ssr: false,
@@ -94,6 +95,7 @@ export default function SingleProperty() {
             )}
           </div>
         </div>
+        <AllImagePreview image={property?.image} />
         <div className="px-3 sm:px-8 py-10">
           <div className="flex sm:gap-0 gap-3 sm:justify-between sm:flex-row flex-col sm:items-center">
             <div>
@@ -202,11 +204,12 @@ export default function SingleProperty() {
       <Map
         address={String(property?.address)}
         location={posi || [25.112, 55.139]}
+        image={property?.image}
       />
       <div className="flex gap-5 px-3 sm:px-8 py-8 mb-10">
         <BookingTour />
         <Button
-          className="bg-orange-600 hover:bg-orange-700"
+          className="bg-orange-500 hover:bg-orange-600"
           onClick={() => {
             router.back();
           }}

@@ -14,13 +14,16 @@ import { Card } from "@/components/ui/card";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import Image from "next/image";
 
 interface MapProps {
-  address: string;
+  address: string | undefined;
   location: number[] | undefined;
+  image: (string | StaticImport)[] | undefined;
 }
 
-function Map({ address, location }: MapProps) {
+function Map({ address, location, image }: MapProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [position, setPosition] = useState<any>(location);
   const [error, setError] = useState("");
@@ -73,7 +76,19 @@ function Map({ address, location }: MapProps) {
             url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
           />
           <Marker position={position} draggable={false}>
-            <Popup>{address}</Popup>
+            <Popup className=" p-0">
+              <div className=" rounded-sm border-r-2 border-solid border-green-500">
+                <h1>{address}</h1>
+                {image?.at(0) && (
+                  <Image
+                    src={image?.at(0) as string | StaticImport}
+                    width={50}
+                    height={50}
+                    alt="map"
+                  />
+                )}
+              </div>
+            </Popup>
           </Marker>
           {position && <ChangeCenter position={position} />}
 

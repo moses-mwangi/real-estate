@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import {
   AlertDialog,
@@ -50,6 +50,8 @@ type FormValues = {
 };
 
 export default function BookingTour() {
+  const [cursor, setCursor] = useState(false);
+
   const [date, setDate] = React.useState<Date>();
   const { register, handleSubmit, setValue, reset } = useForm<FormValues>();
   const { curUser } = useUser();
@@ -83,110 +85,124 @@ export default function BookingTour() {
   });
 
   return (
-    <div>
-      <AlertDialog>
-        <AlertDialogTrigger asChild>
-          <Button className="bg-orange-600 hover:bg-orange-700">
-            Book a visit now
-          </Button>
-        </AlertDialogTrigger>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle className="">
-              Make a booking for a house tour
-            </AlertDialogTitle>
-            <AlertDialogDescription></AlertDialogDescription>
-            <div className="mt-4">
-              <form
-                className="flex flex-col gap-3"
-                onSubmit={handleSubmit(onSubmit)}
-              >
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <Button
-                      variant={"outline"}
-                      className={cn(
-                        "w-full text-gray-600 flex justify-between items-center text-left font-normal",
-                        !date && "text-muted-foreground"
-                      )}
+    <>
+      <Button
+        className={`${
+          cursor === false ? " cursor-not-allowed opacity-50" : ""
+        }   bg-orange-500  hover:bg-orange-600`}
+      >
+        Book a visit now
+      </Button>
+      <div className="hidden">
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button
+              className={`${
+                cursor === false ? " cursor-not-allowed opacity-50" : ""
+              }   bg-orange-500  hover:bg-orange-600`}
+              // disabled={cursor === false ? true : false}
+            >
+              Book a visit now
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle className="">
+                Make a booking for a house tour
+              </AlertDialogTitle>
+              <AlertDialogDescription></AlertDialogDescription>
+              <div className="mt-4">
+                <form
+                  className="flex flex-col gap-3"
+                  onSubmit={handleSubmit(onSubmit)}
+                >
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-full text-gray-600 flex justify-between items-center text-left font-normal",
+                          !date && "text-muted-foreground"
+                        )}
+                      >
+                        {date ? format(date, "PPP") : <span>Pick a date</span>}
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={date}
+                        onSelect={(selectedDate) => {
+                          setDate(selectedDate);
+                          setValue("date", selectedDate as Date);
+                        }}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+
+                  <Select onValueChange={(value) => setValue("time", value)}>
+                    <SelectTrigger className="w-full text-[13px] text-slate-500">
+                      <SelectValue placeholder="Choose Time" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        {timeOptions.map((time) => (
+                          <SelectItem key={time} value={time}>
+                            {time}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+
+                  <Input
+                    className="text-[13px]"
+                    placeholder="Your Name"
+                    defaultValue={curUser?.name}
+                    {...register("name")}
+                  />
+                  <Input
+                    type="hidden"
+                    defaultValue={id}
+                    {...register("property")}
+                  />
+                  <Input
+                    className="text-[13px]"
+                    placeholder="Your Email"
+                    defaultValue={curUser?.email}
+                    {...register("email")}
+                  />
+                  <Input
+                    className="text-[13px]"
+                    placeholder="Your Phone"
+                    {...register("phone")}
+                  />
+
+                  <Textarea
+                    className="text-[13px]"
+                    placeholder="I'm interested in [ Luxury 6 Bed Mansion in Palm Jumeira ]"
+                    {...register("message")}
+                  />
+                  <div className="flex justify-end gap-4 mt-6">
+                    <AlertDialogCancel className="w-full text-slate-50 hover:text-slate-50 font-medium bg-orange-600 hover:bg-orange-500">
+                      Cancel
+                    </AlertDialogCancel>
+                    <AlertDialogAction
+                      type="submit"
+                      className="w-full bg-orange-600 hover:bg-orange-500"
                     >
-                      {date ? format(date, "PPP") : <span>Pick a date</span>}
-                      <CalendarIcon className="mr-2 h-4 w-4" />
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={date}
-                      onSelect={(selectedDate) => {
-                        setDate(selectedDate);
-                        setValue("date", selectedDate as Date);
-                      }}
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
-
-                <Select onValueChange={(value) => setValue("time", value)}>
-                  <SelectTrigger className="w-full text-[13px] text-slate-500">
-                    <SelectValue placeholder="Choose Time" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      {timeOptions.map((time) => (
-                        <SelectItem key={time} value={time}>
-                          {time}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-
-                <Input
-                  className="text-[13px]"
-                  placeholder="Your Name"
-                  defaultValue={curUser?.name}
-                  {...register("name")}
-                />
-                <Input
-                  type="hidden"
-                  defaultValue={id}
-                  {...register("property")}
-                />
-                <Input
-                  className="text-[13px]"
-                  placeholder="Your Email"
-                  defaultValue={curUser?.email}
-                  {...register("email")}
-                />
-                <Input
-                  className="text-[13px]"
-                  placeholder="Your Phone"
-                  {...register("phone")}
-                />
-
-                <Textarea
-                  className="text-[13px]"
-                  placeholder="I'm interested in [ Luxury 6 Bed Mansion in Palm Jumeira ]"
-                  {...register("message")}
-                />
-                <div className="flex justify-end gap-4 mt-6">
-                  <AlertDialogCancel className="w-full text-slate-50 hover:text-slate-50 font-medium bg-orange-600 hover:bg-orange-500">
-                    Cancel
-                  </AlertDialogCancel>
-                  <AlertDialogAction
-                    type="submit"
-                    className="w-full bg-orange-600 hover:bg-orange-500"
-                  >
-                    Continue
-                  </AlertDialogAction>
-                </div>
-              </form>
-            </div>
-          </AlertDialogHeader>
-          <AlertDialogFooter></AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    </div>
+                      Continue
+                    </AlertDialogAction>
+                  </div>
+                </form>
+              </div>
+            </AlertDialogHeader>
+            <AlertDialogFooter></AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
+    </>
   );
 }
