@@ -35,7 +35,7 @@ export default function Propeties() {
     <div className="bg-property" id="properties">
       <div className="bg-white px-7 sm:px-12 pt-20 bg-opacity-[96%]">
         <div className="flex flex-col gap-2 mb-5">
-          <p className="opacity-80 font-normal">BOMAS REAL ESTATE</p>
+          <p className="opacity-80 font-normal">BOMA SYNERGY REAL ESTATE</p>
           <h1
             className={`${cn(meriwether.variable)} text-4xl`}
             style={{ fontFamily: "var(--Merriweather)" }}
@@ -118,7 +118,7 @@ export default function Propeties() {
         </div>
         <div className=" flex justify-center py-16">
           <Button
-            className="font-normal text-[17px] transition-all duration-150  bg-orange-500 hover:bg-orange-400 rounded-md px-3 py-1"
+            className="font-normal text-[14px] transition-all duration-150  bg-orange-500 hover:bg-orange-400 rounded-md px-3 py-1"
             onClick={() => {
               router.push("/allProperties");
             }}

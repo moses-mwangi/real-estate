@@ -38,7 +38,7 @@ export default function Propeties() {
     <div className="bg-property">
       <div className="bg-white px-7 sm:px-12 pt-28 bg-opacity-[96%]">
         <div className="flex flex-col gap-2 mb-5">
-          <p className="opacity-80 font-light">GLOBAL REAL ESTATE</p>
+          <p className="opacity-80 font-light">BOMA SYNERGY REAL ESTATE</p>
           <h1
             className={`${cn(meriwether.variable)} text-4xl`}
             style={{ fontFamily: "var(--Merriweather)" }}
