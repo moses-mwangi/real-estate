@@ -83,10 +83,10 @@ export default function Contact() {
 
   return (
     <div
-      className="bg-team pb-6 pt-14 md:pl-32 flex justify-center md:grid md:grid-cols-2 items-center"
+      className="bg-team pb-6 px-3 sm:px-0 pt-14 md:pl-32 flex justify-center md:grid md:grid-cols-2 items-center"
       id="contact"
     >
-      <div className="flex flex-col gap-3 w-[80%]">
+      <div className="flex flex-col gap-3 sm:w-[80%]">
         <h1>CONTACT US</h1>
         <p
           className={`${cn(meriwether.variable)} text-3xl sm:text-4xl mb-4`}

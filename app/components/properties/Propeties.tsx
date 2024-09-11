@@ -33,7 +33,7 @@ export default function Propeties() {
 
   return (
     <div className="bg-property" id="properties">
-      <div className="bg-white px-7 sm:px-12 pt-20 bg-opacity-[96%]">
+      <div className="bg-white px-[10px] sm:px-12 pt-20 bg-opacity-[96%]">
         <div className="flex flex-col gap-2 mb-5">
           <p className="opacity-80 font-normal">BOMA SYNERGY REAL ESTATE</p>
           <h1

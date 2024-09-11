@@ -97,7 +97,7 @@ const Testimonials = () => {
 
   return (
     <div className="bg-test pt-12">
-      <div className="container">
+      <div className="container sm:px-32 px-[12px]">
         <div className=" flex flex-col gap-2 text-center mb-10 max-w-[600px] mx-auto">
           <p className="text-sm text-primary text-orange-600">
             What our customers are saying
@@ -153,10 +153,7 @@ const Testimonials = () => {
       <div className="mt-24">
         <div className="bg-project w-full">
           <div
-            className={`${cn(
-              meriwether.variable
-            )}  text-slate-50 font-medium h-full flex flex-col justify-center items-center gap-4  md:px-40`}
-            style={{ fontFamily: "var(--Merriweather)" }}
+            className={`text-slate-50 font-medium h-full flex flex-col justify-center items-center gap-4  md:px-40`}
           >
             <p className="flex text-[14px] sm:text-[16px] justify-center">
               Our Team is Just a Call away and Ready to Serve you!
