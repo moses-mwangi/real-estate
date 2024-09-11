@@ -153,10 +153,10 @@ const Testimonials = () => {
       <div className="mt-24">
         <div className="bg-project w-full">
           <div
-            className={`text-slate-50 font-medium h-full flex flex-col justify-center items-center gap-4  md:px-40`}
+            className={`text-white px-1 font-medium h-full flex flex-col justify-center items-center gap-4  md:px-40`}
           >
             <p className="flex text-[14px] sm:text-[16px] justify-center">
-              Our Team is Just a Call away and Ready to Serve you!
+              Our Team is Always Ready to Serve you!
             </p>
             <p className="flex flex-col items-center justify-center text-[20px] sm:text-4xl md:text-6xl">
               <span>Do you have a Question or need</span>
