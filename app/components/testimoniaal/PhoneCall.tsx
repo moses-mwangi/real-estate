@@ -14,7 +14,7 @@ export default function PhoneNumber() {
         className="bg-orange-500 hover:bg-orange-600 text-[13px] sm:text-[16px]"
         onClick={() => setIsModalOpen(true)}
       >
-        <PhoneCall className="mr-[5px] w-[17px] h-[17px] sm:w-5 sm:h-5" /> CALL
+        <PhoneCall className="mr-[5px] w-[18px] h-[18px] sm:w-5 sm:h-5" /> CALL
         US NOW
       </Button>
 
