@@ -2,14 +2,9 @@
 
 import first from "../../../public/images/customer 1.png";
 import second from "../../../public/images/customer 2.png";
-import third from "../../../public/images/customer 4.png";
-import fourth from "../../../public/images/customer 3.png";
-
-import pa from "../../../public/dubai/im 1.png";
-import pb from "../../../public/dubai/im 2.png";
-import pc from "../../../public/dubai/im 3.png";
-import pd from "../../../public/dubai/im 4.png";
-import pe from "../../../public/dubai/im 5.png";
+import third from "../../../public/images/customer 3.png";
+import fourth from "../../../public/images/customer 4.png";
+import fifth from "../../../public/images/customer 5.png";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -18,6 +13,7 @@ import Slider from "react-slick";
 import Image from "next/image";
 import { Merriweather } from "next/font/google";
 import { cn } from "@/lib/utils";
+import PhoneNumber from "./PhoneCall";
 
 const meriwether = Merriweather({
   subsets: ["latin"],
@@ -26,38 +22,37 @@ const meriwether = Merriweather({
   display: "swap",
 });
 
-const comp = [
-  { im: pa, id: 1 },
-  { im: pb, id: 2 },
-  { im: pc, id: 3 },
-  { im: pd, id: 4 },
-  { im: pe, id: 5 },
-];
-
 const TestimonialData = [
   {
     id: 1,
-    name: "Victor",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reiciendis inventore iste ratione ex alias quis magni at optio",
+    name: "Lucy Nyambura",
+    text: "BOMAS made my dream of owning a home a reality. The entire process was seamless, from browsing properties to finalizing the purchase. Their team was so professional and supportive, answering every question I had. I’m incredibly happy with my new home and would recommend BOMAS to anyone looking for a reliable property platform!",
     img: first,
   },
   {
     id: 2,
-    name: "Satya Nadella",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reiciendis inventore iste ratione ex alias quis magni at optio",
+    name: "Emmanuel Kipkurui",
+    text: "I was nervous about purchasing my first home, but Boma Synergy made everything so easy. Their platform is user-friendly, and I was able to explore a wide variety of houses until I found the perfect one for my family. The service was top-notch, and I felt supported at every stage. I’m beyond satisfied!",
     img: second,
   },
   {
     id: 3,
-    name: "Virat Kohli",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reiciendis inventore iste ratione ex alias quis magni at optio",
+    name: "Ann Awinja",
+    text: "Boma Synergy provided an exceptional home-buying experience. The team was responsive and transparent, making sure I understood each step of the process. It was reassuring to work with professionals who genuinely care about their clients. I’m thrilled with my new home and couldn’t have asked for a better partner in this journey.",
     img: third,
   },
   {
-    id: 5,
-    name: "Sachin Tendulkar",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reiciendis inventore iste ratione ex alias quis magni at optio",
+    id: 4,
+    name: "Brian Wekesa",
+    text: "Buying a house through BOMAS was one of the best decisions I’ve made. The platform is intuitive, and I was able to find exactly what I was looking for in no time. The customer service was outstanding, and they made the entire transaction smooth and stress-free. I’m proud to call my new place home!",
+
     img: fourth,
+  },
+  {
+    id: 5,
+    name: "John Kamau",
+    text: "BOMAS delivered an amazing experience from start to finish. I was impressed by the variety of homes listed, and the support I received from their team was unparalleled. The process was quick, and I felt confident every step of the way. I love my new home and wouldn’t hesitate to recommend BOMAS to anyone in the market for a new house!",
+    img: fifth,
   },
 ];
 
@@ -113,9 +108,11 @@ const Testimonials = () => {
           >
             Testimonials
           </h1>
+
           <p className="text-xs text-gray-600">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit
-            asperiores modi Sit asperiores modi
+            Our customers are at the heart of everything we do. Every home
+            purchased through BOMAS is a step toward fulfilling a dream, and we
+            are honored to be a part of that journey.
           </p>
         </div>
 
@@ -125,13 +122,13 @@ const Testimonials = () => {
               <div key={data.id} className="my-6">
                 <div
                   key={data.id}
-                  className="flex flex-col bg-white gap-4 shadow-lg py-6 px-8  sm:mx-4 rounded-xl bg-primary/5 relative"
+                  className="flex flex-col h-80 bg-white gap-4 shadow-lg py-6 px-8  sm:mx-4 rounded-xl bg-primary/5 relative"
                 >
                   <div className="mb-4">
                     <Image
                       src={data.img}
                       alt="images"
-                      className="rounded-full w-20 h-20"
+                      className="rounded-full w-[75px] h-[75px]"
                       width={100}
                       height={100}
                     />
@@ -154,28 +151,25 @@ const Testimonials = () => {
         </div>
       </div>
       <div className="mt-24">
-        <div className="bg-project w-full flex  justify-center">
-          <h1
+        <div className="bg-project w-full flex">
+          <div
             className={`${cn(
               meriwether.variable
-            )} pt-40 text-3xl sm:text-6xl text-slate-50 font-medium`}
+            )}  text-slate-50 font-medium flex flex-col gap-4 items-center justify-center px-40`}
             style={{ fontFamily: "var(--Merriweather)" }}
           >
-            Popular Nairobi Projects
-          </h1>
+            <p className="">
+              Our Team is Just a Call away and Ready to Serve you!
+            </p>
+            <p className="flex flex-col items-center justify-center text-[20px] sm:text-6xl">
+              <span>Do you have a Question or need</span>
+              <span className="">some information?</span>
+            </p>
+
+            <PhoneNumber />
+          </div>
         </div>
-        <div className=" grid grid-cols-5 bg-slate-900 md:px-12">
-          {comp.map((el) => (
-            <Image
-              className="w-[68px] h-[45px]"
-              key={el.id}
-              src={el.im}
-              alt="logo"
-              width={100}
-              height={50}
-            />
-          ))}
-        </div>
+        <div className=" grid grid-cols-5 bg-slate-900 h-11 py-8 md:px-12"></div>
       </div>
     </div>
   );

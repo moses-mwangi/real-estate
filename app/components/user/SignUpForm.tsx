@@ -14,6 +14,9 @@ import { Eye, EyeOff, X } from "lucide-react";
 import toast from "react-hot-toast";
 import { Card } from "@/components/ui/card";
 import ForgotPasswordForm from "./ForgotPassword";
+import Image from "next/image";
+
+import logo from "../../../public/logos/image copy 6.png";
 
 interface SignUpFormInputs {
   email: string;
@@ -102,10 +105,11 @@ export default function SignUpForm() {
 
       {show === true && (
         <div className="flex absolute top-0 right-0 bg-black/40 backdrop-blur-[2px]  justify-center items-center h-svh w-svw z-50">
-          <div className="bg-sign rounded-l-md relative h-full w-full max-h-[85.3svh] max-w-[300px]">
-            <div className="text-[24px] absolute top-1/2 px-6 pb-7  text-white font-semibold">
-              Welcome to
-              <br /> Dubai Real Estate
+          <div className=" bg-sign rounded-l-md relative h-full w-full max-h-[85.3svh] max-w-[300px]">
+            {/* <div className="text-[24px] absolute top-1/2 px-6 pb-7  text-white font-semibold"> */}
+            <div className="bg-white bg-opacity-55 h-full flex flex-col gap-10  text-2xl absolute px-5 py-12 font-bold">
+              <p className="">Welcome to Boma Synergy Real Estate</p>
+              <Image src={logo} alt="logo" width={300} height={100} />
             </div>
           </div>
           <div className="bg-card h-full max-h-[85.3svh] rounded-r-md">

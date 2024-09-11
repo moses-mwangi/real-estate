@@ -90,7 +90,8 @@ export default function Propeties() {
                 >
                   <p className="text-[13px] text-slate-700">{el.type}, sales</p>
                   <p className="font-semibold text-[16px] text-black/85 duration-150 transition-all hover:text-orange-500">
-                    {el.about}
+                    {/* {el.about} */}
+                    {el.description.substring(0, 35)}...
                   </p>
                   <p className="font-medium text-orange-500">
                     Ksh {el.price.toLocaleString()}
