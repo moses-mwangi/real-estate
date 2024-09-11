@@ -174,7 +174,7 @@ function UserImageUpload() {
       console.log(token, formData.get("photo"));
       setLoading(true);
       const res = await axios.post(
-        "http://127.0.0.1:3008/api/users/updateImage",
+        "https://real-estate-api-azure.vercel.app/api/users/updateImage",
         formData,
         {
           headers: {
