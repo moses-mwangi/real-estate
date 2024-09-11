@@ -27,9 +27,12 @@ export default function Propeties() {
   const { properties, nextImageIndexes, handleNextImage, handlePreviousImage } =
     useProperty();
 
-  const sortedProperty = properties.sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  );
+  const sortedProperty = properties
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    )
+    .slice(0, 9);
 
   return (
     <div className="bg-property" id="properties">

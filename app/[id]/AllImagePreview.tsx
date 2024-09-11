@@ -51,7 +51,7 @@ export default function AllImagePreview({ image }: Images) {
               width={150}
               height={100}
               alt={`house image ${currentIndex + index + 1}`}
-              className="rounded-sm"
+              className="rounded-sm w-40 h-24"
             />
           ))}
       </div>

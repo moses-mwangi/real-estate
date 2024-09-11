@@ -23,7 +23,7 @@ const meriwether = Merriweather({
 });
 
 export default function Propeties() {
-  const [showMore, setShowMore] = useState(6);
+  const [showMore, setShowMore] = useState(9);
   const router = useRouter();
   const { properties, nextImageIndexes, handleNextImage, handlePreviousImage } =
     useProperty();
@@ -128,8 +128,8 @@ export default function Propeties() {
               sortedProperty.length <= showMore
                 ? " cursor-not-allowed opacity-50"
                 : ""
-            } font-normal text-[16px] disabled:cursor-not-allowed transition-all duration-150  bg-orange-500 hover:text-orange-600 hover:bg-red-100 rounded-md px-3 py-1`}
-            // disabled={sortedProperty.length <= showMore}
+            } font-normal text-[14px] disabled:cursor-not-allowed transition-all duration-150  bg-orange-500 hover:text-orange-600 hover:bg-red-100 rounded-md px-3 py-1`}
+            disabled={sortedProperty.length <= showMore}
             onClick={() => {
               if (sortedProperty.length > showMore) {
                 setShowMore((prev) => prev + 6);
