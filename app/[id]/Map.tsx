@@ -53,7 +53,7 @@ function Map({ address, location }: MapProps) {
   L.Marker.prototype.options.icon = DefaultIcon;
 
   return (
-    <div className="px-6 md:px-8">
+    <div className=" px-1 sm:px-6 md:px-8">
       <Card className="bg-card relative border-none py-5 px-5 sm:py-8 sm:px-8">
         <Button
           onClick={getPosition}

@@ -11,7 +11,7 @@ const meriwether = Merriweather({
 
 export default function SearchedPage() {
   return (
-    <div className="bg-id flex-col pt-32 pb-[20px] md:pb-[30px] px-7 sm:px-14">
+    <div className="bg-id flex-col pt-32 pb-[20px] md:pb-[30px] px-3 sm:px-14">
       <p
         className={`${cn(
           meriwether.variable

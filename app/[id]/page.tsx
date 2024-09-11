@@ -85,16 +85,16 @@ export default function SingleProperty() {
             )}
             {property?.image[4] && (
               <Image
-                className=" w-full h-full"
+                className="w-full h-full"
                 src={property.image[4]}
-                alt="mm"
+                alt="logoo"
                 width={500}
                 height={200}
               />
             )}
           </div>
         </div>
-        <div className="px-5 sm:px-8 py-10">
+        <div className="px-3 sm:px-8 py-10">
           <div className="flex sm:gap-0 gap-3 sm:justify-between sm:flex-row flex-col sm:items-center">
             <div>
               <span className=" flex gap-5 mb-3">
@@ -203,7 +203,7 @@ export default function SingleProperty() {
         address={String(property?.address)}
         location={posi || [25.112, 55.139]}
       />
-      <div className="flex gap-5 px-8 py-8 mb-10">
+      <div className="flex gap-5 px-3 sm:px-8 py-8 mb-10">
         <BookingTour />
         <Button
           className="bg-orange-600 hover:bg-orange-700"
