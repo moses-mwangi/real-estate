@@ -10,7 +10,7 @@ export default function UserPhoto() {
   const { curUser } = useUser();
 
   return (
-    <div className="pr-6 md:pr-12 py-2 w-full flex justify-end">
+    <div className="md:pr-12 py-2 w-full flex justify-end">
       {curUser?.photo ? (
         <div className="w-[50px] h-[50px]">
           <Image

@@ -2,17 +2,12 @@
 
 import Image from "next/image";
 import React from "react";
-import log from "../../public/images/image copy 11.png";
-import loga from "../../public/logos/image copy 3.png";
-import logob from "../../public/logos/image copy 4.png";
-import logoc from "../../public/logos/image copy 5.png";
 import logod from "../../public/logos/image copy 6.png";
 import { usePathname, useRouter } from "next/navigation";
 import UserDetails from "../components/user/UserDetails";
 import useUser from "../components/user/useUser";
 import SignUpForm from "../components/user/SignUpForm";
 import NavbarSheet from "./NavbarSheet";
-import Link from "next/link";
 
 const lists = [
   { label: "Home", id: "home" },
@@ -35,7 +30,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="py-[5px] pl-8 shadow-md fixed w-svw z-50 top-0 left-0 bg-card flex justify-between items-center">
+    <div className="py-[5px] pl-5 md:pl-8 shadow-md fixed w-full z-50 top-0 left-0 bg-card flex justify-between items-center">
       <div
         className=" cursor-pointer"
         onClick={() => {
@@ -68,7 +63,9 @@ export default function Navbar() {
       </div>
       <div className="flex gap-1 items-center">
         <NavbarSheet />
-        <div>{token ? <UserDetails /> : <SignUpForm />}</div>
+        <div className="mr-3 md:mr-0">
+          {token ? <UserDetails /> : <SignUpForm />}
+        </div>
       </div>
     </div>
   );
