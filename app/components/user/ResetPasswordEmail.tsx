@@ -1,11 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import React from "react";
-
+import { Card } from "@/components/ui/card";
 import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 
@@ -16,17 +12,6 @@ const inter = Inter({
 });
 
 export default function ResetPasswordEmail() {
-  const loader = (
-    <div
-      className="inline-block h-5 w-5 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
-      role="status"
-    >
-      <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-        Loading...
-      </span>
-    </div>
-  );
-
   return (
     <div className="flex absolute top-0 right-0 bg-black/40 backdrop-blur-[2px]  justify-center items-center h-svh w-svw z-50">
       <Card className="w-[398px] shadow-xl border-[1px] px-7 py-9">
