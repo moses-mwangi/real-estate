@@ -45,7 +45,8 @@ export default function HeroSection() {
             )} text-4xl sm:text-[53px] leading-[1] text-gray-800`}
             style={{ fontFamily: "var(--Merriweather)" }}
           >
-            Kenya Real Estate <br /> Luxury Market Place
+            {/* Kenya Real Estate <br /> Luxury Market Place */}
+            Boma Synergy <br /> Luxury Market Place
           </p>
           <SearchHouse />
           <div className=" hidden sm:flex gap-10">
