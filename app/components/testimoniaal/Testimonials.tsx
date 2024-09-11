@@ -151,17 +151,17 @@ const Testimonials = () => {
         </div>
       </div>
       <div className="mt-24">
-        <div className="bg-project w-full flex">
+        <div className="bg-project w-full">
           <div
             className={`${cn(
               meriwether.variable
-            )}  text-slate-50 font-medium flex flex-col gap-4 items-center justify-center px-40`}
+            )}  text-slate-50 font-medium flex flex-col justify-center items-center gap-4  md:px-40`}
             style={{ fontFamily: "var(--Merriweather)" }}
           >
-            <p className="">
+            <p className="flex text-[14px] sm:text-[16px] justify-center">
               Our Team is Just a Call away and Ready to Serve you!
             </p>
-            <p className="flex flex-col items-center justify-center text-[20px] sm:text-6xl">
+            <p className="flex flex-col items-center justify-center text-[20px] sm:text-4xl md:text-6xl">
               <span>Do you have a Question or need</span>
               <span className="">some information?</span>
             </p>
