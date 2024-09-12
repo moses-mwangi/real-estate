@@ -97,7 +97,7 @@ const Testimonials = () => {
 
   return (
     <div className="bg-test pt-12">
-      <div className="container sm:px-32 px-[12px]">
+      <div className="container sm:px-7 px-[12px]">
         <div className=" flex flex-col gap-2 text-center mb-10 max-w-[600px] mx-auto">
           <p className="text-sm text-primary text-orange-600">
             What our customers are saying
