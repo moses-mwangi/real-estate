@@ -13,7 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Eye, EyeOff, X } from "lucide-react";
 import toast from "react-hot-toast";
 import { Card } from "@/components/ui/card";
-import ForgotPasswordForm from "./ForgotPassword";
+import ForgotPasswordForm from "../components/user/ForgotPassword";
 import EmailOtpVerificationForm from "./EmailOtpVerificationForm";
 
 interface SignUpFormInputs {
@@ -22,17 +22,19 @@ interface SignUpFormInputs {
   name: string;
 }
 
-export default function SignUpForm() {
+export default function EmailVerification() {
   const [newUser, setNewUser] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showForgotPasModal, setShowForgotPasModal] = useState(false);
   const [show, setShow] = useState(false);
 
+  const [showOtp, setShowOtp] = useState(false);
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
-  const [showOtp, setShowOtp] = useState(false);
+
+  ///===/verifyOtp
 
   const {
     register,
@@ -46,41 +48,80 @@ export default function SignUpForm() {
     setShowPassword(!showPassword);
   };
 
-  const onSubmit: SubmitHandler<SignUpFormInputs> = async (data) => {
-    const url = newUser
-      ? "https://real-estate-api-azure.vercel.app/api/auth/login"
-      : "https://real-estate-api-azure.vercel.app/api/auth/verifyOtp";
-
+  const onSubmits: SubmitHandler<SignUpFormInputs> = async (data) => {
     try {
+      const url = newUser
+        ? "https://real-estate-api-azure.vercel.app/api/auth/login"
+        : "http://127.0.0.1:3008/api/auth/verifyOtp";
+
+      const otpData = { email: data.email, password: data.password };
+
+      const formData = newUser ? data : otpData;
+
       setIsLoading(true);
-      const res = await axios.post(url, data);
+
+      const res = await axios.post(url, formData);
+      toast.success(newUser ? "Login successful" : "OTP Sent successful");
 
       if (newUser) {
-        toast.success("Login successful");
         const token = res.data.token;
         document.cookie = `token=${token}; path=/`;
-        setShow((el) => !el);
-
         reset();
-        router.push("/");
+        setShow((el) => !el);
         router.refresh();
         setIsLoading(false);
         setTimeout(() => {
           window.location.reload();
         }, 1200);
       } else {
-        toast.success("OTP Sent successful");
         setShowOtp(true);
         setUserPassword(data.password);
         setUserEmail(data.email);
         setUserName(data.name);
-
-        setIsLoading(false);
-        reset();
       }
     } catch (err) {
       toast.error("Failed to register. Please try again.");
       console.log("Error", err);
+      setIsLoading(false);
+    }
+  };
+
+  const onSubmit: SubmitHandler<SignUpFormInputs> = async (data) => {
+    try {
+      const url = newUser
+        ? "https://real-estate-api-azure.vercel.app/api/auth/login"
+        : "http://127.0.0.1:3008/api/auth/verifyOtp";
+
+      const formData = newUser
+        ? data
+        : { email: data.email, password: data.password };
+
+      setIsLoading(true);
+      const res = await axios.post(url, formData);
+
+      if (newUser) {
+        toast.success("Login successful");
+        setIsLoading(false);
+        // Do login logic, refresh token, etc.
+        const token = res.data.token;
+        document.cookie = `token=${token}; path=/`;
+        reset();
+        setShow((el) => !el);
+        router.refresh();
+        setIsLoading(false);
+        setTimeout(() => {
+          window.location.reload();
+        }, 1200);
+      } else {
+        toast.success("OTP Sent successfully");
+        setShowOtp(true);
+        setUserEmail(data.email);
+        setUserPassword(data.password);
+        setUserName(data.name);
+        setIsLoading(false);
+      }
+    } catch (err) {
+      toast.error("Failed to send OTP. Please try again.");
       setIsLoading(false);
     }
   };
@@ -97,46 +138,33 @@ export default function SignUpForm() {
   );
 
   return (
-    <div>
-      {show === false && (
-        <div className="pr-2 mb-2 md:mr-12">
-          <Card
-            className="w-fit shadow-[4px_4px_0_orange]  translate-x-[3px] translate-y-[3px]  bg-card hover:shadow-lg cursor-pointer font-semibold text-gray-700 hover:text-orange-500 transition-all duration-150 text-sm py-2 px-3 rounded-md"
-            onClick={() => {
-              setShow((el) => !el);
-            }}
-          >
-            Sign Up
-          </Card>
-        </div>
-      )}
-
-      {showForgotPasModal === true && (
-        <ForgotPasswordForm
-          setShow={setShow}
-          setShowForgotPasModal={setShowForgotPasModal}
+    <div className="pb-14 pt-28 px-8">
+      {showOtp === true ? (
+        <EmailOtpVerificationForm
+          userName={userName}
+          userEmail={userEmail}
+          userPassword={userPassword}
         />
-      )}
-
-      {show === true && (
-        <div className="flex absolute top-0 right-0 bg-black/40 backdrop-blur-[2px]  justify-center items-center h-svh w-svw z-50">
-          {showOtp === true ? (
-            <EmailOtpVerificationForm
-              userName={userName}
-              userEmail={userEmail}
-              userPassword={userPassword}
+      ) : (
+        <div className="">
+          {showForgotPasModal === true && (
+            <ForgotPasswordForm
               setShow={setShow}
-              setShowOtp={setShowOtp}
+              setShowForgotPasModal={setShowForgotPasModal}
             />
-          ) : (
+          )}
+
+          {/* {show === true && ( */}
+          <div className="flex absolute top-0 right-0 bg-black/40 backdrop-blur-[2px]  justify-center items-center h-svh w-svw z-50">
             <div className="flex items-center justify-center sm:w-[80svw] md:w-[60svw] h-full rounded-r-md">
               <Card className="px-8  py-5 pt-6  rounded-sm border-b-0  shadow-none w-full relative h-[80svh] max-w-sm">
                 <X
-                  className="w-8 h-8 absolute top-4 right-4 hover:bg-slate-100 p-[6px] rounded-full text-gray-600 cursor-pointer"
+                  className="w-8 h-8 absolute top-4 right-4 hover:bg-slate-300 p-[6px] rounded-full text-gray-600 cursor-pointer"
                   onClick={() => {
                     setShow((el) => !el);
                   }}
                 />
+
                 <div className="max-w-md mx-auto">
                   <h2 className="text-2xl font-bold mb-6 text-center">
                     {!newUser && "Create an account"}
@@ -278,7 +306,8 @@ export default function SignUpForm() {
                 </div>
               </Card>
             </div>
-          )}
+          </div>
+          {/* )} */}
         </div>
       )}
     </div>
