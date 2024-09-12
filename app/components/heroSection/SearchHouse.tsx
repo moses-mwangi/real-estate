@@ -17,6 +17,57 @@ import { Search } from "lucide-react";
 import { useForm } from "react-hook-form";
 import useSearchProperty from "./useSearchProperty";
 import { Input } from "@/components/ui/input";
+import { Value } from "@radix-ui/react-select";
+
+const price = [
+  { from: 0, to: 10000000 },
+  { from: 10, to: 20000000 },
+  { from: 20, to: 30000000 },
+  { from: 30, to: 40000000 },
+  { from: 40, to: 50000000 },
+  { from: 50, to: 60000000 },
+  { from: 60, to: 70000000 },
+  { from: 70, to: 80000000 },
+  { from: 80, to: 90000000 },
+  { from: 90, to: 100000000 },
+  { from: 100, to: 110000000 },
+  { from: 110, to: 120000000 },
+  { from: 120, to: 130000000 },
+  { from: 130, to: 140000000 },
+];
+
+const bedrooms = [
+  { label: 1, value: 1 },
+  { label: 2, value: 2 },
+  { label: 3, value: 3 },
+  { label: 4, value: 4 },
+  { label: 5, value: 5 },
+  { label: 6, value: 6 },
+  { label: 7, value: 7 },
+  { label: 8, value: 8 },
+  { label: 9, value: 9 },
+  { label: 10, value: 10 },
+];
+
+const bathrooms = [
+  { label: 1, value: 1 },
+  { label: 2, value: 2 },
+  { label: 3, value: 3 },
+  { label: 4, value: 4 },
+  { label: 5, value: 5 },
+  { label: 6, value: 6 },
+  { label: 7, value: 7 },
+  { label: 8, value: 8 },
+  { label: 9, value: 9 },
+  { label: 10, value: 10 },
+];
+
+const category = [
+  { id: 1, type: "Apartment" },
+  { id: 2, type: "Penthouse" },
+  { id: 3, type: "Mansion" },
+  { id: 4, type: "Villa" },
+];
 
 export default function SearchHouse() {
   const { onSubmit } = useSearchProperty();
@@ -49,30 +100,16 @@ export default function SearchHouse() {
                     <SelectLabel className="text-[13px] text-slate-500">
                       Property Category
                     </SelectLabel>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="Apartment"
-                    >
-                      Apartment
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="Penthouse"
-                    >
-                      Penthouse
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="Mansion"
-                    >
-                      Mansion
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="Villa"
-                    >
-                      Villa
-                    </SelectItem>
+                    {category.map((el) => (
+                      <div key={el.id}>
+                        <SelectItem
+                          className="text-[13px] text-slate-500"
+                          value={el.type}
+                        >
+                          {el.type}
+                        </SelectItem>
+                      </div>
+                    ))}
                   </SelectGroup>
                 </SelectContent>
               </Select>
@@ -91,60 +128,17 @@ export default function SearchHouse() {
                     <SelectLabel className="text-[13px] text-slate-500">
                       Property Bedrooms
                     </SelectLabel>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="1"
-                    >
-                      1
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="2"
-                    >
-                      2
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="3"
-                    >
-                      3
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="4"
-                    >
-                      4
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="5"
-                    >
-                      5
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="6"
-                    >
-                      6
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="7"
-                    >
-                      7
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="8"
-                    >
-                      8
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="9"
-                    >
-                      9
-                    </SelectItem>
+
+                    {bedrooms?.map((el) => (
+                      <div key={el.label}>
+                        <SelectItem
+                          className="text-[13px] text-slate-500"
+                          value={el.value.toString()}
+                        >
+                          {el.value}
+                        </SelectItem>
+                      </div>
+                    ))}
                   </SelectGroup>
                 </SelectContent>
               </Select>
@@ -165,60 +159,17 @@ export default function SearchHouse() {
                     <SelectLabel className="text-[13px] text-slate-500">
                       Bathrooms
                     </SelectLabel>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="1"
-                    >
-                      1
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="2"
-                    >
-                      2
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="3"
-                    >
-                      3
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="4"
-                    >
-                      4
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="5"
-                    >
-                      5
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="6"
-                    >
-                      6
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="7"
-                    >
-                      7
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="8"
-                    >
-                      8
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="9"
-                    >
-                      9
-                    </SelectItem>
+
+                    {bathrooms?.map((el) => (
+                      <div key={el.label}>
+                        <SelectItem
+                          className="text-[13px] text-slate-500"
+                          value={el.value.toString()}
+                        >
+                          {el.value}
+                        </SelectItem>
+                      </div>
+                    ))}
                   </SelectGroup>
                 </SelectContent>
               </Select>
@@ -248,42 +199,16 @@ export default function SearchHouse() {
                     <SelectLabel className="text-[13px] text-slate-500">
                       Property Price
                     </SelectLabel>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="1600000"
-                    >
-                      $0 - $1600000
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="2000000"
-                    >
-                      $0 - $2000000
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="3500000"
-                    >
-                      $0 - $3500000
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="5000000"
-                    >
-                      $0 - $5000000
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="6000000"
-                    >
-                      $0 - $6000000
-                    </SelectItem>
-                    <SelectItem
-                      className="text-[13px] text-slate-500"
-                      value="8000000"
-                    >
-                      $0 - $8000000
-                    </SelectItem>
+                    {price?.map((el) => (
+                      <div key={el.from}>
+                        <SelectItem
+                          className="text-[13px] text-slate-500"
+                          value={el.to.toString()}
+                        >
+                          ksh {el.from}m - ksh {el.to.toLocaleString()}
+                        </SelectItem>
+                      </div>
+                    ))}
                   </SelectGroup>
                 </SelectContent>
               </Select>

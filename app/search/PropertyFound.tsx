@@ -1,7 +1,6 @@
 "use client";
 
 import React, { Suspense, useState } from "react";
-import { useRouter } from "next/navigation";
 import { Heart, Plus } from "lucide-react";
 import Image from "next/image";
 import { GrNext, GrPrevious } from "react-icons/gr";
@@ -37,11 +36,11 @@ export default function PropertyFound({
     ? filteredProperties
     : [];
 
-  const latestProperties = filteredProperties.sort(
+  const latestProperties = selectedProperties.sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
 
-  const totalPages = Math.ceil(properties.length / propertiesPerPage);
+  const totalPages = Math.ceil(selectedProperties.length / propertiesPerPage);
 
   // Get properties for the current page
   const paginatedProperties = latestProperties.slice(
@@ -49,13 +48,17 @@ export default function PropertyFound({
     currentPage * propertiesPerPage
   );
 
-  // Handle pagination
+  // Handle pagination with checks for next and previous pages
   const handleNextPage = () => {
-    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+    if (currentPage < totalPages && paginatedProperties.length > 0) {
+      setCurrentPage(currentPage + 1);
+    }
   };
 
   const handlePrevPage = () => {
-    if (currentPage > 1) setCurrentPage(currentPage - 1);
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
   };
 
   const totalProperties = selectedProperties.length;
@@ -84,13 +87,16 @@ export default function PropertyFound({
                 alt="house"
                 width={200}
                 height={200}
+                loading="lazy" // Lazy loading for performance
               />
             )}
             <GrNext
+              aria-label="Next image"
               onClick={() => handleNextImage(index, property.image.length)}
               className="w-10 h-10 font-bold cursor-pointer hover:bg-card/20 rounded-full p-1 absolute right-1 top-1/2 transform -translate-y-1/2 z-50 text-slate-100"
             />
             <GrPrevious
+              aria-label="Previous image"
               onClick={() => handlePreviousImage(index, property.image.length)}
               className="w-10 h-10 font-bold cursor-pointer hover:bg-card/20 rounded-full p-1 absolute left-1 top-1/2 transform -translate-y-1/2 z-50 text-slate-100"
             />
@@ -117,10 +123,10 @@ export default function PropertyFound({
                 {property.type}, sales
               </p>
               <p className="font-semibold text-[16px] hover:text-orange-500 text-black/85">
-                {property.about}
+                {property.description.substring(0, 30)}...
               </p>
               <p className=" font-medium text-orange-500">
-                KSH {property.price}
+                KSH {property.price.toLocaleString()}
               </p>
               <p className="text-[12px] text-slate-500">
                 {property.description.substring(0, 200)}....
@@ -157,7 +163,9 @@ export default function PropertyFound({
 
           <Label
             className={`py-[5px] text-[16px] px-3 cursor-pointer hover:bg-orange-500 hover:text-card transition-all duration-200 rounded-sm ${
-              currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
+              currentPage === totalPages || paginatedProperties.length === 0
+                ? "opacity-50 cursor-not-allowed"
+                : ""
             }`}
             onClick={handleNextPage}
           >

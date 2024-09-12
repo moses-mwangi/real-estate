@@ -5,6 +5,7 @@ import useSearchProperty from "../components/heroSection/useSearchProperty";
 import { useSearchParams } from "next/navigation";
 import PropertyFound from "./PropertyFound";
 import PropertyNotFoundView from "./PropertyNotFoundView";
+import { Button } from "@/components/ui/button";
 
 export default function Searching() {
   const [nextImageIndexes, setNextImageIndexes] = useState<number[]>([]);
@@ -37,7 +38,9 @@ export default function Searching() {
 
   const filteredProperties = properties?.filter((property) => {
     return (
-      (!price || property.price <= Number(price)) &&
+      (!price ||
+        (property.price <= Number(price) &&
+          property.price > Number(price) - 10000000)) &&
       (!bathrooms || property.bathrooms === Number(bathrooms)) &&
       (!bedrooms || property.bedrooms === Number(bedrooms)) &&
       (!type || property.type === type) &&
@@ -48,6 +51,14 @@ export default function Searching() {
   const selectedProperties = filteredProperties?.length
     ? filteredProperties
     : [];
+
+  const proper = properties?.filter((property) => {
+    return (
+      !price ||
+      (property.price <= Number(price) &&
+        property.price > Number(price) - 10000000)
+    );
+  });
 
   return (
     <div className="">

@@ -114,10 +114,10 @@ export default function PropertyNotFoundView({
                       {property.type}, sales
                     </p>
                     <p className="font-semibold text-[16px] hover:text-orange-500 text-black/85">
-                      {property.about}
+                      {property.description.substring(0, 30)}...
                     </p>
                     <p className=" font-medium text-orange-500">
-                      KSH {property.price}
+                      KSH {property.price.toLocaleString()}
                     </p>
                     <p className="text-[12px] text-slate-500">
                       {property.description.substring(0, 200)}....
