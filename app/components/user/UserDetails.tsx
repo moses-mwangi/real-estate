@@ -9,10 +9,13 @@ import { MdMarkEmailUnread, MdAdminPanelSettings } from "react-icons/md";
 import UserProfileSetting from "./UserProfileSetting";
 import { Button } from "@/components/ui/button";
 import UserImageUpload from "./UserImageUpload";
+import { useRouter } from "next/navigation";
 
 export default function UserDetails() {
   const [isOpen, setIsOpen] = useState(false);
   const [isUpload, setIsUpload] = useState(false);
+
+  const router = useRouter();
 
   const { curUser, logOut } = useUser();
 
@@ -81,7 +84,19 @@ export default function UserDetails() {
                 </span>
               </div>
               <div className="w-full cursor-pointer duration-150 transition-all text-gray-800 hover:bg-slate-100 rounded-sm pl-3 py-2">
-                <span className=" text-sm font-medium flex gap-3">
+                <span
+                  className=" text-sm font-medium flex gap-3"
+                  onClick={() => {
+                    if (
+                      curUser?.role === "admin" ||
+                      curUser?.role === "agent"
+                    ) {
+                      router.push(
+                        "https://real-estate-dashboard-kappa.vercel.app/login"
+                      );
+                    }
+                  }}
+                >
                   <MdAdminPanelSettings className=" w-5 h-5 text-gray-600" />
                   {curUser?.role}
                 </span>
