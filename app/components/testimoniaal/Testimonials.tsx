@@ -97,7 +97,7 @@ const Testimonials = () => {
 
   return (
     <div className="bg-test pt-12">
-      <div className="container sm:px-7 px-[12px]">
+      <div className="container md:px-7 px-[12px]">
         <div className=" flex flex-col gap-2 text-center mb-10 max-w-[600px] mx-auto">
           <p className="text-sm text-primary text-orange-600">
             What our customers are saying
@@ -109,7 +109,7 @@ const Testimonials = () => {
             Testimonials
           </h1>
 
-          <p className="text-xs text-gray-600">
+          <p className="text-[13px] text-gray-600">
             Our customers are at the heart of everything we do. Every home
             purchased through BOMAS is a step toward fulfilling a dream, and we
             are honored to be a part of that journey.
@@ -119,10 +119,10 @@ const Testimonials = () => {
         <div>
           <Slider {...settings}>
             {TestimonialData.map((data) => (
-              <div key={data.id} className="my-6">
+              <div key={data.id} className="my-5">
                 <div
                   key={data.id}
-                  className="flex flex-col h-80 bg-white gap-4 shadow-lg py-6 px-8  sm:mx-4 rounded-xl bg-primary/5 relative"
+                  className="flex flex-col sm:h-[395px] md:h-80 bg-white gap-4 shadow-lg py-6 px-7  sm:mx-4 rounded-xl bg-primary/5 relative"
                 >
                   <div className="mb-4">
                     <Image
@@ -135,7 +135,7 @@ const Testimonials = () => {
                   </div>
                   <div className="flex flex-col items-center gap-4">
                     <div className="space-y-3">
-                      <p className="text-xs text-gray-500">{data.text}</p>
+                      <p className="text-[13px] text-gray-500">{data.text}</p>
                       <h1 className="text-xl font-bold text-black/80 dark:text-light">
                         {data.name}
                       </h1>
