@@ -119,7 +119,7 @@ const Testimonials = () => {
         <div>
           <Slider {...settings}>
             {TestimonialData.map((data) => (
-              <div key={data.id} className="my-6 bg-blue-500">
+              <div key={data.id} className="my-6">
                 <div
                   key={data.id}
                   className="flex flex-col sm:h-[395px] md:h-80 bg-white gap-4 shadow-lg py-6 px-7  sm:mx-4 rounded-xl bg-primary/5 relative"
