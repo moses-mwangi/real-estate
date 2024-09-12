@@ -17,7 +17,6 @@ import { Search } from "lucide-react";
 import { useForm } from "react-hook-form";
 import useSearchProperty from "./useSearchProperty";
 import { Input } from "@/components/ui/input";
-import { Value } from "@radix-ui/react-select";
 
 const price = [
   { from: 0, to: 10000000 },

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
 import { GrNext, GrPrevious } from "react-icons/gr";
@@ -12,8 +12,27 @@ interface Images {
 
 export default function AllImagePreview({ image }: Images) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [imagesPerPage, setImagesPerPage] = useState(5);
 
-  const imagesPerPage = 5;
+  useEffect(() => {
+    const updateImagesPerPage = () => {
+      const screenWidth = window.innerWidth;
+      if (screenWidth < 450) {
+        setImagesPerPage(1);
+      } else if (screenWidth < 640) {
+        setImagesPerPage(2);
+      } else if (screenWidth < 1024) {
+        setImagesPerPage(3);
+      } else {
+        setImagesPerPage(5);
+      }
+    };
+
+    updateImagesPerPage();
+    window.addEventListener("resize", updateImagesPerPage);
+
+    return () => window.removeEventListener("resize", updateImagesPerPage);
+  }, []);
 
   if (!image) return null;
 
@@ -30,7 +49,7 @@ export default function AllImagePreview({ image }: Images) {
   };
 
   return (
-    <div className="flex gap-7 justify-center items-center pt-4">
+    <div className="flex items-center justify-center gap-4 pt-4">
       <div>
         <Button
           className="bg-card py-0 px-0 w-11 h-11 rounded-full hover:bg-slate-200"
@@ -41,17 +60,17 @@ export default function AllImagePreview({ image }: Images) {
         </Button>
       </div>
 
-      <div className="flex gap-4">
+      <div className="flex justify-center gap-4 overflow-hidden">
         {image
           .slice(currentIndex, currentIndex + imagesPerPage)
           .map((img, index) => (
             <Image
               key={index}
               src={img as string | StaticImport}
-              width={150}
-              height={100}
+              width={imagesPerPage === 1 ? 200 : 150}
+              height={imagesPerPage === 1 ? 100 : 100}
               alt={`house image ${currentIndex + index + 1}`}
-              className="rounded-sm w-40 h-24"
+              className="rounded-sm object-cover"
             />
           ))}
       </div>
