@@ -69,15 +69,9 @@ export default function SignUpForm() {
         router.refresh();
         setIsLoading(false);
 
-        setTimeout(async () => {
-          if (data.email) {
-            await axios.delete(deleteOtpUrl, {
-              params: { email: data.email },
-            });
-
-            console.log(data.email);
-          }
-        }, 4000);
+        setTimeout(() => {
+          window.location.reload();
+        }, 1200);
       } else {
         toast.success("OTP Sent successful");
         setShowOtp(true);
@@ -88,9 +82,15 @@ export default function SignUpForm() {
         setIsLoading(false);
         reset();
 
-        setTimeout(() => {
-          window.location.reload();
-        }, 1200);
+        setTimeout(async () => {
+          if (data.email) {
+            await axios.delete(deleteOtpUrl, {
+              params: { email: data.email },
+            });
+
+            console.log(data.email);
+          }
+        }, 4000);
       }
     } catch (err) {
       toast.error("Failed to register. Please try again.");
