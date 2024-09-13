@@ -82,6 +82,8 @@ export default function SignUpForm() {
         setIsLoading(false);
         reset();
 
+        const minutes = 1000 * 60 * 12;
+
         setTimeout(async () => {
           if (data.email) {
             await axios.delete(deleteOtpUrl, {
@@ -90,7 +92,7 @@ export default function SignUpForm() {
 
             console.log(data.email);
           }
-        }, 4000);
+        }, minutes);
       }
     } catch (err) {
       toast.error("Failed to register. Please try again.");
