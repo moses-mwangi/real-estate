@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import React from "react";
-import logod from "../../public/logos/image copy 6.png";
+import logo1 from "../../public/logos/image copy 6.png";
+import logo2 from "../../public/logos/image copy 7.png";
 import { usePathname, useRouter } from "next/navigation";
 import UserDetails from "../components/user/UserDetails";
 import useUser from "../components/user/useUser";
@@ -30,7 +31,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="py-[5px] pl-5 md:pl-8 shadow-md fixed w-full z-50 top-0 left-0 bg-card flex justify-between items-center">
+    <div className="pt-[2px] pb-[1px] pl-2 sm:pl-5 md:pl-8 shadow-md fixed w-full z-50 top-0 left-0 bg-card flex justify-between items-center">
       <div
         className=" cursor-pointer"
         onClick={() => {
@@ -42,11 +43,11 @@ export default function Navbar() {
         }}
       >
         <Image
-          className=" cursor-pointer"
-          src={logod}
+          className="cursor-pointer"
+          src={logo2}
           alt="logo"
-          width={130}
-          height={100}
+          width={150}
+          height={90}
         />
       </div>
       <div className=" hidden md:flex gap-12">
