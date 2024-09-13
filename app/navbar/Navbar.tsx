@@ -4,6 +4,8 @@ import Image from "next/image";
 import React from "react";
 import logo1 from "../../public/logos/image copy 6.png";
 import logo2 from "../../public/logos/image copy 7.png";
+import logo3 from "../../public/logos/image copy 8.png";
+
 import { usePathname, useRouter } from "next/navigation";
 import UserDetails from "../components/user/UserDetails";
 import useUser from "../components/user/useUser";
@@ -42,9 +44,16 @@ export default function Navbar() {
           }
         }}
       >
-        <Image
+        {/* <Image
           className="cursor-pointer"
           src={logo2}
+          alt="logo"
+          width={150}
+          height={90}
+        /> */}
+        <Image
+          className="cursor-pointer"
+          src={logo3}
           alt="logo"
           width={150}
           height={90}
