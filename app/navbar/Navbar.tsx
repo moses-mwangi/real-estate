@@ -5,6 +5,7 @@ import React from "react";
 import logo1 from "../../public/logos/image copy 6.png";
 import logo2 from "../../public/logos/image copy 7.png";
 import logo3 from "../../public/logos/image copy 8.png";
+import logo4 from "../../public/logos/image copy 9.png";
 
 import { usePathname, useRouter } from "next/navigation";
 import UserDetails from "../components/user/UserDetails";
@@ -53,7 +54,7 @@ export default function Navbar() {
         /> */}
         <Image
           className="cursor-pointer"
-          src={logo3}
+          src={logo4}
           alt="logo"
           width={150}
           height={90}
