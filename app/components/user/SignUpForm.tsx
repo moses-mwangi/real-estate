@@ -51,6 +51,9 @@ export default function SignUpForm() {
       ? "https://real-estate-api-azure.vercel.app/api/auth/login"
       : "https://real-estate-api-azure.vercel.app/api/auth/verifyOtp";
 
+    const deleteOtpUrl =
+      "https://real-estate-api-azure.vercel.app/api/auth/deleteOtp";
+
     try {
       setIsLoading(true);
       const res = await axios.post(url, data);
@@ -65,9 +68,16 @@ export default function SignUpForm() {
         router.push("/");
         router.refresh();
         setIsLoading(false);
-        setTimeout(() => {
-          window.location.reload();
-        }, 1200);
+
+        setTimeout(async () => {
+          if (data.email) {
+            await axios.delete(deleteOtpUrl, {
+              params: { email: data.email },
+            });
+
+            console.log(data.email);
+          }
+        }, 4000);
       } else {
         toast.success("OTP Sent successful");
         setShowOtp(true);
@@ -77,6 +87,10 @@ export default function SignUpForm() {
 
         setIsLoading(false);
         reset();
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 1200);
       }
     } catch (err) {
       toast.error("Failed to register. Please try again.");

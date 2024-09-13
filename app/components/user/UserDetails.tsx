@@ -14,7 +14,6 @@ import { useRouter } from "next/navigation";
 export default function UserDetails() {
   const [isOpen, setIsOpen] = useState(false);
   const [isUpload, setIsUpload] = useState(false);
-
   const router = useRouter();
 
   const { curUser, logOut } = useUser();
