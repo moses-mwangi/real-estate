@@ -15,6 +15,7 @@ import toast from "react-hot-toast";
 import { Card } from "@/components/ui/card";
 import ForgotPasswordForm from "./ForgotPassword";
 import EmailOtpVerificationForm from "./EmailOtpVerificationForm";
+import { number } from "zod";
 
 interface SignUpFormInputs {
   email: string;
@@ -82,14 +83,12 @@ export default function SignUpForm() {
         setIsLoading(false);
         reset();
 
-        const minutes = 1000 * 60 * 6;
+        const minutes = 1000 * 60 * 11;
         setTimeout(async () => {
           if (data.email) {
             await axios.delete(deleteOtpUrl, {
               params: { email: data.email },
             });
-
-            console.log(data.email);
           }
         }, minutes);
       }
