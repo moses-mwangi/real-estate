@@ -6,6 +6,8 @@ import logo1 from "../../public/logos/image copy 6.png";
 import logo2 from "../../public/logos/image copy 7.png";
 import logo3 from "../../public/logos/image copy 8.png";
 import logo4 from "../../public/logos/image copy 9.png";
+import logo5 from "../../public/logos/image copy 10.png";
+import logo6 from "../../public/logos/image copy 11.png";
 
 import { usePathname, useRouter } from "next/navigation";
 import UserDetails from "../components/user/UserDetails";
@@ -47,14 +49,14 @@ export default function Navbar() {
       >
         {/* <Image
           className="cursor-pointer"
-          src={logo2}
+          src={logo5}
           alt="logo"
           width={150}
           height={90}
         /> */}
         <Image
           className="cursor-pointer"
-          src={logo4}
+          src={logo6}
           alt="logo"
           width={150}
           height={90}
