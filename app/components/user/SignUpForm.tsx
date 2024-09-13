@@ -82,8 +82,7 @@ export default function SignUpForm() {
         setIsLoading(false);
         reset();
 
-        const minutes = 1000 * 60 * 12;
-
+        const minutes = 1000 * 60 * 6;
         setTimeout(async () => {
           if (data.email) {
             await axios.delete(deleteOtpUrl, {
