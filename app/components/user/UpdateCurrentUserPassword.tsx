@@ -42,7 +42,6 @@ export default function UpdateCurrentUserPassword({
 
       const token = document.cookie.split("=")[1];
 
-      console.log(token);
       if (!token) {
         toast.error("User is not authenticated. Please log in.");
         setLoading(false);
@@ -53,12 +52,10 @@ export default function UpdateCurrentUserPassword({
         passwordCurrent: data.passwordCurrent,
         password: data.password,
         passwordConfirm: data.passwordConfirm,
-        // id: curUser?._id,ss
       };
-
       const url = `https://real-estate-api-azure.vercel.app/api/auth/updatePassword`;
 
-      const res = await axios.patch(url, formData, {
+      await axios.patch(url, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
