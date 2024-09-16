@@ -54,11 +54,11 @@ export default function SortProperty({ totalProperties }: Sort) {
           </div>
         </Card>
         {isOpen && (
-          <div className="absolute top-12 w-full">
-            <Card className=" shadow-lg rounded-md px-2 py-1">
+          <div className="absolute top-12 w-full z-50">
+            <Card className=" shadow-lg rounded-md z-50 px-2 py-1">
               {sorting.map((el) => (
                 <div
-                  className=" hover:bg-slate-300 text-[15px] py-1 px-2 rounded-sm cursor-pointer transition-all duration-150"
+                  className=" hover:bg-slate-300 z-50 text-[15px] py-1 px-2 rounded-sm cursor-pointer transition-all duration-150"
                   key={el.id}
                   onClick={() => handleSortChange(el.name, el.label)}
                 >
