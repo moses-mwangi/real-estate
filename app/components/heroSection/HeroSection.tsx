@@ -34,7 +34,7 @@ export default function HeroSection() {
 
   return (
     <section
-      className="px-[10px] sm:pl-7 md:pl-12 z-20 w-full h-[115svh] sm:h-[105svh] pt-20 md:grid md:grid-cols-[1fr_1.5fr] relative"
+      className="px-[10px] sm:pl-7 md:pl-12 z-20 w-full h-[110svh] sm:h-[105svh] pt-20 md:grid md:grid-cols-[1fr_1.5fr] relative"
       id="home"
     >
       <div>

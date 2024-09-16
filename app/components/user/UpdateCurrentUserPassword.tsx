@@ -32,6 +32,8 @@ export default function UpdateCurrentUserPassword({
   const updatePassword: SubmitHandler<UpdatePasswordFormData> = async (
     data
   ) => {
+    console.log(data);
+
     try {
       setLoading(true);
 
