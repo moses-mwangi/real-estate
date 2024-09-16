@@ -5,6 +5,7 @@ import second from "../../../public/images/customer 2.png";
 import third from "../../../public/images/customer 3.png";
 import fourth from "../../../public/images/customer 4.png";
 import fifth from "../../../public/images/customer 5.png";
+import fisfth from "../../../public/dubai/nairobi.png";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
