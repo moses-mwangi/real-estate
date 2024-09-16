@@ -207,7 +207,7 @@ export default function SingleProperty() {
         image={property?.image}
       />
       <div className="flex gap-5 px-3 sm:px-8 py-8 mb-10">
-        <BookingTour />
+        {/* <BookingTour /> */}
         <Button
           className="bg-orange-500 hover:bg-orange-600"
           onClick={() => {
