@@ -44,7 +44,7 @@ export default function UpdateCurrentUserPassword({
         setLoading(false);
         return;
       }
-
+      //updatePassword
       const url = `https://real-estate-api-azure.vercel.app/api/auth/updatePassword`;
       const res = await axios.patch(url, data, {
         headers: {
