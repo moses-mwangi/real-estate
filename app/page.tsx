@@ -7,15 +7,13 @@ import Testimonials from "./components/testimoniaal/Testimonials";
 
 export default function Home() {
   return (
-    <main className="">
-      <>
-        <HeroSection />
-        <Propeties />
-        <Testimonials />
-        <AboutUs />
-        <OurTeam />
-        <Contact />
-      </>
+    <main className="w-svw">
+      <HeroSection />
+      <Propeties />
+      <Testimonials />
+      <AboutUs />
+      <OurTeam />
+      <Contact />
     </main>
   );
 }
