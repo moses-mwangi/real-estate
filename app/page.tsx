@@ -7,7 +7,7 @@ import Testimonials from "./components/testimoniaal/Testimonials";
 
 export default function Home() {
   return (
-    <main className="w-svw">
+    <main className="w-[98svw]">
       <HeroSection />
       <Propeties />
       <Testimonials />
