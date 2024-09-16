@@ -73,7 +73,7 @@ export default function OurTeam() {
               >
                 <div className="overflow-hidden rounded-md">
                   <Image
-                    className="xl:w-full w-auto h-full rounded-md hover:scale-105 transition-all duration-300"
+                    className="xl:w-full sm:w-auto w-full h-full rounded-md hover:scale-105 transition-all duration-300"
                     src={el.photo}
                     alt={el.name}
                     width={400}
