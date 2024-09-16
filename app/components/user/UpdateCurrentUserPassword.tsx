@@ -9,6 +9,7 @@ import { Eye, EyeOff } from "lucide-react";
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
+import useUser from "./useUser";
 
 type UpdatePasswordFormData = {
   passwordCurrent: string;
@@ -29,6 +30,8 @@ export default function UpdateCurrentUserPassword({
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
 
+  const { curUser } = useUser();
+
   const updatePassword: SubmitHandler<UpdatePasswordFormData> = async (
     data
   ) => {
@@ -39,14 +42,23 @@ export default function UpdateCurrentUserPassword({
 
       const token = document.cookie.split("=")[1];
 
+      console.log(token);
       if (!token) {
         toast.error("User is not authenticated. Please log in.");
         setLoading(false);
         return;
       }
-      //updatePassword
+
+      const formData = {
+        passwordCurrent: data.passwordCurrent,
+        password: data.password,
+        passwordConfirm: data.passwordConfirm,
+        // id: curUser?._id,ss
+      };
+
       const url = `https://real-estate-api-azure.vercel.app/api/auth/updatePassword`;
-      const res = await axios.patch(url, data, {
+
+      const res = await axios.patch(url, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
