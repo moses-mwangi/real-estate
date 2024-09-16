@@ -36,7 +36,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="pt-[2px] pb-[1px] pl-2 sm:pl-5 md:pl-8 shadow-md fixed w-full z-50 top-0 left-0 bg-card flex justify-between items-center">
+    <div className="pt-[2px] pb-[1px] pl-2 sm:pl-5 md:pl-8 shadow-md fixed w-svw z-50 top-0 left-0 bg-card flex justify-between items-center">
       <div
         className=" cursor-pointer"
         onClick={() => {
