@@ -9,7 +9,7 @@ export interface Property {
   _id: string;
   image: (string | StaticImport)[];
   description: string;
-  about: string;
+  // about: string;
   type: string;
   bathrooms: number;
   bedrooms: number;

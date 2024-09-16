@@ -8,12 +8,14 @@ import Testimonials from "./components/testimoniaal/Testimonials";
 export default function Home() {
   return (
     <main className="">
-      <HeroSection />
-      <Propeties />
-      <Testimonials />
-      <AboutUs />
-      <OurTeam />
-      <Contact />
+      <>
+        <HeroSection />
+        <Propeties />
+        <Testimonials />
+        <AboutUs />
+        <OurTeam />
+        <Contact />
+      </>
     </main>
   );
 }
