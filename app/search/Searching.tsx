@@ -5,7 +5,6 @@ import useSearchProperty from "../components/heroSection/useSearchProperty";
 import { useSearchParams } from "next/navigation";
 import PropertyFound from "./PropertyFound";
 import PropertyNotFoundView from "./PropertyNotFoundView";
-import { Button } from "@/components/ui/button";
 
 export default function Searching() {
   const [nextImageIndexes, setNextImageIndexes] = useState<number[]>([]);
