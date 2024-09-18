@@ -39,8 +39,24 @@ export default function PropertyFound({
 
   const totalPages = Math.ceil(selectedProperties.length / propertiesPerPage);
 
+  const params = searchParams.get("SortBy"); /// size,price,createdAt
+
+  let sortedProperties = selectedProperties;
+
+  if (params === "size")
+    sortedProperties = selectedProperties.sort((a, b) => b.size - a.size);
+
+  if (params === "price")
+    sortedProperties = selectedProperties.sort((a, b) => b.price - a.price);
+
+  if (params === "createdAt")
+    sortedProperties = selectedProperties.sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+
   // Get properties for the current page
-  const paginatedProperties = selectedProperties.slice(
+  const paginatedProperties = sortedProperties.slice(
     (currentPage - 1) * propertiesPerPage,
     currentPage * propertiesPerPage
   );
@@ -59,22 +75,6 @@ export default function PropertyFound({
   };
 
   const totalProperties = selectedProperties.length;
-
-  const params = searchParams.get("SortBy"); /// size,price,createdAt
-
-  let sortedProperties = paginatedProperties;
-
-  if (params === "size")
-    sortedProperties = paginatedProperties.sort((a, b) => b.size - a.size);
-
-  if (params === "price")
-    sortedProperties = paginatedProperties.sort((a, b) => b.price - a.price);
-
-  if (params === "createdAt")
-    sortedProperties = paginatedProperties.sort(
-      (a, b) =>
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    );
 
   return (
     <div className="flex flex-col gap-8">
