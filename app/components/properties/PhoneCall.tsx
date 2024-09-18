@@ -39,8 +39,9 @@ export default function PhoneNumber({ el }: Phone) {
               </button>
             </div>
             <CardContent className="px-2 font-medium text-gray-700 text-[14px]">
-              You can contact {el.name} via phone: {el.phone}. Please use the
-              #%id to identify the property: Apartment in GEMZ in Al Furjan
+              You can contact {el.name} via phone: {el.phone}.
+              {/* Please use the
+              #%id to identify the property: Apartment in GEMZ in Al Furjan */}
             </CardContent>
           </div>
         </div>
