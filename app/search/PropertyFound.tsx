@@ -43,6 +43,8 @@ export default function PropertyFound({
 
   let sortedProperties = selectedProperties;
 
+  if (params === "" || !params) sortedProperties = selectedProperties;
+
   if (params === "size")
     sortedProperties = selectedProperties.sort((a, b) => b.size - a.size);
 
