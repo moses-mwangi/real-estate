@@ -31,7 +31,7 @@ export default function PropertyFound({
   const searchParams = useSearchParams();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const propertiesPerPage = 4;
+  const propertiesPerPage = 9;
 
   const selectedProperties = filteredProperties?.length
     ? filteredProperties
