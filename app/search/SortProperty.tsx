@@ -72,5 +72,3 @@ export default function SortProperty({ totalProperties }: Sort) {
     </div>
   );
 }
-
-/// http://localhost:3001/search?city=&price=&bathrooms=&bedrooms=&category=

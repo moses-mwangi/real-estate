@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label";
 import SortProperty from "./SortProperty";
 import WhatsUpPage from "../components/properties/WhatsUpPage";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 interface Select {
   filteredProperties: Property[];
@@ -28,6 +29,7 @@ export default function PropertyFound({
   nextImageIndexes,
 }: Select) {
   const { properties } = useProperty();
+  const searchParams = useSearchParams();
 
   const [currentPage, setCurrentPage] = useState(1);
   const propertiesPerPage = 4;
@@ -63,13 +65,29 @@ export default function PropertyFound({
 
   const totalProperties = selectedProperties.length;
 
+  const params = searchParams.get("SortBy"); /// size,price,createdAt
+
+  let sortedProperties = paginatedProperties;
+
+  if (params === "size")
+    sortedProperties = paginatedProperties.sort((a, b) => b.size - a.size);
+
+  if (params === "price")
+    sortedProperties = paginatedProperties.sort((a, b) => b.price - b.price);
+
+  if (params === "createdAt")
+    sortedProperties = paginatedProperties.sort(
+      (a, b) =>
+        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+    );
+
   return (
     <div className="flex flex-col gap-8">
       <Separator />
       <Suspense fallback={<p>Loading...</p>}>
         <SortProperty totalProperties={totalProperties} />
       </Suspense>
-      {paginatedProperties?.map((property, index) => (
+      {sortedProperties?.map((property, index) => (
         <div
           className="bg-card shadow-lg grid grid-cols-1 md:grid-cols-[1fr_2.3fr] items-center gap-5 rounded-md"
           key={property._id}
