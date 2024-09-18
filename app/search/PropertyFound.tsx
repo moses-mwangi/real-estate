@@ -102,7 +102,7 @@ export default function PropertyFound({
                 alt="house"
                 width={200}
                 height={200}
-                loading="lazy" // Lazy loading for performance
+                loading="lazy"
               />
             )}
             <GrNext

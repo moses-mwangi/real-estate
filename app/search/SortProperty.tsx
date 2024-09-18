@@ -62,7 +62,10 @@ export default function SortProperty({ totalProperties }: Sort) {
                   key={el.id}
                   onClick={() => handleSortChange(el.name, el.label)}
                 >
-                  {el.label}
+                  {/* {el.label}  */}
+                  {el.label === "Price" ? `Price (Desceding)` : ""}
+                  {el.label === "CreatedAt" ? `CreatedAt (Latest)` : ""}
+                  {el.label === "Plot Size" ? `Plot Size (Desceding)` : ""}
                 </div>
               ))}
             </Card>
