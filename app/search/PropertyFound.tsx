@@ -28,7 +28,6 @@ export default function PropertyFound({
   handleNextImage,
   nextImageIndexes,
 }: Select) {
-  const { properties } = useProperty();
   const searchParams = useSearchParams();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,14 +37,10 @@ export default function PropertyFound({
     ? filteredProperties
     : [];
 
-  const latestProperties = selectedProperties.sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  );
-
   const totalPages = Math.ceil(selectedProperties.length / propertiesPerPage);
 
   // Get properties for the current page
-  const paginatedProperties = latestProperties.slice(
+  const paginatedProperties = selectedProperties.slice(
     (currentPage - 1) * propertiesPerPage,
     currentPage * propertiesPerPage
   );
@@ -73,12 +68,12 @@ export default function PropertyFound({
     sortedProperties = paginatedProperties.sort((a, b) => b.size - a.size);
 
   if (params === "price")
-    sortedProperties = paginatedProperties.sort((a, b) => b.price - b.price);
+    sortedProperties = paginatedProperties.sort((a, b) => b.price - a.price);
 
   if (params === "createdAt")
     sortedProperties = paginatedProperties.sort(
       (a, b) =>
-        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     );
 
   return (
