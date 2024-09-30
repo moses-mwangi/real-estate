@@ -91,7 +91,8 @@ export default function UserDetails() {
                       curUser?.role === "agent"
                     ) {
                       router.push(
-                        "https://real-estate-dashboard-kappa.vercel.app/login"
+                        // "https://real-estate-dashboard-kappa.vercel.app/login"
+                        "https://admin.bomac.io/login"
                       );
                     }
                   }}
