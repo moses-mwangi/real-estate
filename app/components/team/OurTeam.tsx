@@ -31,7 +31,7 @@ const SocialLinks = () => (
 );
 
 export default function OurTeam() {
-  const { agent } = useUser();
+  const { agent, allUsers } = useUser();
 
   var settings = {
     dots: true,
@@ -53,7 +53,15 @@ export default function OurTeam() {
   return (
     <div className="bg-team py-14 px-1 sm:px-12" id="agents">
       <div>
-        <h1 className="flex justify-center text-[16px]">OUR AGENTS</h1>
+        <h1
+          className="flex justify-center text-[16px]"
+          onClick={() => {
+            console.log("agents:", agent);
+            console.log("users:", allUsers);
+          }}
+        >
+          OUR AGENTS
+        </h1>
         <h1
           className={`${cn(
             meriwether.variable
@@ -87,7 +95,6 @@ export default function OurTeam() {
                     </p>
                     <p className="text-slate-500 text-sm">{el.role}</p>
                     <p className="text-[13px] text-slate-500 mt-3">
-                      {/* {el.description} */}
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                       Consequuntur mollitia tempore eum ab voluptatum tenetur,
                       et voluptatibus porro
