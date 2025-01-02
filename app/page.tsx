@@ -1,4 +1,5 @@
 import Contact from "./components/contact/Contact";
+import Footer from "./components/footer/Footer";
 import HeroSection from "./components/heroSection/HeroSection";
 import Propeties from "./components/properties/Propeties";
 import AboutUs from "./components/service/AboutUs";
@@ -14,6 +15,7 @@ export default function Home() {
       <AboutUs />
       <OurTeam />
       <Contact />
+      <Footer />
     </main>
   );
 }

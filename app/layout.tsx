@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import Footer from "./components/footer/Footer";
 import Navbar from "./navbar/Navbar";
 import { Toaster } from "react-hot-toast";
+import Footers from "./components/footer/Footers";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -50,7 +51,7 @@ export default function RootLayout({
           />
           <Navbar />
           <main>{children}</main>
-          <Footer />
+          {/* <Footers /> */}
         </div>
       </body>
     </html>

@@ -45,7 +45,6 @@ export default function HeroSection() {
             )} text-4xl sm:text-[53px] leading-[1] text-gray-800`}
             style={{ fontFamily: "var(--Merriweather)" }}
           >
-            {/* Boma Synergy <br /> Luxury Market Place */}
             Bomac Real Estate <br /> Luxury Market Place
           </p>
           <SearchHouse />

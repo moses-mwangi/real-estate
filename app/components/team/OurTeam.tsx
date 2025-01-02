@@ -12,6 +12,7 @@ import useUser from "../user/useUser";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Button } from "@/components/ui/button";
 
 const meriwether = Merriweather({
   subsets: ["latin"],
@@ -54,6 +55,14 @@ export default function OurTeam() {
     <div className="bg-team py-14 px-1 sm:px-12" id="agents">
       <div>
         <h1 className="flex justify-center text-[16px]">OUR AGENTS</h1>
+        <Button
+          onClick={() => {
+            console.log(allUsers);
+            console.log(agent);
+          }}
+        >
+          Confirm Users
+        </Button>
         <h1
           className={`${cn(
             meriwether.variable
