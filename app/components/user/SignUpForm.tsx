@@ -143,8 +143,8 @@ export default function SignUpForm() {
               setShowOtp={setShowOtp}
             />
           ) : (
-            <div className="flex items-center justify-center sm:w-[80svw] md:w-[60svw] h-full rounded-r-md">
-              <Card className="px-8  py-5 pt-6  rounded-sm border-b-0  shadow-none w-full relative h-[80svh] max-w-sm">
+            <div className="flex items-center justify-center sm:w-[800svw] md:w-[60svw] h-full rounded-r-md">
+              <Card className="px-8  py-5 pt-6  rounded-sm border-b-0  shadow-none w-full relative h-[85svh] max-w-sm">
                 <X
                   className="w-8 h-8 absolute top-4 right-4 hover:bg-slate-100 p-[6px] rounded-full text-gray-600 cursor-pointer"
                   onClick={() => {
